@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Proposify proposal editor case study · Liam Mackenzie</title>
+<meta name="description" content="Rebuilding a proposal editor customers had already rejected. A product design case study by Liam Mackenzie.">
+<meta name="author" content="Liam Mackenzie">
+<meta name="theme-color" content="#0b0b0d">
+<link rel="canonical" href="https://liammackenzie.net/work/proposify-editor/">
+
+<link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/assets/icons/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Liam Mackenzie">
+<meta property="og:title" content="Proposify proposal editor case study">
+<meta property="og:description" content="Rebuilding a proposal editor customers had already rejected. A product design case study by Liam Mackenzie.">
+<meta property="og:url" content="https://liammackenzie.net/work/proposify-editor/">
+<meta property="og:image" content="https://liammackenzie.net/assets/images/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The homepage of Liam Mackenzie's portfolio: I make complicated software feel obvious to the people using it.">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="/css/styles.css">
+<script>document.documentElement.classList.add('js');</script>
+<script src="/js/main.js" defer></script>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="wrap">
+    <a class="brand" href="/">Liam Mackenzie</a>
+    <div class="links">
+      <a href="/">Homepage</a>
+      <div class="dd">
+        <button class="dd-btn" type="button" aria-expanded="false" aria-haspopup="true">About <span class="chev" aria-hidden="true">&#9662;</span></button>
+        <div class="dd-menu">
+          <a href="/about/">Who</a>
+          <a href="/freelance/">Freelancing</a>
+          <a href="/sound/">My Sound</a>
+        </div>
+      </div>
+      <a href="/contact/">Contact</a>
+    </div>
+  </div>
+</nav>
+
+
+<header class="study-hero">
+  <div class="wrap col read-wide">
+    <p class="eyebrow">Proposify Proposal Editor, Lead Product Designer.</p>
+    <h1 class="rw" data-rw-now>Rebuilding a proposal editor customers had already rejected.</h1>
+    <div class="metrics" style="margin-top:2.1rem;margin-bottom:0;">
+      <div class="metric"><span class="n">45→15</span><span class="l">Minutes to prepare a quote</span></div>
+      <div class="metric"><span class="n">2.4×</span><span class="l">Higher user engagement</span></div>
+    </div>
+  </div>
+</header>
+
+<section class="meta-block reveal">
+  <div class="wrap">
+    <div>
+      <h2 class="mb-h">What I owned</h2>
+      <ul class="bullets">
+        <li>Product strategy and MVP definition, from weekly super-user interviews</li>
+        <li>Editor foundation: block system, interaction model, toolbar, sections, undo/redo</li>
+        <li>Content reuse: variables, custom fields, template-to-proposal workflow</li>
+        <li>Pricing table, redesigned progressively into a real quoting surface</li>
+      </ul>
+    </div>
+    <div>
+      <h2 class="mb-h">Constraints</h2>
+      <ul class="bullets">
+        <li>An installed base working around the gaps, and reverting to V2</li>
+        <li>Four engineers, a tech lead, one PM, and the head of product</li>
+        <li>No rewrite available, incremental only</li>
+        <li>Every pattern set here would become the foundation for what came next</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROBLEM ============ -->
+<section class="act problem">
+  <div class="wrap col read-wide">
+    <h2 class="act-thesis">A thin editor doesn't fail loudly. People just quietly use the old one.</h2>
+
+    <p>When I joined, V3 was the future of the product and barely a document editor. Text and images worked; almost nothing else did. Tables couldn't do real work and nothing let you reuse content, so customers rebuilt the same proposal by hand every time. People tried V3, hit a wall, and went back to V2, a platform that had already reached its technical limits.</p>
+  </div>
+
+  <div class="wrap">
+    <figure class="fig reveal">
+      <div class="fig-body">
+        <div class="shot-img">
+          <img src="/assets/images/editor-before.png" width="1440" height="1024" loading="lazy" decoding="async" alt="The proposal editor before the rebuild: an empty white page titled About Us, a formatting toolbar across the top, and a Content panel on the right offering only four blocks: Text, Image, Video and Table.">
+        </div>
+      </div>
+      <figcaption><span>Where it started. An empty page, a formatting toolbar, and four block types. This is what customers were trying before they went back.</span></figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ WHAT WE LEARNED ============ -->
+<section class="act learned">
+  <div class="wrap col read-wide">
+    <h2 class="act-thesis">Customers weren't rejecting V3. Every return to V2 was a specific, findable gap.</h2>
+
+    <p>To find them, I ran a standing Thursday session with one to five of the editor's heaviest users, for as long as I was on the product. Every week followed the same loop:</p>
+
+    <ol class="loop">
+      <li><span class="ln">01</span><span class="lt">Listen</span><span class="ld">Hear the friction from the people using it hardest.</span></li>
+      <li><span class="ln">02</span><span class="lt">Diagnose</span><span class="ld">Work out what is actually causing it.</span></li>
+      <li><span class="ln">03</span><span class="lt">Scope</span><span class="ld">Define the smallest version worth shipping, agreed with PM and engineering.</span></li>
+      <li><span class="ln">04</span><span class="lt">Ship</span><span class="ld">Design it and get it out.</span></li>
+      <li class="again"><span class="ln">&#8635;</span><span class="lt">Re-test</span><span class="ld">Back in front of the same people the following Thursday.</span></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ KEY PRODUCT DECISION ============ -->
+<section class="act decision-act">
+  <div class="wrap col read-wide">
+    <h2 class="act-thesis">We phased the big capabilities instead of cutting them.</h2>
+
+    <p>Richer block interactions and a real pricing table were first judged too large for a V3 MVP, and the concern was fair. But the interview record showed the same limitations week after week, from the same accounts, including the ones reverting to V2. That turned my opinion into a pattern with names attached.</p>
+
+    <p>With the PM and tech lead, I split the work into phases around one rule: build the interaction model first, so every block and feature added later would inherit it instead of becoming another special case.</p>
+  </div>
+
+  <div class="wrap">
+    <figure class="fig reveal">
+      <div class="fig-body">
+        <div class="journey">
+          <div class="jlabel">Two years, in the order it was built</div>
+          <div class="jsteps">
+            <div class="jstep buried"><span class="sn">Start</span>Text and images</div>
+            <div class="jstep"><span class="sn">01</span>Block system</div>
+            <div class="jstep"><span class="sn">02</span>Toolbar &amp; sections</div>
+            <div class="jstep"><span class="sn">03</span>Variables &amp; custom fields</div>
+            <div class="jstep"><span class="sn">04</span>Pricing table</div>
+            <div class="jstep"><span class="sn">05</span>Video, shapes, AI drafting</div>
+            <div class="jstep entry"><span class="sn">Then</span>CPQ foundation</div>
+          </div>
+        </div>
+      </div>
+      <figcaption><span>The order matters. Each layer only became cheap to build once the one before it existed.</span></figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ WHAT WE BUILT ============ -->
+<section class="act built">
+  <div class="wrap col read-wide">
+    <h2 class="act-thesis">One interaction model for every block, and everything built on top of it.</h2>
+
+    <ul class="bullets">
+      <li><strong>Block foundation.</strong> Image, video, shape, table and text blocks that all behave the same way, with a WYSIWYG toolbar, a sections panel and undo you can trust. The other designers carried these patterns into the design system.</li>
+      <li><strong>Reusable content.</strong> Variables and custom fields, created once and used in every template, so a proposal fills itself in instead of being retyped. Field values lock once a proposal is sent, which made them safe to automate against.</li>
+      <li><strong>A pricing table you can quote from.</strong> Rebuilt progressively with in-canvas editing, recurring pricing, optional items, discounts and subtotals.</li>
+    </ul>
+  </div>
+
+  <div class="wrap">
+    <figure class="fig reveal">
+      <div class="fig-body">
+        <div class="mock">
+          <div class="mock-editor">
+            <div class="ed-rail"><i class="brand"></i><i class="on"></i><i></i><i></i><i></i><i></i></div>
+            <div class="ed-top">
+              <div>
+                <div class="ed-title">City of Toronto | New Public Installation Space 2025</div>
+                <div class="ed-meta"><span>Draft</span><span>Saved</span></div>
+              </div>
+              <div class="ed-actions"><span class="ed-bar w2"></span><span class="ed-bar w2"></span><span class="ed-share">Share</span><span class="ed-avatar"></span></div>
+            </div>
+            <div class="ed-toolbar">
+              <span class="ed-bar w3"></span><span class="sep"></span>
+              <span class="ed-bar w4"></span><span class="ed-bar w2"></span><span class="sep"></span>
+              <span class="ed-bar w1"></span><span class="ed-bar w1"></span><span class="ed-bar w1"></span><span class="sep"></span>
+              <span class="ed-bar w2"></span>
+            </div>
+            <div class="ed-canvas">
+              <div class="ed-section"><span class="name">Overview</span><span class="tools"><span class="ed-bar w1"></span><span class="ed-bar w1"></span><span class="ed-bar w1"></span></span></div>
+              <div class="ed-page">
+                <div style="font-size:.95rem;font-weight:600;margin-bottom:.6rem;">Scope of Work</div>
+                <span class="ed-line" style="width:100%;"></span>
+                <span class="ed-line" style="width:88%;"></span>
+                <span class="ed-line" style="width:64%;margin-bottom:.9rem;"></span>
+                <span class="ed-blocktools">&#9781; &#9723;</span>
+                <div class="ed-block" style="height:66px;background:#f7f9fa;border:1px solid var(--ed-line);display:flex;align-items:center;justify-content:center;color:var(--ed-muted);">Video block, selected</div>
+                <p style="margin:.9rem 0 0;color:#9aa8ae;">+ Add block</p>
+              </div>
+            </div>
+            <div class="ed-panel">
+              <h5>Block Settings</h5>
+              <div class="grp">Video</div>
+              <div class="field"><span>Full width</span><span>&#9662;</span></div>
+              <div class="row"><span>Autoplay</span><span class="ed-toggle"></span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <figcaption><span>Block-based canvas: new block types, clearer selection and resize affordances, contextual formatting.</span></figcaption>
+    </figure>
+  </div>
+
+  <div class="wrap">
+    <figure class="fig reveal">
+      <div class="fig-body">
+        <div class="mock">
+          <div class="mock-editor">
+            <div class="ed-rail"><i class="brand"></i><i class="on"></i><i></i><i></i><i></i><i></i></div>
+            <div class="ed-top">
+              <div>
+                <div class="ed-title">City of Toronto | New Public Installation Space 2025</div>
+                <div class="ed-meta"><span>Draft</span><span>Saved</span></div>
+              </div>
+              <div class="ed-actions"><span class="ed-bar w2"></span><span class="ed-bar w2"></span><span class="ed-share">Share</span><span class="ed-avatar"></span></div>
+            </div>
+            <div class="ed-toolbar">
+              <span class="ed-bar w3"></span><span class="sep"></span>
+              <span class="ed-bar w4"></span><span class="ed-bar w2"></span><span class="sep"></span>
+              <span class="ed-bar w1"></span><span class="ed-bar w1"></span><span class="ed-bar w1"></span><span class="sep"></span>
+              <span class="ed-bar w2"></span>
+            </div>
+            <div class="ed-canvas">
+              <div class="ed-section"><span class="name">Overview</span><span class="tools"><span class="ed-bar w1"></span><span class="ed-bar w1"></span><span class="ed-bar w1"></span></span></div>
+              <div class="ed-page">
+                <span class="ed-blocktools">&#9781; &#9723;</span>
+                <div class="ed-block">
+                  <table class="ed-table" data-pricing data-discount="0.10">
+                    <thead>
+                      <tr class="type"><th></th><th><em>Aa</em> Text</th><th><em>$</em> Currency</th><th><em>x</em> Multiplier</th><th><em>$</em> Subtotal</th></tr>
+                    </thead>
+                    <tbody>
+                      <tr class="head"><td class="drag"></td><td>Item Name</td><td class="num">Price</td><td class="num">Qty</td><td class="num">Subtotal</td></tr>
+                      <tr data-price="18000"><td class="drag">&#8942;&#8942;</td><td><strong>Implementation</strong><br><span style="color:#8a969c;">One-time</span></td><td class="num">$18,000</td><td class="num">1</td><td class="num">$18,000</td></tr>
+                      <tr data-price="2400"><td class="drag">&#8942;&#8942;</td><td><strong>Premium Support</strong><br><span style="color:#8a969c;">Recurring, annual</span></td><td class="num">$2,400</td><td class="num">1</td><td class="num">$2,400/yr</td></tr>
+                      <tr data-price="1200" data-optional><td class="drag">&#8942;&#8942;</td><td><span class="opt-toggle"></span><strong>Onsite Training</strong><br><span style="color:#8a969c;">Optional, click to add</span></td><td class="num">$1,200</td><td class="num line-qty">1</td><td class="num line-total">$1,200</td></tr>
+                    </tbody>
+                    <tfoot>
+                      <tr><td class="drag"></td><td colspan="3" class="num" style="color:#5f7883;font-weight:400;">After 10% discount</td><td class="num"><span class="subtotal-val">Subtotal $18,360</span></td></tr>
+                    </tfoot>
+                  </table>
+                </div>
+                <p class="mock-hint" style="margin-top:.8rem;">Try it: toggle the optional line item</p>
+              </div>
+            </div>
+            <div class="ed-panel">
+              <h5>Table Settings</h5>
+              <div class="grp">Pricing</div>
+              <div class="field"><span>Decimals: 2</span><span>&#9662;</span></div>
+              <div class="row"><span>Table footer</span><span class="ed-toggle"></span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <figcaption><span class="fig-live">Interactive</span><span>Optional line items, recurring pricing, live discounted subtotal. Toggle the third row.</span></figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ KEY TRADE-OFF ============ -->
+<section class="act tradeoff">
+  <div class="wrap col read-wide">
+    <h2 class="act-thesis">My first copy/paste worked for every block except the one that mattered.</h2>
+
+    <p>It treated every block the same: copy the markup, paste the markup. That worked for text, headings and images, which is why it reached QA. But a pricing block holds live formulas and variable bindings, so a pasted copy looked identical and was quietly connected to nothing. QA caught it before customers did, and we traded the simple generic handler for per-block copy behaviour, where each block declares what duplicating it means. More work, and the version that shipped.</p>
+  </div>
+
+  <div class="wrap">
+    <figure class="fig reveal">
+      <div class="fig-body">
+        <div class="decision">
+          <div class="dp killed">
+            <span class="tag">✕ Shipped to QA, then pulled</span>
+            <h4>One generic markup handler</h4>
+            <div class="flow">
+              <span class="node">Block</span>
+              <span class="ar">→</span>
+              <span class="node">Copy markup</span>
+              <span class="ar">→</span>
+              <span class="node">Paste markup</span>
+            </div>
+            <span class="clash">Pricing table pastes as a lookalike: formulas gone, {{variables}} unbound, totals frozen.</span>
+            <p style="margin-top:1rem;">Simple and general. Treats a binding as if it were decoration.</p>
+          </div>
+          <div class="dp shipped">
+            <span class="tag">✓ Shipped</span>
+            <h4>Per-block-type copy behaviour</h4>
+            <div class="flow">
+              <span class="node">Text</span>
+              <span class="ar">→</span>
+              <span class="node sys">copy markup</span>
+            </div>
+            <div class="flow" style="margin-top:.2rem;">
+              <span class="node">Pricing</span>
+              <span class="ar">→</span>
+              <span class="node sys">copy formulas + rebind</span>
+            </div>
+            <p style="margin-top:1rem;">Each block type declares how it duplicates. A block isn't markup; it's a binding, and the editor had to know the difference.</p>
+          </div>
+        </div>
+      </div>
+      <figcaption><span>The bug that changed how I think about editors. It's a data model with a UI on top.</span></figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ OUTCOME ============ -->
+<section class="act impact">
+  <div class="wrap col read-wide">
+    <h2 class="act-thesis">V3 became a much more capable foundation for proposal creation.</h2>
+  </div>
+
+  <div class="wrap">
+    <div class="impact-grid reveal">
+      <div class="cell"><span class="n">45→15</span><span class="l">Minutes to prepare a quote</span></div>
+      <div class="cell"><span class="n">2.4×</span><span class="l">Higher user engagement</span></div>
+    </div>
+  </div>
+
+  <div class="wrap col read-wide">
+    <p class="statement">The pricing and editor architecture established here became part of the foundation for CPQ.</p>
+  </div>
+</section>
+
+<section class="next">
+  <div class="wrap">
+    <a href="/work/ownly/">
+      <div>
+        <p class="eyebrow">Next case study</p>
+        <h3>Building a custom home reservation product</h3>
+      </div>
+      <span class="arrow">→</span>
+    </a>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>Calgary, Alberta, Canada</span>
+    <div class="links">
+      <a href="/">Homepage</a>
+      <a href="/freelance/">Freelance</a>
+      <a href="/sound/">Sound</a>
+      <a href="/about/">About</a>
+      <a href="/contact/">Contact</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

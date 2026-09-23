@@ -1,0 +1,5 @@
+# macOS folder metadata
+.DS_Store
+
+# internal notes and local tooling, not part of the site
+SOURCE.md

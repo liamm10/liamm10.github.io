@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Proposify CPQ case study · Liam Mackenzie</title>
+<meta name="description" content="A pricing tool reps would trust more than their own spreadsheet. A product design case study by Liam Mackenzie.">
+<meta name="author" content="Liam Mackenzie">
+<meta name="theme-color" content="#0b0b0d">
+<link rel="canonical" href="https://liammackenzie.net/work/proposify-cpq/">
+
+<link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/assets/icons/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Liam Mackenzie">
+<meta property="og:title" content="Proposify CPQ case study">
+<meta property="og:description" content="A pricing tool reps would trust more than their own spreadsheet. A product design case study by Liam Mackenzie.">
+<meta property="og:url" content="https://liammackenzie.net/work/proposify-cpq/">
+<meta property="og:image" content="https://liammackenzie.net/assets/images/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The homepage of Liam Mackenzie's portfolio: I make complicated software feel obvious to the people using it.">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="/css/styles.css">
+<script>document.documentElement.classList.add('js');</script>
+<script src="/js/main.js" defer></script>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="wrap">
+    <a class="brand" href="/">Liam Mackenzie</a>
+    <div class="links">
+      <a href="/">Homepage</a>
+      <div class="dd">
+        <button class="dd-btn" type="button" aria-expanded="false" aria-haspopup="true">About <span class="chev" aria-hidden="true">&#9662;</span></button>
+        <div class="dd-menu">
+          <a href="/about/">Who</a>
+          <a href="/freelance/">Freelancing</a>
+          <a href="/sound/">My Sound</a>
+        </div>
+      </div>
+      <a href="/contact/">Contact</a>
+    </div>
+  </div>
+</nav>
+
+
+<header class="study-hero">
+  <div class="wrap col read-wide">
+    <p class="eyebrow">Proposify Pricing Library, Lead Product Designer.</p>
+    <h1 class="rw" data-rw-now>A pricing tool reps would trust more than their own spreadsheet.</h1>
+    <div class="metrics" style="margin-top:2.1rem;margin-bottom:0;">
+      <div class="metric"><span class="n">~25%</span><span class="l">Faster assembly</span></div>
+      <div class="metric"><span class="n">50→87.5%</span><span class="l">Task completion</span></div>
+    </div>
+  </div>
+</header>
+
+<section class="meta-block reveal">
+  <div class="wrap">
+    <div>
+      <h2 class="mb-h">What I owned</h2>
+      <ul class="bullets">
+        <li>Customer research: interviews across four mid-market accounts, plus support tickets</li>
+        <li>Feasibility on external pricing integrations, with engineering</li>
+        <li>Catalog architecture and pricing UX, from flows to high-fidelity prototypes</li>
+        <li>Rollout, beta, and post-launch evaluation</li>
+      </ul>
+    </div>
+    <div>
+      <h2 class="mb-h">Constraints</h2>
+      <ul class="bullets">
+        <li>3 months to Phase 1</li>
+        <li>One PM, four engineers, and myself as the product design lead</li>
+        <li>Customers' real prices lived in systems we didn't own</li>
+        <li>A wrong number becomes a signed contract</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROBLEM ============ -->
+<section class="act problem">
+  <div class="wrap col read-wide">
+    <h2 class="act-thesis">Our real competitor was Excel, and Excel was winning.</h2>
+
+    <p>Mid-market reps didn't trust Proposify with their prices. The v2 Pricing Library couldn't bundle, tier, apply conditional discounts, route approvals or sync with an outside price source, so reps built every quote in a spreadsheet and pasted the result in. Nobody downstream could see what had happened to the number.</p>
+
+    <blockquote>"I discovered two reps were quoting different prices for the same product. There was no way to enforce consistency."<cite>VP Sales, B2B services provider</cite></blockquote>
+  </div>
+
+  <div class="wrap">
+    <figure class="fig reveal">
+      <div class="fig-body">
+        <div class="mock">
+          <div class="mock-main" style="padding:1.2rem 1.3rem;">
+            <table class="mock-table">
+              <tr><th>Item</th><th>List</th><th>Rep discount</th><th>Quoted</th></tr>
+              <tr><td><span class="cell-main">Enterprise License</span></td><td>$24,999</td><td>15%</td><td>$21,249</td></tr>
+              <tr><td><span class="cell-main">Enterprise License</span><span class="cell-sub">Same product, different rep</span></td><td>$24,999</td><td>28%</td><td><span class="mock-pill is-warning">$17,999</span></td></tr>
+              <tr><td><span class="cell-main">Pro Services</span></td><td>$5,000</td><td>0%</td><td>$5,000</td></tr>
+              <tr><td><span class="cell-main">Analytics Module</span><span class="cell-sub">Formula referenced a deleted row</span></td><td>$7,500</td><td>-</td><td><span class="mock-pill is-warning">#REF!</span></td></tr>
+            </table>
+          </div>
+        </div>
+      </div>
+      <figcaption><span>The workaround in production.</span></figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ WHAT WE LEARNED ============ -->
+<section class="act learned">
+  <div class="wrap col read-wide">
+    <h2 class="act-thesis">Customers wanted automation, but never at the cost of seeing what changed.</h2>
+
+    <blockquote>"We want the system to update prices, but only if we know when it happens. Surprises would erode our clients' trust."<cite>Account Director, marketing agency</cite></blockquote>
+
+    <p>I turned that into four principles the team used for every trade-off:</p>
+
+    <ul class="bullets">
+      <li><strong>Simplicity over complexity.</strong> Build on the quoting habits people already had.</li>
+      <li><strong>External source of truth.</strong> Treat the customer's own pricing system as authoritative, not something to replace.</li>
+      <li><strong>Clarity and autonomy.</strong> No silent automation, ever.</li>
+      <li><strong>Trust through fail-safes.</strong> Locking, alerts, and predictable behaviour when things go wrong.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ KEY PRODUCT DECISION ============ -->
+<section class="act decision-act">
+  <div class="wrap col read-wide">
+    <h2 class="act-thesis">We cut a full CPQ brief down to the part nobody trusted: the price.</h2>
+
+    <p>The brief was a full CPQ product: configuration, pricing, quoting, approvals and guided selling. Four sprints of interviews argued against building it that way. Reps weren't losing time to configuration logic; they were losing it to not trusting the price they started from. So Phase 1 narrowed to the Pricing Catalog, with the rest of CPQ to follow on top of it.</p>
+  </div>
+</section>
+
+<!-- ============ WHAT WE BUILT ============ -->
+<section class="act built">
+  <div class="wrap col read-wide">
+    <h2 class="act-thesis">A catalog worth quoting from, wired into every pricing table.</h2>
+
+    <p>The catalog replaced the flat fee list with folders, search and inline editing, and billing frequency travels with each item instead of being retyped into every quote.</p>
+  </div>
+
+  <div class="wrap">
+    <figure class="fig reveal">
+      <div class="fig-body">
+        <div class="mock">
+          <div class="mock-app">
+            <div class="mock-side">
+              <div class="mock-brand">Pricing Library</div>
+              <div class="mock-nav-item on">Products</div>
+              <div class="mock-nav-item">Bundles</div>
+              <div class="mock-nav-item">Approvals</div>
+              <div class="mock-nav-item">Analytics</div>
+            </div>
+            <div class="mock-main">
+              <div class="mock-back"><span class="bk" aria-hidden="true">&#8592;</span><div><div class="mock-title">Enterprise Platform License</div>
+              <div class="mock-desc">SKU: EPL-001</div></div></div>
+              <div class="mock-tabs">
+                <span class="on">Details</span><span>Add-ons</span><span>Dependencies</span><span>Volume Pricing</span><span>Bundles</span><span>Permissions</span>
+              </div>
+              <table class="mock-table">
+                <tr><th>Field</th><th>Value</th></tr>
+                <tr><td>Cost</td><td>$8,000</td></tr>
+                <tr><td>List Price</td><td>$24,999 <span class="mock-pill">Suggested: $11,200 avg.</span></td></tr>
+                <tr><td>Default Quantity</td><td>1</td></tr>
+                <tr><td>Lock Price</td><td>Enabled</td></tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <figcaption><span>Product detail: one screen for most people, six tabs for the admin who needs them.</span></figcaption>
+    </figure>
+  </div>
+
+  <div class="wrap">
+    <figure class="fig reveal">
+      <div class="fig-body">
+        <div class="mock">
+          <div class="mock-main" style="padding:1.3rem 1.4rem;">
+            <div class="mock-title" style="margin-bottom:.2rem;">Pricing table</div>
+            <div class="mock-desc" style="margin-bottom:1rem;">The menu on a single quote row</div>
+            <div class="rm-stage">
+              <table class="mock-table rm-table">
+                <tr><th>Item</th><th>Price</th><th>Qty</th><th>Subtotal</th><th class="rm-k"></th></tr>
+                <tr><td><span class="cell-main">Enterprise License</span><span class="cell-sub">EPL-001</span></td><td>$24,999</td><td>1</td><td>$24,999</td><td class="rm-k"><span class="kb">&#8942;</span></td></tr>
+                <tr class="sel"><td><span class="cell-main">Pro Services</span><span class="cell-sub">Custom line, not in catalog</span></td><td>$5,000</td><td>2</td><td>$10,000</td><td class="rm-k"><span class="kb on">&#8942;</span>
+                <div class="mock-menu rm-float">
+                  <div class="mi"><span class="ic">+</span>Insert row</div>
+                  <div class="mi"><span class="ic">+</span>Insert column</div>
+                  <div class="sep"></div>
+                  <div class="mi on"><span class="ic">↓</span>Insert from Catalog</div>
+                  <div class="mi on"><span class="ic">↑</span>Save to Catalog</div>
+                  <div class="sep"></div>
+                  <div class="mi"><span class="ic">⧉</span>Duplicate row</div>
+                  <div class="mi"><span class="ic">×</span>Delete row</div>
+                  <div class="sep"></div>
+                  <div class="mi"><span class="ic">%</span>Discount</div>
+                  <div class="mi"><span class="ic">↻</span>Billing frequency</div>
+                  <div class="mi"><span class="ic">☑</span>Make row optional</div>
+                </div></td></tr>
+                <tr><td><span class="cell-main">Managed Support</span><span class="cell-sub">MS-220</span></td><td>$1,200</td><td>12</td><td>$14,400</td><td class="rm-k"><span class="kb">&#8942;</span></td></tr>
+                <tr><td><span class="cell-main">Onsite Training</span><span class="cell-sub">OT-050</span></td><td>$1,200</td><td>1</td><td>$1,200</td><td class="rm-k"><span class="kb">&#8942;</span></td></tr>
+                <tr><td><span class="cell-main">Analytics Module</span><span class="cell-sub">AM-310</span></td><td>$7,500</td><td>1</td><td>$7,500</td><td class="rm-k"><span class="kb">&#8942;</span></td></tr>
+                <tr class="rm-total"><td colspan="3">Total</td><td>$58,099</td><td class="rm-k"></td></tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <figcaption><span>The pricing table&rsquo;s row menu. Insert from Catalog pulls a priced item in; Save to Catalog sends a custom line back.</span></figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ KEY TRADE-OFF ============ -->
+<section class="act tradeoff">
+  <div class="wrap col read-wide">
+    <h2 class="act-thesis">I spent two weeks pushing for two-way pricing sync. Then we killed it.</h2>
+
+    <p>Customers were asking for live sync between Proposify and their own sheets, and I argued for it. A feasibility spike with engineering found what I'd missed: if both sides changed the same price between syncs, every way of resolving it silently overwrote one of them. That broke the no-silent-automation principle, and a pricing tool that changes numbers without telling you is worse than none, because people stop checking.</p>
+  </div>
+
+  <div class="wrap">
+    <figure class="fig reveal">
+      <div class="fig-body">
+        <div class="decision">
+          <div class="dp killed">
+            <span class="tag">✕ Proposed, killed at feasibility</span>
+            <h4>Two-way live sync</h4>
+            <div class="flow">
+              <span class="node sys">Proposify</span>
+              <span class="ar two">⇄</span>
+              <span class="node">Customer sheet</span>
+            </div>
+            <span class="clash">Both edit $24,999 → whose number wins? Any answer overwrites someone silently.</span>
+            <p style="margin-top:1rem;">Impressive on a roadmap, unresolvable in the one case that matters: a price on a contract.</p>
+          </div>
+          <div class="dp shipped">
+            <span class="tag">✓ Shipped</span>
+            <h4>A catalog, and nothing moves by itself</h4>
+            <div class="flow">
+              <span class="node sys">Pricing Catalog</span>
+              <span class="ar">→</span>
+              <span class="node">Proposal</span>
+            </div>
+            <div class="flow" style="margin-top:.2rem;">
+              <span class="node">Proposal</span>
+              <span class="ar">→</span>
+              <span class="node sys">Pricing Catalog</span>
+            </div>
+            <div class="flow" style="margin-top:.2rem;">
+              <span class="node" style="border-style:dashed;">Insert from Catalog · Save to Catalog</span>
+            </div>
+            <p style="margin-top:1rem;">Still two-way, but a person makes every move, one row at a time, so there is never a conflict to resolve.</p>
+          </div>
+        </div>
+      </div>
+      <figcaption><span>The decision that defined the project. Losing the feature was the point, not the cost.</span></figcaption>
+    </figure>
+  </div>
+
+  <div class="wrap col read-wide">
+    <p>Killing sync made the catalog the source of truth inside Proposify, and that tested our second principle. <strong>It turned out to be a hypothesis.</strong> We'd assumed customers needed Proposify to defer to a pricing system they already had. In reality, smaller companies were happy to build their catalog from scratch, and others were fine uploading a CSV to start. What most companies actually used to track pricing was an Excel sheet, so the eventual answer was simply letting them link it as the source.</p>
+  </div>
+</section>
+
+<!-- ============ TRUST MECHANISMS ============ -->
+<section class="act trust">
+  <div class="wrap col read-wide">
+    <h2 class="act-thesis">Three fail-safes made the numbers trustworthy.</h2>
+
+    <ul class="bullets">
+      <li><strong>Quote locking.</strong> Freezes every price once a proposal is sent, so a catalog change can't rewrite what a client already saw.</li>
+      <li><strong>Provenance.</strong> Shows where each line's price came from and whether someone overrode it.</li>
+      <li><strong>Approval thresholds.</strong> Catch risky quotes without ever blocking the rep.</li>
+    </ul>
+  </div>
+
+  <div class="wrap">
+    <figure class="fig reveal">
+      <div class="fig-body">
+        <ol class="steps3">
+          <li>
+            <div class="st-h"><span class="ln">01</span>A rep edits a row</div>
+            <div class="mock">
+              <div class="st-body">
+                <div class="st-title">City of Toronto &middot; Pricing</div>
+                <table class="st-table">
+                  <tr><th>Item</th><th>Disc.</th><th class="r">Total</th></tr>
+                  <tr class="st-on"><td>Enterprise License</td><td><span class="st-edit">25%</span></td><td class="r">$18,749</td></tr>
+                  <tr><td>Pro Services</td><td>0%</td><td class="r">$5,000</td></tr>
+                </table>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="st-h"><span class="ln">02</span>The threshold trips</div>
+            <div class="mock">
+              <div class="st-body">
+                <div class="st-banner"><span class="ic" aria-hidden="true">!</span><span><b>Discount over 20% needs approval.</b> You can still send. A manager will review it.</span></div>
+                <table class="st-table">
+                  <tr><th>Item</th><th>Disc.</th><th class="r">Total</th></tr>
+                  <tr class="st-warn"><td>Enterprise License</td><td><span class="mock-pill is-warning">25%</span></td><td class="r">$18,749</td></tr>
+                  <tr><td>Pro Services</td><td>0%</td><td class="r">$5,000</td></tr>
+                </table>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="st-h"><span class="ln">03</span>Sent, and flagged for review</div>
+            <div class="mock">
+              <div class="st-body">
+                <div class="st-title">Approvals &middot; Manager view</div>
+                <div class="st-item">
+                  <div><span class="st-name">City of Toronto</span><span class="st-sub">Discount 25%, limit 20%</span></div>
+                  <span class="mock-pill is-warning">Needs review</span>
+                </div>
+                <div class="st-item">
+                  <div><span class="st-name">Harbourfront Events</span><span class="st-sub">Total $38,200</span></div>
+                  <span class="mock-pill is-positive">Within limits</span>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ol>
+      </div>
+      <figcaption><span>Admins set the rule, such as a discount over 20% or a total over $50,000.</span></figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ OUTCOME ============ -->
+<section class="act impact">
+  <div class="wrap col read-wide">
+    <h2 class="act-thesis">Building a priced proposal became faster and significantly more reliable.</h2>
+  </div>
+
+  <div class="wrap">
+    <div class="impact-grid reveal">
+      <div class="cell"><span class="n">~25%</span><span class="l">Faster assembly</span></div>
+      <div class="cell"><span class="n">50→87.5%</span><span class="l">Task completion</span></div>
+    </div>
+  </div>
+
+  <div class="wrap col read-wide">
+    <p class="statement">Every time we chose to show more, whether a log, an icon or one more confirmation, people trusted the system more.</p>
+  </div>
+</section>
+
+<section class="next">
+  <div class="wrap">
+    <a href="/work/proposify-editor/">
+      <div>
+        <p class="eyebrow">Next case study</p>
+        <h3>Rebuilding an editor customers had rejected</h3>
+      </div>
+      <span class="arrow">→</span>
+    </a>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>Calgary, Alberta, Canada</span>
+    <div class="links">
+      <a href="/">Homepage</a>
+      <a href="/freelance/">Freelance</a>
+      <a href="/sound/">Sound</a>
+      <a href="/about/">About</a>
+      <a href="/contact/">Contact</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

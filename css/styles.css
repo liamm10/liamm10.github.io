@@ -1,0 +1,1800 @@
+/* =========================================================
+   Liam Mackenzie - portfolio
+   Hand-written CSS. No framework, no build step.
+
+   ONE ACCENT, TWO SURFACES.
+   - Chrome (--bg/--fg/--edge/--ac) is a neutral off-black with a
+     single warm accent. The accent means "actionable" and nothing
+     else: links, CTAs, the shipped/after side of a comparison.
+   - Mockups keep the light tokens (--paper/--ink/--sys-*) because a
+     product screen should look like a product screen. Light app UI on
+     off-black is the whole visual idea, and the cool product blue
+     reads as a different system from the warm site chrome on purpose.
+
+   RADIUS SYSTEM (one documented rule, applied everywhere):
+     --r-card 14px   panels, cards, mockups, grouped blocks
+     --r-sm    8px   inputs, chips, small nodes
+     --r-pill 999px  anything pill-shaped or interactive-round
+   ========================================================= */
+:root{
+  color-scheme:dark;
+  /* ---- chrome: dark, neutral, off-black ---- */
+  --bg:#0b0b0d;
+  --bg-2:#131317;
+  --surface:rgba(255,255,255,.03);
+  --surface-2:rgba(255,255,255,.06);
+  --edge:rgba(255,255,255,.09);
+  --edge-2:rgba(255,255,255,.17);
+  --fg:#ececed;
+  --fg-soft:rgba(236,236,237,.66);
+  --fg-faint:rgba(236,236,237,.44);
+  --fg-ghost:rgba(236,236,237,.15);
+
+  /* The one chrome accent. hsl(24 73% 56%), 6.5:1 against --bg. */
+  --ac:#e07a3f;
+  --ac-line:rgba(224,122,63,.38);
+  --ac-line-2:rgba(224,122,63,.85);
+  --ac-soft:rgba(224,122,63,.10);
+  /* Accent needs dark text on top of it, never white: 6.5:1 vs 3.0:1. */
+  --on-ac:#0b0b0d;
+
+  /* Legacy aliases. Every old reference resolves to the one accent or
+     to --dead. Killed / before / buried states use --dead, so an
+     abandoned idea reads as inert rather than as a second brand colour. */
+  --v:var(--ac);
+  --b:var(--ac);
+  --c:var(--ac);
+  --lime:var(--ac);
+  --dead:rgba(236,236,237,.50);
+  --pink:var(--dead);
+  --grad:var(--ac);
+
+  /* ---- mockup layer: light (unchanged, mocks depend on these) ---- */
+  --paper:#fff;
+  --paper-2:#f4f4f1;
+  --paper-warm:#f7f5f0;
+  --ink:#0a0a0a;
+  --ink-soft:rgba(10,10,10,.66);
+  --ink-faint:rgba(10,10,10,.42);
+  --line:rgba(10,10,10,.13);
+  --blue-50:#eef3fc;
+  --blue-100:#dce7f8;
+  --blue-200:#b6cdf2;
+  --blue-500:#0049c8;
+  --blue-600:#003ba3;
+  --green-500:#146c2e;
+  --green-50:#e7f3ea;
+  --amber-500:#8f4a0b;
+  --amber-50:#fbefe0;
+  --accent:var(--blue-500);
+  --accent-soft:rgba(0,73,200,.07);
+  --sys-accent:var(--blue-500);
+  --sys-accent-weak:var(--blue-50);
+  --sys-positive:var(--green-500);
+  --sys-positive-weak:var(--green-50);
+  --sys-warning:var(--amber-500);
+  --sys-warning-weak:var(--amber-50);
+  --sys-surface:#fff;
+  --sys-surface-alt:#f7f7f4;
+  --good:var(--green-500);
+  --warn:var(--amber-500);
+
+  --display:'Geist','Inter Tight',system-ui,-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;
+  --ui:var(--display);
+  --mono:'IBM Plex Mono','SF Mono',Consolas,monospace;
+  --body:var(--display);
+
+  --r-card:14px;
+  --r-sm:8px;
+  --r-pill:999px;
+
+  --max:1180px;
+  --wide:1400px;
+  --col:660px;
+  --gutter:clamp(1.25rem,5vw,4rem);
+
+  --ease-out:cubic-bezier(.22,.61,.36,1);
+  --ease-spring:cubic-bezier(.34,1.32,.64,1);
+  --dur-fast:.18s;
+  --dur:.45s;
+  --dur-slow:.8s;
+}
+
+*,*::before,*::after{box-sizing:border-box;}
+html{scroll-behavior:smooth;background:var(--bg);}
+
+:focus-visible{outline:2px solid var(--c);outline-offset:3px;border-radius:3px;}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.01ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.01ms !important;
+    scroll-behavior:auto !important;
+  }
+  html.js .reveal,html.js .reveal .mock{opacity:1 !important;transform:none !important;}
+  html.js .rw .w{opacity:1 !important;filter:none !important;transform:none !important;}
+}
+
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--fg);
+  font-family:var(--ui);
+  font-size:17px;
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+img{max-width:100%;display:block;}
+a{color:inherit;}
+ul{margin:0;padding:0;list-style:none;}
+
+.wrap{max-width:var(--max);margin:0 auto;padding-left:var(--gutter);padding-right:var(--gutter);}
+.wrap.wide{max-width:var(--wide);}
+.col{max-width:var(--col);}
+/* Case study columns run the same width as every other container on the
+   page: the standard .wrap measure. Note this must name --max rather than
+   `none` - .col.read-wide is two classes and beats .wrap's own max-width,
+   so `none` removed the 1180px cap entirely and let body copy run the full
+   1312px of a 1440 viewport, growing further on a larger monitor. */
+.col.read-wide{max-width:var(--max);}
+
+/* =========================================================
+   TYPE
+   ========================================================= */
+h1,h2,h3,h4{font-family:var(--display);font-weight:500;letter-spacing:-0.03em;margin:0;}
+.eyebrow{
+  font-family:var(--mono);
+  font-size:.7rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--fg-faint);
+}
+.lede{font-size:1.16rem;line-height:1.5;color:var(--fg-soft);}
+p{margin:0 0 1.05em;}
+p:last-child{margin-bottom:0;}
+
+/* Narrative sits in the same sans as everything else, one step down in
+   size. Emphasis comes from italic or weight inside this family, never
+   from switching to a second family. */
+.prose p:not(.eyebrow):not(.lede):not(.statement):not(.mock-caption):not(.mock-hint),
+.act .col > p:not(.eyebrow):not(.lede):not(.statement):not(.mock-caption):not(.mock-hint),
+.section .col > p:not(.eyebrow):not(.lede):not(.statement):not(.mock-caption):not(.mock-hint){
+  font-size:1.07rem;
+  /* Leading and paragraph spacing are set for the full-width measure the
+     case studies use. A 1052px line needs more room to track back to than
+     the 660px column these numbers were originally written against. The
+     act columns never matched this rule at all before, so case study body
+     copy was running at 17px/1.55 in full-strength white. */
+  line-height:1.72;
+  color:var(--fg-soft);
+  margin-bottom:1.5em;
+}
+/* The last block in an act column hands its spacing to the act's own
+   padding. Without this, an act that ended on a paragraph or a callout
+   kept that element's bottom margin on top of the padding and closed
+   ~26-35px looser than an act ending on a figure, which is why the
+   case studies didn't share one rhythm. The :not() chain matches the
+   rule above so this one wins on specificity. */
+.act .col > p:not(.eyebrow):not(.lede):not(.statement):not(.mock-caption):not(.mock-hint):last-child,
+.act .col > .callout:last-child,
+.act .col > ul:last-child,
+.act .col > ol:last-child,
+.act .col > ul:last-child > li:last-child{margin-bottom:0;}
+/* Text after a figure starts a new beat, so it gets the same room a
+   subheading gets (2.8rem) rather than the tighter gap used above a
+   figure. The caption then reads as closing the figure, not as the
+   first line of the next paragraph. */
+.act > .wrap:has(> figure) + .wrap{margin-top:2.8rem;}
+/* A heading sits the same distance above whatever it introduces. */
+.act h3 + blockquote,
+.act h3 + .callout{margin-top:1rem;}
+
+/* Only the narrow prose pages keep a character measure; case study columns
+   are governed by .col.read-wide instead. */
+.prose p:not(.eyebrow):not(.lede):not(.statement):not(.mock-caption):not(.mock-hint){max-width:65ch;}
+
+.statement{
+  font-family:var(--display);
+  font-weight:500;
+  font-size:clamp(1.5rem,3.4vw,2.2rem);
+  line-height:1.22;
+  letter-spacing:-0.035em;
+  color:var(--fg);
+  max-width:24ch;
+  margin:clamp(2rem,5vw,3rem) 0;
+  text-wrap:balance;
+}
+.statement.short{max-width:19ch;}
+/* Inside a case study, statements and act theses run the same width as the
+   body copy around them, so every text block in the column shares one left
+   and right edge. The narrower measures above still apply on Freelance and
+   Sound, where a statement is a standalone pull quote rather than part of a
+   reading column. */
+.col.read-wide .statement,
+.col.read-wide .statement.short{
+  max-width:none;
+  /* balance splits a two-line statement into two equal half-width lines,
+     which reads as a narrow column even though the box is full width.
+     Fill the line instead, and let pretty keep the last line off a widow. */
+  text-wrap:pretty;
+}
+
+/* Word-by-word reveal. Gated behind html.js so text is never hidden
+   if scripting fails. */
+html.js .rw .w{
+  display:inline-block;
+  opacity:0;
+  transform:translateY(.16em);
+  transition:opacity .5s var(--ease-out),transform .5s var(--ease-out);
+  transition-delay:var(--wd,0ms);
+}
+html.js .rw.in .w{opacity:1;transform:none;}
+
+/* =========================================================
+   NAV
+   ========================================================= */
+.site-nav{
+  position:sticky;top:0;z-index:60;
+  background:rgba(5,6,10,.72);
+  backdrop-filter:blur(14px) saturate(150%);
+  border-bottom:1px solid var(--edge);
+}
+.site-nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:1rem;height:62px;}
+.site-nav .brand{
+  font-family:var(--display);font-weight:600;font-size:.98rem;
+  letter-spacing:-0.025em;text-decoration:none;white-space:nowrap;
+}
+.site-nav .links{
+  display:flex;gap:clamp(.85rem,2.4vw,1.8rem);
+  font-family:var(--mono);font-size:.75rem;letter-spacing:.02em;
+}
+.site-nav .links a{
+  position:relative;text-decoration:none;color:var(--fg-faint);
+  padding:.3rem 0;transition:color .18s ease;white-space:nowrap;
+}
+.site-nav .links a::after{
+  content:'';position:absolute;left:0;right:0;bottom:0;height:1px;
+  background:var(--ac);transform:scaleX(0);transform-origin:left;
+  transition:transform .28s var(--ease-out);
+}
+.site-nav .links a:hover{color:var(--fg);}
+.site-nav .links a:hover::after,
+.site-nav .links a.active::after{transform:scaleX(1);}
+.site-nav .links a.active{color:var(--fg);}
+/* About groups the three pages that answer "who is this": the person,
+   the freelance offer, and the music. One trigger, one menu. Opens on
+   hover for a fine pointer, on click or tap everywhere, and on keyboard
+   focus, so no input method is locked out of it. */
+.site-nav .dd{position:relative;}
+.site-nav .dd-btn{
+  position:relative;display:inline-flex;align-items:center;gap:.35rem;
+  font:inherit;letter-spacing:inherit;color:var(--fg-faint);
+  background:none;border:0;padding:.3rem 0;cursor:pointer;white-space:nowrap;
+  transition:color .18s ease;
+}
+.site-nav .dd-btn::after{
+  content:'';position:absolute;left:0;right:0;bottom:0;height:1px;
+  background:var(--ac);transform:scaleX(0);transform-origin:left;
+  transition:transform .28s var(--ease-out);
+}
+.site-nav .dd-btn .chev{font-size:.62em;transition:transform .22s var(--ease-out);}
+.site-nav .dd-btn:hover,
+.site-nav .dd-btn.active,
+.site-nav .dd.open .dd-btn{color:var(--fg);}
+.site-nav .dd-btn.active::after{transform:scaleX(1);}
+.site-nav .dd.open .chev{transform:rotate(180deg);}
+.site-nav .dd-menu{
+  position:absolute;top:calc(100% + .7rem);left:-.8rem;z-index:61;
+  display:grid;min-width:176px;padding:.35rem;
+  background:var(--bg-2);border:1px solid var(--edge-2);border-radius:var(--r-sm);
+  box-shadow:0 18px 40px -16px rgba(0,0,0,.8);
+  opacity:0;visibility:hidden;transform:translateY(-4px);
+  transition:opacity .18s var(--ease-out),transform .18s var(--ease-out),visibility 0s linear .18s;
+}
+/* bridges the gap between trigger and menu so hover survives the trip */
+.site-nav .dd-menu::before{content:'';position:absolute;left:0;right:0;top:-.8rem;height:.8rem;}
+.site-nav .dd.open .dd-menu,
+.site-nav .dd:focus-within .dd-menu{
+  opacity:1;visibility:visible;transform:none;
+  transition:opacity .18s var(--ease-out),transform .18s var(--ease-out);
+}
+@media (hover:hover) and (pointer:fine){
+  .site-nav .dd:hover .dd-menu{
+    opacity:1;visibility:visible;transform:none;
+    transition:opacity .18s var(--ease-out),transform .18s var(--ease-out);
+  }
+  .site-nav .dd:hover .chev{transform:rotate(180deg);}
+}
+.site-nav .dd-menu a{
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  padding:.55rem .7rem;border-radius:6px;color:var(--fg-soft);
+}
+.site-nav .dd-menu a::after{display:none;}
+.site-nav .dd-menu a:hover{background:var(--surface-2);color:var(--fg);}
+/* The current page is marked the way the top-level links are, by colour
+   and a mark rather than a filled row: full-strength text and a small
+   accent dot at the end. A filled row read as hover, and an edge bar
+   bent around the item's rounded corner. */
+.site-nav .dd-menu a.active{color:var(--fg);}
+.site-nav .dd-menu a.active::after{
+  display:block;content:'';position:static;flex:none;
+  width:6px;height:6px;border-radius:50%;background:var(--ac);transform:none;
+}
+@media (max-width:560px){.site-nav .dd-menu{left:50%;transform:translate(-50%,-4px);}
+  .site-nav .dd.open .dd-menu,.site-nav .dd:focus-within .dd-menu{transform:translateX(-50%);}}
+@media (max-width:620px){.site-nav .links{font-size:.7rem;}}
+@media (max-width:560px){
+  .site-nav .wrap{flex-wrap:wrap;height:auto;padding-top:.7rem;padding-bottom:.55rem;gap:.45rem;}
+  .site-nav .links{width:100%;justify-content:space-between;gap:.4rem;}
+}
+
+/* =========================================================
+   HERO
+   ========================================================= */
+/* A full-height opener. The hero was capped short back when it held
+   four stacked elements and floated in the middle of the viewport; it
+   now holds one headline and two buttons, so it earns the room.
+   Capped at 78vh rather than 100vh so the top edge of the work section
+   stays visible and the page still reads as scrollable. */
+.hero,
+.study-hero.opener{
+  position:relative;
+  display:flex;
+  align-items:center;
+  min-height:min(78vh,780px);
+  padding:clamp(3.5rem,9vw,6.5rem) 0;
+  border-bottom:1px solid var(--edge);
+  overflow:hidden;
+  isolation:isolate;
+}
+.hero > .wrap,
+.study-hero.opener > .wrap{position:relative;z-index:3;width:100%;}
+
+/* THE CRATE.
+   Borrowed from the Kallax lab in lab/. A Kallax is a square-cube
+   shelf, the thing every vinyl collector's wall is made of, so the
+   lattice is already a grid system and already about curation - an
+   honest metaphor here rather than a decorative one. This takes one
+   layer of it, the rails, and leaves the cells and records behind,
+   because it has to sit under a headline rather than be the headline.
+   Inverted for the dark ground: the carcass becomes a light hairline,
+   which is what the rest of this site is built out of anyway. Masked
+   so it stays off the left where the type sits and reads strongest
+   through the warm part of the field. */
+.hero-crate{
+  --cell:128px;
+  --rail:rgba(236,236,237,.08);
+  /* Lighting strength lives in variables because it is ground-relative:
+     the same white glow reads far weaker over the Freelance hero's
+     lifted base than over the homepage's near-black. */
+  --lit:.30;
+  --lit-edge:.24;
+  position:absolute;inset:0;z-index:1;pointer-events:none;
+  overflow:hidden;
+  -webkit-mask-image:linear-gradient(100deg,transparent 0%,rgba(0,0,0,.28) 32%,#000 68%,rgba(0,0,0,.55) 100%);
+  mask-image:linear-gradient(100deg,transparent 0%,rgba(0,0,0,.28) 32%,#000 68%,rgba(0,0,0,.55) 100%);
+}
+/* The rails. Overscanned top and bottom so the scroll parallax below
+   never drags an edge into view. */
+.hero-crate::before{
+  content:'';
+  position:absolute;inset:-14% 0;
+  background:
+    repeating-linear-gradient(to right, var(--rail) 0 1px, transparent 1px var(--cell)),
+    repeating-linear-gradient(to bottom, var(--rail) 0 1px, transparent 1px var(--cell));
+}
+/* Parallax on scroll, driven by the native scroll timeline. This site
+   does not use scroll listeners - the case-study progress bar was
+   converted off one for the same reason - so the shelf moves the same
+   way: no JS, no per-frame work, and simply static where the timeline
+   is unsupported. */
+@supports (animation-timeline:scroll()){
+  @media (prefers-reduced-motion:no-preference){
+    .hero-crate::before{
+      animation:crateDrift linear both;
+      animation-timeline:scroll(root block);
+      animation-range:0 760px;
+    }
+  }
+}
+@keyframes crateDrift{
+  from{transform:translate3d(0,0,0);}
+  to{transform:translate3d(0,-7%,0);}
+}
+/* THE CUBES.
+   The lab's crate variant is built on one idea, that the pointer is a
+   light source and the cubes near it open up. This is that idea and
+   only that idea: no sleeves, no spines, no generated cover art, since
+   this sits under a headline rather than being the artwork. The cubes
+   are built by JS and are purely decorative, so if the script never
+   runs you get the lattice above with no lighting rather than a hole. */
+.hero-crate .cube{
+  --p:0;
+  position:absolute;
+  width:var(--cell);height:var(--cell);
+  background:radial-gradient(circle at 50% 45%, rgba(236,236,237,var(--lit)), rgba(236,236,237,0) 72%);
+  /* The edge is what makes it read as a cube opening rather than a
+     smudge following the cursor. This site is built out of hairlines,
+     so the hairline is the thing that should respond. */
+  box-shadow:inset 0 0 0 1px rgba(236,236,237,var(--lit-edge));
+  opacity:var(--p);
+  transition:opacity .4s var(--ease-out);
+}
+
+/* THE EMBER FIELD.
+   One hue family rather than a second brand colour: the sweep runs
+   from the site accent (24deg) through crimson to a violet tail, so it
+   reads as the accent's own shadow. The mass sits right of centre,
+   which leaves the headline and the buttons on a dark field - the
+   primary CTA is solid accent and needs that separation to stay
+   legible as the one actionable thing. */
+.hero::before{
+  content:'';
+  position:absolute;inset:-15%;z-index:0;
+  background:
+    radial-gradient(56% 72% at 76% 30%, rgba(224,122,63,.44) 0%, rgba(224,122,63,0) 68%),
+    radial-gradient(50% 60% at 97% 72%, rgba(198,58,72,.36) 0%, rgba(198,58,72,0) 66%),
+    radial-gradient(62% 66% at 46% 104%, rgba(84,52,127,.38) 0%, rgba(84,52,127,0) 70%),
+    linear-gradient(104deg,#0b0b0d 0%,#14100f 36%,#1d1210 62%,#130f18 100%);
+  animation:emberDrift 34s var(--ease-out) infinite alternate;
+}
+
+/* The same field in a lighter key, for the Freelance opener. Same
+   composition and the same hue family, so the two pages read as one
+   system; the base is lifted off black and the pools are softer and
+   goldier, which is the difference you can see when you land on it
+   from the homepage. Scoped to .opener rather than .study-hero,
+   because the case studies need compact headers - each one carries an
+   eyebrow and a reading-mode toggle, and the article itself should
+   start near the top of the viewport. */
+.study-hero.opener::before{
+  content:'';
+  position:absolute;inset:-15%;z-index:0;
+  background:
+    radial-gradient(56% 72% at 74% 28%, rgba(232,150,90,.40) 0%, rgba(232,150,90,0) 68%),
+    radial-gradient(52% 62% at 96% 70%, rgba(206,96,104,.28) 0%, rgba(206,96,104,0) 66%),
+    radial-gradient(62% 66% at 44% 104%, rgba(112,84,158,.30) 0%, rgba(112,84,158,0) 70%),
+    linear-gradient(104deg,#121216 0%,#1b1614 36%,#251815 62%,#191322 100%);
+  animation:emberDrift 34s var(--ease-out) infinite alternate;
+}
+/* The lattice has a lighter ground to sit on here, so it needs a
+   little more to stay visible at all - but only a little. The glow is
+   white at --lit over the ground, so what you see is lit x (255 - ground):
+   .30 over the homepage's near-black is ~73, and matching that over this
+   page's lifted base (~28) takes about .32, not the half-again that was
+   here before. Ground-relative is the right instinct; the correction is
+   just much smaller than it looks, because both grounds are dark. */
+.study-hero.opener .hero-crate{--rail:rgba(236,236,237,.09);--lit:.34;--lit-edge:.26;}
+
+@media (prefers-reduced-motion:reduce){
+  .hero::before,
+  .study-hero.opener::before{animation:none;}
+}
+@keyframes emberDrift{
+  from{transform:translate3d(0,0,0) scale(1);}
+  to{transform:translate3d(-2.2%,-1.6%,0) scale(1.06);}
+}
+
+/* Grain and scrim, static above the drifting field. The scrim
+   guarantees headline contrast on the left; the grain is what stops a
+   large CSS gradient banding on a dark ground. */
+.hero::after,
+.study-hero.opener::after{
+  content:'';
+  position:absolute;inset:0;z-index:2;pointer-events:none;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.15'/%3E%3C/svg%3E"),
+    linear-gradient(96deg,rgba(11,11,13,.92) 0%,rgba(11,11,13,.66) 34%,rgba(11,11,13,.14) 70%,rgba(11,11,13,0) 100%);
+  background-size:180px 180px, auto;
+}
+.hero h1{
+  font-size:clamp(2.05rem,6vw,4.4rem);
+  line-height:1.03;
+  letter-spacing:-0.048em;
+  max-width:24ch;
+  text-wrap:balance;
+}
+
+/* ---------- buttons ---------- */
+.cta-row{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:2.1rem;}
+.btn{
+  display:inline-flex;align-items:center;gap:.5rem;
+  font-family:var(--mono);font-size:.76rem;letter-spacing:.06em;text-transform:uppercase;
+  text-decoration:none;white-space:nowrap;
+  padding:.8rem 1.35rem;border-radius:var(--r-pill);
+  border:1px solid transparent;
+  transition:background .2s ease,border-color .2s ease,color .2s ease,transform .12s var(--ease-out);
+}
+/* Dark text on the accent scores 6.5:1. White on the accent is 3.0:1. */
+.btn.primary{background:var(--ac);color:var(--on-ac);font-weight:500;}
+.btn.primary:hover{background:#ef8c53;}
+.btn.ghost{border-color:var(--edge-2);color:var(--fg-soft);}
+.btn.ghost:hover{border-color:var(--fg-soft);color:var(--fg);}
+.btn:active{transform:translateY(1px);}
+.btn .arrow{transition:transform .22s var(--ease-out);}
+.btn:hover .arrow{transform:translateX(3px);}
+
+/* =========================================================
+   SPOTLIGHT CARD - pointer-tracked radial highlight.
+   JS sets --mx/--my; if JS never runs the card is still a
+   perfectly good bordered card.
+   ========================================================= */
+.sc{
+  position:relative;
+  border:1px solid var(--edge);
+  border-radius:var(--r-card);
+  background:var(--surface);
+  overflow:hidden;
+  isolation:isolate;
+  transition:border-color .3s ease,transform .4s var(--ease-out);
+}
+.sc::before{
+  content:'';position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(380px circle at var(--mx,50%) var(--my,0%),
+    rgba(255,255,255,.055),transparent 62%);
+  opacity:0;transition:opacity .35s ease;
+}
+.sc:hover::before{opacity:1;}
+.sc:hover{border-color:var(--edge-2);}
+.sc > *{position:relative;z-index:1;}
+
+/* The top hairline is a light source anchored to the pointer: a full
+   width rule, plus a bright segment that sits wherever the cursor is.
+   Shares the --mx that already drives the radial above it, so the two
+   read as one effect rather than two.
+
+   Accent means actionable, so only a card that navigates gets an
+   accent segment. */
+.sc::after{
+  content:'';position:absolute;left:0;right:0;top:0;height:1px;z-index:2;
+  opacity:0;transition:opacity .4s var(--ease-out);
+  background:
+    radial-gradient(260px 1px at var(--mx,50%) 50%,var(--fg-soft),transparent),
+    linear-gradient(90deg,transparent,rgba(255,255,255,.09),transparent);
+}
+a.sc::after{
+  background:
+    radial-gradient(260px 1px at var(--mx,50%) 50%,var(--ac),transparent),
+    linear-gradient(90deg,transparent,rgba(255,255,255,.09),transparent);
+}
+.sc:hover::after{opacity:1;}
+
+/* =========================================================
+   CHAPTERS
+   ========================================================= */
+.chapter{position:relative;padding:clamp(3rem,8vw,5.5rem) 0;border-bottom:1px solid var(--edge);}
+.chapter:last-of-type{border-bottom:none;}
+/* Section headers stack: headline, then body underneath. No numeral,
+   no small explainer floating in a right-hand column. */
+.chapter-head{margin-bottom:clamp(2rem,5vw,3rem);}
+.chapter-title h2{
+  font-size:clamp(1.6rem,3.6vw,2.5rem);line-height:1.1;
+  letter-spacing:-0.042em;max-width:20ch;text-wrap:balance;
+}
+.chapter-title .chapter-lede{
+  font-size:1.07rem;line-height:1.6;
+  color:var(--fg-soft);max-width:62ch;margin-top:1.1rem;
+}
+
+/* =========================================================
+   BENTO GRID - the work index
+   ========================================================= */
+.bento{
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  gap:clamp(.7rem,1.4vw,1.1rem);
+}
+.bento > .sc{grid-column:span 6;display:flex;flex-direction:column;text-decoration:none;color:inherit;}
+.bento > .sc.wide{grid-column:span 4;}
+.bento > .sc.narrow{grid-column:span 2;}
+.bento > .sc.half{grid-column:span 3;}
+@media (max-width:900px){
+  .bento > .sc.wide,.bento > .sc.narrow,.bento > .sc.half{grid-column:span 6;}
+}
+.bento .pad{padding:clamp(1.2rem,2.4vw,1.7rem);}
+.bento .kicker{
+  font-family:var(--mono);font-size:.66rem;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--fg-faint);display:block;margin-bottom:.85rem;
+}
+.bento h3{
+  font-size:clamp(1.15rem,2.2vw,1.6rem);line-height:1.14;
+  letter-spacing:-0.035em;margin-bottom:.7rem;text-wrap:balance;
+}
+.bento .sub{
+  font-size:1rem;line-height:1.55;
+  color:var(--fg-soft);margin-bottom:1.1rem;
+}
+.bento .shot{
+  margin-top:auto;padding:0 0 0 clamp(1.2rem,2.4vw,1.7rem);
+  overflow:hidden;border-top-left-radius:10px;
+}
+.bento .shot .mock{
+  margin:0;border-bottom:0;border-right:0;
+  border-top-left-radius:10px;border-bottom-left-radius:0;border-bottom-right-radius:0;
+  transform:translateY(6px);
+  transition:transform .5s var(--ease-out);
+}
+.bento > .sc:hover .shot .mock{transform:translateY(0);}
+
+.metrics{display:flex;flex-wrap:wrap;gap:1.2rem 1.8rem;margin-bottom:1.2rem;}
+.metric .n{
+  display:block;font-family:var(--display);font-weight:600;
+  font-size:clamp(1.4rem,2.6vw,1.9rem);letter-spacing:-0.045em;line-height:1;
+  color:var(--fg);
+}
+.metric .l{
+  font-family:var(--mono);font-size:.64rem;text-transform:uppercase;
+  letter-spacing:.1em;color:var(--fg-faint);margin-top:.4rem;display:block;
+}
+.see-more{
+  font-family:var(--mono);font-size:.74rem;letter-spacing:.04em;
+  color:var(--ac);text-decoration:none;display:inline-flex;gap:.4rem;align-items:center;
+}
+.see-more .arrow{display:inline-block;transition:transform .22s var(--ease-out);}
+.sc:hover .see-more .arrow,.see-more:hover .arrow{transform:translateX(4px);}
+
+/* =========================================================
+   THREE-ACT CASE STUDY: Constraint / Pivot / Impact
+   ========================================================= */
+.act{
+  position:relative;
+  padding:clamp(3.2rem,6.5vw,5rem) 0;
+  border-bottom:1px solid var(--edge);
+}
+.act:last-of-type{border-bottom:none;}
+/* Prose and figures are separate .wrap children of an act; without this
+   they butt together at the mockup's own small margin. */
+.act > .wrap + .wrap,
+.section > .wrap + .wrap{margin-top:1.8rem;}
+.act-head{display:flex;align-items:baseline;gap:1rem;margin-bottom:2.2rem;flex-wrap:wrap;}
+.act-n{
+  font-family:var(--mono);font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--fg-faint);border:1px solid var(--edge-2);border-radius:var(--r-pill);padding:.28rem .75rem;
+}
+.act-head h2{
+  font-size:clamp(1.5rem,3.2vw,2.1rem);letter-spacing:-0.04em;line-height:1.1;
+}
+/* Every act label carries the accent, so the three beats read as one
+   system across all three case studies rather than changing colour
+   partway through a page. */
+.act .act-n{color:var(--ac);border-color:var(--ac-line);}
+
+/* the one-line thesis under each act heading */
+.act-thesis{
+  font-family:var(--display);font-weight:500;
+  font-size:clamp(1.15rem,2.3vw,1.5rem);line-height:1.28;letter-spacing:-0.03em;
+  color:var(--fg);max-width:none;margin:0 0 2rem;
+}
+
+/* IMPACT metric row */
+.impact-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,170px),1fr));
+  gap:1px;background:var(--edge);border:1px solid var(--edge);border-radius:var(--r-card);overflow:hidden;
+  margin:2.4rem 0;
+}
+.impact-grid .cell{background:var(--bg-2);padding:clamp(1.1rem,2.4vw,1.5rem);}
+.impact-grid .cell .n{
+  display:block;font-family:var(--display);font-weight:600;
+  font-size:clamp(1.6rem,3.4vw,2.3rem);letter-spacing:-0.05em;line-height:1;
+  color:var(--fg);
+}
+.impact-grid .cell .l{
+  display:block;font-family:var(--mono);font-size:.64rem;text-transform:uppercase;
+  letter-spacing:.1em;color:var(--fg-faint);margin-top:.55rem;line-height:1.4;
+}
+
+/* =========================================================
+   ARTIFACT: the decision panel (proposed vs shipped)
+   ========================================================= */
+.decision{
+  display:grid;grid-template-columns:1fr 1fr;gap:clamp(.8rem,2vw,1.2rem);
+  align-items:stretch;
+}
+@media (max-width:760px){.decision{grid-template-columns:1fr;}}
+.dp{
+  border:1px solid var(--edge);border-radius:var(--r-card);
+  padding:clamp(1.1rem,2.4vw,1.5rem);background:var(--surface);
+  position:relative;overflow:hidden;
+}
+.dp .tag{
+  font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;
+  display:inline-flex;align-items:center;gap:.45rem;margin-bottom:1rem;
+}
+/* A killed idea reads as inert: dashed edge, muted label. The shipped
+   one carries the accent. No second hue needed to tell them apart. */
+.dp.killed{border-style:dashed;border-color:var(--edge-2);}
+.dp.killed .tag{color:var(--dead);}
+.dp.shipped{border-color:var(--ac-line);}
+.dp.shipped .tag{color:var(--ac);}
+.dp h4{font-size:1.05rem;letter-spacing:-0.025em;margin-bottom:.6rem;}
+.dp p{font-size:.98rem;line-height:1.5;color:var(--fg-soft);}
+
+/* the little flow diagram inside a decision panel */
+.flow{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;margin:1rem 0;}
+.flow .node{
+  font-family:var(--mono);font-size:.66rem;letter-spacing:.04em;
+  border:1px solid var(--edge-2);border-radius:var(--r-sm);padding:.45rem .6rem;
+  color:var(--fg-soft);background:var(--bg-2);white-space:nowrap;
+}
+.flow .node.sys{color:var(--ac);border-color:var(--ac-line);}
+.flow .ar{color:var(--fg-faint);font-size:.85rem;flex:none;}
+.flow .ar.two{color:var(--dead);}
+.flow .clash{
+  font-family:var(--mono);font-size:.62rem;letter-spacing:.06em;
+  color:var(--dead);border:1px dashed var(--edge-2);border-radius:var(--r-sm);
+  padding:.4rem .6rem;margin-top:.6rem;display:inline-block;
+}
+
+/* =========================================================
+   ARTIFACT: journey strip (entry-point relocation)
+   ========================================================= */
+.journey{
+  border:1px solid var(--edge);border-radius:var(--r-card);background:var(--surface);
+  padding:clamp(1.1rem,2.6vw,1.6rem);
+}
+.journey + .journey{margin-top:.8rem;}
+.journey .jlabel{
+  font-family:var(--mono);font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--fg-faint);margin-bottom:1rem;display:flex;gap:.6rem;align-items:center;flex-wrap:wrap;
+}
+.journey.before .jlabel{color:var(--dead);}
+.journey.after .jlabel{color:var(--ac);}
+.jsteps{display:flex;align-items:stretch;gap:.4rem;flex-wrap:nowrap;overflow-x:auto;padding-bottom:.4rem;}
+.jstep{
+  flex:1 1 0;min-width:104px;
+  border:1px solid var(--edge);border-radius:var(--r-sm);
+  padding:.7rem .65rem;background:var(--bg-2);
+  font-family:var(--mono);font-size:.65rem;line-height:1.4;color:var(--fg-soft);
+  position:relative;
+}
+.jstep .sn{display:block;color:var(--fg-faint);font-size:.58rem;letter-spacing:.1em;margin-bottom:.35rem;}
+.jstep.entry{border-color:var(--ac);box-shadow:inset 0 0 0 1px var(--ac-line);color:var(--fg);}
+.jstep.entry .sn{color:var(--ac);}
+.jstep.buried{border-style:dashed;border-color:var(--edge-2);color:var(--fg-faint);}
+.jstep.buried .sn{color:var(--dead);}
+.jstep.drop::after{
+  content:attr(data-drop);
+  position:absolute;right:.5rem;top:.5rem;
+  font-size:.56rem;letter-spacing:.06em;color:var(--dead);
+}
+
+/* =========================================================
+   FIGURES
+   ========================================================= */
+figure.fig{margin:0;}
+/* .mock is already its own horizontal scroll container, so the
+   440px-min-width sidebar mockups scroll inside the mock rather
+   than pushing the page. Nothing to do here. */
+figure.fig .fig-body{position:relative;}
+figure.fig figcaption{
+  display:flex;gap:.6rem;align-items:baseline;flex-wrap:wrap;margin-top:1.2rem;
+  font-family:var(--mono);font-size:.68rem;line-height:1.5;color:var(--fg-faint);
+}
+figure.fig figcaption .fig-n{flex:none;color:var(--fg);font-weight:500;}
+figure.fig figcaption .fig-live{
+  flex:none;color:var(--ac);border:1px solid var(--ac-line);border-radius:var(--r-pill);
+  padding:.05rem .5rem;font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;
+}
+
+/* light mockups need a rim + shadow to sit on near-black, and their own
+   light colour scheme so a scrollbar inside one isn't drawn dark */
+.mock{
+  color-scheme:light;
+  box-shadow:0 30px 70px -28px rgba(0,0,0,.85),0 0 0 1px rgba(255,255,255,.07);
+}
+
+/* A real product screenshot, framed like the coded mockups so it sits on
+   the dark ground the same way: card radius, hairline rim, deep shadow. */
+.shot-img{
+  border-radius:var(--r-card);overflow:hidden;background:#fff;
+  box-shadow:0 30px 70px -28px rgba(0,0,0,.85),0 0 0 1px rgba(255,255,255,.07);
+}
+.shot-img img{width:100%;height:auto;}
+
+/* =========================================================
+   CASE STUDY HERO + READING MODE
+   ========================================================= */
+.study-hero{
+  position:relative;overflow:hidden;
+  padding:clamp(2.5rem,7vw,4.5rem) 0 clamp(1.8rem,4vw,2.6rem);
+  border-bottom:1px solid var(--edge);
+}
+.study-hero .wrap{position:relative;z-index:2;}
+
+/* About opens as one block. Its title and the paragraphs under it are a
+   single thought, so the rule between them was announcing a section
+   break that is not there, and the two stacked paddings were opening a
+   gap the size of one. Killing both leaves a heading-to-body
+   relationship, which is what it actually is. */
+.study-hero.seamless{border-bottom:none;padding-bottom:0;}
+.study-hero.seamless + .section,
+.study-hero.seamless + .meta-block{padding-top:clamp(1.4rem,3vw,2rem);}
+.study-hero .eyebrow{margin-bottom:1rem;}
+.study-hero h1{
+  font-size:clamp(1.9rem,4.6vw,3.3rem);line-height:1.06;
+  letter-spacing:-0.045em;max-width:20ch;text-wrap:balance;
+}
+.study-hero .lede{margin-top:1.2rem;max-width:58ch;}
+
+/* About: a portrait above the tagline, in the same card radius as the
+   panels and mockups. The source frames him small against a lot of empty
+   wall, and its 3:4 ratio matches this box exactly - so object-fit alone
+   has nothing to trim. The image is scaled up inside a clipping box
+   instead, with the origin on his face, which crops to head-and-shoulders
+   without touching the file. */
+.portrait{
+  display:block;
+  width:clamp(200px,24vw,300px);
+  aspect-ratio:3/4;
+  overflow:hidden;
+  border-radius:var(--r-card);
+  border:1px solid var(--edge);
+  margin:0 0 clamp(1.5rem,3vw,2.1rem);
+}
+.portrait img{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transform:scale(1.85);
+  /* Measured: his head centres at 61.5% of the source width. A point at the
+     transform origin holds still under scale, so the origin that lands the
+     face at dead centre is 0.50 = Ox + 1.85(0.615 - Ox) => 75%. */
+  /* Vertical: the visible band starts at Oy(1 - 1/S), so raising Oy trims
+     headroom. 36% left ~25% of the frame as empty wall above the beanie;
+     48% brings that to ~15%. */
+  transform-origin:75% 48%;
+}
+
+.meta-block{border-bottom:1px solid var(--edge);padding:clamp(2rem,5vw,2.8rem) 0;}
+.meta-block .wrap{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,5vw,4rem);}
+.meta-block .eyebrow{margin-bottom:1rem;}
+.meta-block .mb-h{
+  font-size:1.05rem;font-weight:500;letter-spacing:-0.02em;
+  color:var(--fg);margin:0 0 .95rem;
+}
+.meta-block ul.bullets li{font-size:.98rem;}
+@media (max-width:700px){.meta-block .wrap{grid-template-columns:1fr;gap:2rem;}}
+
+/* =========================================================
+   SECTIONS, LISTS, QUOTES
+   ========================================================= */
+.section{padding:clamp(3.2rem,7vw,5rem) 0;border-bottom:1px solid var(--edge);}
+.section:last-of-type{border-bottom:none;}
+.section.finale{padding-bottom:clamp(3.5rem,9vw,6rem);}
+.section .col > .eyebrow{margin-bottom:1.2rem;}
+.section h2{font-size:clamp(1.4rem,2.8vw,1.9rem);letter-spacing:-0.035em;margin-bottom:1.2rem;}
+.section h3,.act h3{font-size:1.08rem;font-family:var(--display);letter-spacing:-0.025em;margin:2.8rem 0 1rem;}
+ul.bullets{margin:1.4rem 0 2rem;}
+ul.bullets li{position:relative;padding-left:1.4rem;margin-bottom:.8rem;color:var(--fg-soft);}
+ul.bullets li::before{
+  content:'';position:absolute;left:0;top:.62em;width:5px;height:5px;
+  border-radius:50%;background:var(--fg-ghost);
+}
+ul.bullets.outcomes li{color:var(--fg);}
+ul.bullets.outcomes li::before{background:var(--ac);}
+ul.bullets a{color:var(--ac);text-decoration:none;border-bottom:1px solid var(--ac-line);}
+ul.bullets a:hover{border-color:var(--ac-line-2);}
+
+blockquote{
+  margin:2rem 0;padding:1.15rem 1.35rem;
+  background:var(--surface);border:1px solid var(--edge);
+  border-left:2px solid var(--ac);border-radius:0 var(--r-card) var(--r-card) 0;
+  font-size:1.1rem;font-style:italic;color:var(--fg-soft);
+}
+blockquote cite{
+  display:block;margin-top:.65rem;font-family:var(--mono);font-style:normal;
+  font-size:.68rem;letter-spacing:.06em;color:var(--fg-faint);
+}
+
+/* =========================================================
+   SPEC LIST / SERVICES / OBSESSIONS / DECK
+   ========================================================= */
+.spec{border-top:1px solid var(--edge);}
+.spec .row{
+  display:grid;grid-template-columns:minmax(0,180px) minmax(0,1fr);
+  gap:clamp(1rem,3vw,2rem);padding:1rem 0;border-bottom:1px solid var(--edge);
+}
+.spec .row .k{
+  font-family:var(--mono);font-size:.68rem;text-transform:uppercase;
+  letter-spacing:.1em;color:var(--fg-faint);padding-top:.2rem;
+}
+.spec .row .v{font-size:1rem;line-height:1.5;color:var(--fg-soft);}
+.spec .row .v a{color:var(--ac);text-decoration:none;border-bottom:1px solid var(--ac-line);}
+.spec .row .v a:hover{border-color:var(--ac-line-2);}
+.spec .row .v .note{display:block;font-family:var(--mono);font-size:.68rem;color:var(--fg-faint);margin-top:.35rem;}
+@media (max-width:640px){.spec .row{grid-template-columns:1fr;gap:.35rem;}}
+
+/* Four services as a divided field rather than four identical boxes.
+   Hairlines and the column gap do the grouping, so no card is needed. */
+.services{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+  column-gap:clamp(2rem,5vw,4rem);
+  border-top:1px solid var(--edge);
+}
+.services .svc{padding:clamp(1.4rem,3vw,1.9rem) 0;border-bottom:1px solid var(--edge);}
+.services .svc h3{font-size:1.12rem;letter-spacing:-0.025em;margin:0 0 .55rem;}
+.services .svc p{font-size:1rem;line-height:1.55;color:var(--fg-soft);max-width:46ch;}
+/* The last row of the 2-col grid keeps its rule so the block closes cleanly. */
+.services .svc:nth-last-child(-n+2){border-bottom:1px solid var(--edge);}
+@media (max-width:700px){.services{grid-template-columns:1fr;}}
+
+.obsession{
+  padding:clamp(1.8rem,4vw,2.6rem) 0;border-top:1px solid var(--edge);
+  display:grid;grid-template-columns:minmax(0,260px) minmax(0,1fr);
+  gap:clamp(1.2rem,4vw,3rem);align-items:start;
+}
+.obsession h3{font-size:clamp(1.1rem,2.4vw,1.45rem);line-height:1.18;letter-spacing:-0.03em;margin:0;}
+.obsession h3 .dim{display:block;color:var(--fg-faint);font-weight:400;font-size:.82em;}
+.obsession .items{display:grid;gap:1.1rem;}
+.obsession .item .t{font-family:var(--display);font-weight:500;font-size:1rem;letter-spacing:-0.02em;margin-bottom:.2rem;}
+.obsession .item .t a{color:var(--ac);text-decoration:none;border-bottom:1px solid var(--ac-line);}
+.obsession .item .t a:hover{border-color:var(--ac-line-2);}
+.obsession .item .d{font-size:1rem;line-height:1.5;color:var(--fg-soft);max-width:58ch;}
+@media (max-width:700px){.obsession{grid-template-columns:1fr;gap:.9rem;}}
+
+/* Fifteen capabilities in one dot-separated run was unreadable. They
+   group into the three phases they actually belong to instead. */
+.skills{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(1.6rem,4vw,3rem);}
+.skills .grp h3{
+  font-size:.98rem;font-weight:500;color:var(--fg);letter-spacing:-0.02em;
+  padding-bottom:.75rem;margin:0 0 .95rem;border-bottom:1px solid var(--edge);
+}
+.skills .grp ul{display:grid;gap:.5rem;}
+.skills .grp li{font-size:1rem;line-height:1.4;color:var(--fg-soft);}
+@media (max-width:760px){.skills{grid-template-columns:1fr;gap:2rem;}}
+
+/* The weekly research loop as a scannable sequence. Same hairline rows
+   as the spec lists; the last step carries the accent because it is the
+   one that sends the loop back to the start. */
+ol.loop{list-style:none;margin:1.2rem 0 2.2rem;padding:0;border-top:1px solid var(--edge);counter-reset:none;}
+ol.loop li{
+  display:grid;grid-template-columns:2.2rem minmax(0,7.5rem) minmax(0,1fr);
+  gap:clamp(.6rem,2vw,1.4rem);align-items:baseline;
+  padding:.85rem 0;border-bottom:1px solid var(--edge);
+}
+ol.loop .ln{font-family:var(--mono);font-size:.68rem;letter-spacing:.08em;color:var(--fg-faint);}
+ol.loop .lt{font-weight:500;letter-spacing:-0.02em;color:var(--fg);}
+ol.loop .ld{font-size:1rem;line-height:1.5;color:var(--fg-soft);}
+ol.loop li.again .ln,ol.loop li.again .lt{color:var(--ac);}
+@media (max-width:560px){
+  ol.loop li{grid-template-columns:2rem minmax(0,1fr);}
+  ol.loop .ld{grid-column:2;}
+}
+
+.callout{
+  background:var(--surface);border:1px solid var(--edge);border-radius:var(--r-card);
+  padding:clamp(1.5rem,4vw,2.2rem);margin:2.2rem 0;
+}
+.callout p{font-size:1.07rem;line-height:1.62;color:var(--fg-soft);}
+
+/* ---------- the proposal editor shell ----------
+   Built to match the real editor rather than suggest it: dark navy rail,
+   document title with status line, formatting strip, a grey canvas holding
+   a white page, and a contextual settings panel on the right. Every colour
+   here was sampled out of the design file, not guessed. */
+.mock-editor{
+  --ed-rail:#001e2d;
+  --ed-head:#00283a;
+  --ed-accent:#00658c;
+  --ed-canvas:#f3f3f6;
+  --ed-row:#eceff1;
+  --ed-ink:#191c1e;
+  --ed-muted:#5f7883;
+  --ed-line:#dfe4e7;
+  display:grid;
+  grid-template-columns:44px minmax(0,1fr) 178px;
+  grid-template-rows:auto auto minmax(0,1fr);
+  min-width:720px;
+  background:var(--ed-canvas);
+  color:var(--ed-ink);
+  font-family:var(--ui);
+  font-size:.72rem;
+  line-height:1.4;
+}
+.mock-editor .ed-rail{
+  grid-row:1 / -1;background:var(--ed-rail);
+  padding:.65rem 0;display:flex;flex-direction:column;align-items:center;gap:.8rem;
+}
+.mock-editor .ed-rail i{width:15px;height:15px;border-radius:4px;border:1.5px solid rgba(255,255,255,.3);}
+.mock-editor .ed-rail i.brand{border:0;background:#0aa1c7;border-radius:50%;width:19px;height:19px;margin-bottom:.45rem;}
+.mock-editor .ed-rail i.on{border-color:#fff;background:rgba(255,255,255,.15);}
+.mock-editor .ed-top{
+  grid-column:2 / -1;background:#fff;border-bottom:1px solid var(--ed-line);
+  padding:.65rem .95rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;
+}
+.mock-editor .ed-title{font-size:.88rem;font-weight:600;letter-spacing:-0.012em;}
+.mock-editor .ed-meta{display:flex;gap:.55rem;margin-top:.2rem;color:var(--ed-muted);font-size:.6rem;letter-spacing:.07em;text-transform:uppercase;}
+.mock-editor .ed-actions{display:flex;align-items:center;gap:.65rem;color:var(--ed-muted);flex:none;}
+.mock-editor .ed-share{background:#1f4353;color:#fff;border-radius:999px;padding:.28rem .68rem;font-weight:500;}
+.mock-editor .ed-avatar{width:19px;height:19px;border-radius:50%;background:#c2d3da;}
+.mock-editor .ed-toolbar{
+  grid-column:2 / -1;background:#fff;border-bottom:1px solid var(--ed-line);
+  padding:.45rem .95rem;display:flex;align-items:center;gap:.7rem;color:var(--ed-muted);overflow:hidden;
+}
+.mock-editor .ed-toolbar .sel{border:1px solid var(--ed-line);border-radius:5px;padding:.18rem .45rem;color:var(--ed-ink);white-space:nowrap;}
+/* Chrome is sketched, not imitated: grey bars stand in for controls so the
+   layout reads at a glance without pretending to be a screenshot. */
+.mock-editor .ed-bar{display:inline-block;height:7px;border-radius:3px;background:#dfe4e7;flex:none;}
+.mock-editor .ed-bar.w1{width:11px;}
+.mock-editor .ed-bar.w2{width:26px;}
+.mock-editor .ed-bar.w3{width:44px;}
+.mock-editor .ed-bar.w4{width:62px;}
+.mock-editor .ed-line{display:block;height:7px;border-radius:3px;background:#eceff1;margin-bottom:.4rem;}
+.mock-editor .ed-toolbar .sep{width:1px;height:13px;background:var(--ed-line);flex:none;}
+.mock-editor .ed-toolbar b{color:var(--ed-ink);}
+.mock-editor .ed-toolbar .ai{color:var(--ed-accent);font-weight:500;white-space:nowrap;}
+.mock-editor .ed-canvas{padding:.9rem 1rem 0;min-width:0;}
+.mock-editor .ed-section{display:flex;align-items:center;justify-content:space-between;margin-bottom:.55rem;}
+.mock-editor .ed-section .name{font-size:.8rem;font-weight:500;}
+.mock-editor .ed-section .tools{display:flex;gap:.55rem;color:var(--ed-muted);}
+.mock-editor .ed-page{background:#fff;border:1px solid var(--ed-line);padding:.95rem;}
+/* the selected block carries the editor's own selection treatment */
+.mock-editor .ed-block{position:relative;outline:1.5px solid var(--ed-accent);outline-offset:1px;}
+.mock-editor .ed-block::before,.mock-editor .ed-block::after{
+  content:'';position:absolute;width:6px;height:6px;background:#fff;border:1.5px solid var(--ed-accent);
+}
+.mock-editor .ed-block::before{left:-5px;top:-5px;}
+.mock-editor .ed-block::after{right:-5px;bottom:-5px;}
+.mock-editor .ed-blocktools{
+  display:inline-flex;gap:.3rem;background:var(--ed-head);border-radius:4px;
+  padding:.2rem .35rem;color:#fff;font-size:.6rem;margin-bottom:.3rem;
+}
+.mock-editor .ed-panel{background:#fff;border-left:1px solid var(--ed-line);padding:.85rem .8rem;}
+.mock-editor .ed-panel h5{margin:0 0 .75rem;font-size:.76rem;font-weight:600;}
+.mock-editor .ed-panel .grp{color:var(--ed-muted);border-bottom:1px solid var(--ed-line);padding-bottom:.45rem;margin-bottom:.75rem;}
+.mock-editor .ed-panel label{display:block;margin-bottom:.28rem;color:var(--ed-ink);}
+.mock-editor .ed-panel .field{border:1px solid var(--ed-line);border-radius:5px;padding:.32rem .45rem;display:flex;justify-content:space-between;margin-bottom:.85rem;}
+.mock-editor .ed-panel .row{display:flex;justify-content:space-between;align-items:center;margin-bottom:.85rem;}
+.mock-editor .ed-toggle{width:25px;height:13px;border-radius:999px;background:var(--ed-accent);position:relative;flex:none;}
+.mock-editor .ed-toggle::after{content:'';position:absolute;right:2px;top:2px;width:9px;height:9px;border-radius:50%;background:#fff;}
+.mock-editor .ed-panel .btn{border:1px solid var(--ed-head);border-radius:999px;padding:.32rem .55rem;display:flex;justify-content:space-between;font-weight:500;color:var(--ed-head);}
+/* the typed pricing table, as the editor renders it */
+.ed-table{width:100%;border-collapse:collapse;font-size:.68rem;}
+.ed-table .type th{background:var(--ed-head);color:#fff;font-weight:400;padding:.38rem .5rem;text-align:left;white-space:nowrap;}
+.ed-table .type th em{font-style:normal;color:#8fa6b1;}
+.ed-table .head td{background:var(--ed-row);font-weight:600;padding:.42rem .5rem;}
+.ed-table td{border:1px solid var(--ed-line);padding:.42rem .5rem;vertical-align:top;}
+.ed-table .num{text-align:right;}
+.ed-table .drag{width:14px;color:#b7c3c9;text-align:center;padding:.42rem .15rem;}
+.ed-table tfoot td{background:var(--ed-row);font-weight:600;}
+.mock > .mock-editor{min-width:720px;}
+
+/* ---------- coded UI mockups ---------- */
+.mock{
+  border:1px solid var(--line);
+  border-radius:10px;
+  overflow-x:auto;
+  overflow-y:hidden;
+  -webkit-overflow-scrolling:touch;
+  background:#fff;
+  /* A light surface inside a dark-theme document, so it has to state its
+     own text colour. Without this, anything in a mockup that doesn't set
+     a colour inherits --fg and renders near-white on white. */
+  color:var(--ink);
+  box-shadow:0 30px 60px -30px rgba(17,17,16,.25);
+  margin:1rem 0 .6rem;
+}
+/* window chrome - makes a coded mockup read as a real product screen */
+.mock-chrome{
+  display:flex;
+  align-items:center;
+  gap:.4rem;
+  padding:.6rem .85rem;
+  border-bottom:1px solid var(--line);
+  background:var(--paper-2);
+  position:sticky;
+  left:0;
+}
+.mock-chrome i{
+  width:9px;height:9px;
+  border-radius:50%;
+  background:var(--line);
+  display:block;
+}
+.mock-chrome .label{
+  margin-left:.6rem;
+  font-family:var(--mono);
+  font-size:.68rem;
+  color:var(--ink-faint);
+}
+
+.mock-app{
+  display:grid;
+  grid-template-columns:180px 1fr;
+  min-width:440px;
+  min-height:380px;
+  font-family:var(--mono);
+  font-size:.78rem;
+}
+/* The homepage card is narrower than a case study figure, so its
+   catalog runs a slimmer rail and drops the min-width that made the
+   card scroll sideways. */
+.mock-app.compact{grid-template-columns:104px minmax(0,1fr);min-width:0;}
+.mock-app.compact .mock-side{padding:1.1rem .7rem;}
+.mock-app.compact .mock-brand{font-size:.8rem;line-height:1.2;}
+.mock-app.compact .mock-main{padding:1.1rem 1rem;min-width:0;}
+/* On a phone the billing pills are the one column the card can lose
+   without losing the idea, so they go rather than the card scrolling. */
+@media (max-width:520px){
+  .mock-app.compact .mock-table th:nth-child(3),
+  .mock-app.compact .mock-table td:nth-child(3){display:none;}
+}
+.mock > .mock-main,
+.mock > .mock-config{
+  min-width:400px;
+}
+.mock .listing-card{
+  min-width:400px;
+}
+.mock-side{
+  background:var(--paper-2);
+  border-right:1px solid var(--line);
+  padding:1.2rem 1rem;
+}
+.mock-side .mock-brand{
+  font-family:var(--display);
+  font-size:.85rem;
+  font-weight:600;
+  margin-bottom:1.4rem;
+}
+.mock-side .mock-nav-item{
+  padding:.5rem .6rem;
+  border-radius:6px;
+  color:var(--ink-soft);
+  margin-bottom:.2rem;
+}
+.mock-side .mock-nav-item.on{
+  background:var(--ink);
+  color:#fff;
+}
+.mock-main{padding:1.2rem 1.4rem;}
+.mock-main .mock-title{
+  font-family:var(--display);
+  font-size:1rem;
+  font-weight:600;
+  margin-bottom:.2rem;
+}
+.mock-main .mock-desc{color:var(--ink-faint);margin-bottom:1rem;}
+.mock-toolbar{
+  display:flex;
+  justify-content:flex-end;
+  gap:.5rem;
+  margin-bottom:.9rem;
+}
+.mock-btn{
+  padding:.4rem .7rem;
+  border-radius:6px;
+  border:1px solid var(--line);
+  background:#fff;
+  color:var(--ink-soft);
+}
+.mock-btn.primary{
+  background:var(--ink);
+  color:#fff;
+  border-color:var(--ink);
+}
+.mock-table{width:100%;border-collapse:collapse;}
+.mock-table th{
+  text-align:left;
+  font-weight:500;
+  color:var(--ink-faint);
+  border-bottom:1px solid var(--line);
+  padding:.5rem .5rem;
+}
+.mock-table td{
+  padding:.6rem .5rem;
+  border-bottom:1px solid var(--line);
+  color:var(--ink-soft);
+}
+.mock-table .cell-main{color:var(--ink);}
+.mock-table .cell-sub{display:block;color:var(--ink-faint);font-size:.72rem;}
+/* status pills carry real meaning, the way they would in the product:
+   blue = informational / mapped-to, green = healthy state,
+   amber = needs attention, grey = inert */
+.mock-pill{
+  display:inline-block;
+  padding:.15rem .5rem;
+  border-radius:999px;
+  background:var(--sys-accent-weak);
+  color:var(--sys-accent);
+  font-size:.7rem;
+  white-space:nowrap;
+}
+.mock-pill.is-positive{
+  background:var(--sys-positive-weak);
+  color:var(--sys-positive);
+}
+.mock-pill.is-warning{
+  background:var(--sys-warning-weak);
+  color:var(--sys-warning);
+}
+.mock-pill.is-muted{
+  background:rgba(17,17,16,.06);
+  color:var(--ink-faint);
+}
+/* a tiny leading dot makes a status read as a status */
+.mock-pill.is-positive::before,
+.mock-pill.is-warning::before{
+  content:'';
+  display:inline-block;
+  width:5px;height:5px;
+  border-radius:50%;
+  margin-right:.35rem;
+  vertical-align:1px;
+  background:currentColor;
+}
+.mock-caption{
+  font-family:var(--mono);
+  font-size:.78rem;
+  color:var(--ink-faint);
+  margin-top:.8rem;
+}
+.mock-tabs{
+  display:flex;
+  gap:1.2rem;
+  color:var(--ink-faint);
+  border-bottom:1px solid var(--line);
+  padding-bottom:.6rem;
+  margin-bottom:1rem;
+  flex-wrap:wrap;
+}
+.mock-tabs .on{color:var(--ink);border-bottom:2px solid var(--accent);padding-bottom:.6rem;margin-bottom:-.66rem;}
+
+/* editor canvas mockup */
+.mock-doc{
+  background:#fff;
+  border:1px dashed var(--line);
+  border-radius:6px;
+  padding:1rem 1.1rem;
+  margin-bottom:.7rem;
+}
+.mock-doc .block-label{
+  font-size:.68rem;
+  color:var(--ink-faint);
+  text-transform:uppercase;
+  letter-spacing:.05em;
+  margin-bottom:.4rem;
+}
+.mock-doc.h{font-family:var(--display);font-size:1.2rem;font-weight:600;padding:.7rem 1.1rem;}
+.mock-doc.body-text{color:var(--ink-soft);font-size:.85rem;line-height:1.5;font-family:var(--body);}
+.mock-doc.price{padding:0;overflow:hidden;}
+.mock-doc.price .mock-table{margin:0;}
+.mock-doc.price .mock-table th,.mock-doc.price .mock-table td{padding:.5rem .7rem;}
+.mock-doc.dashed-add{
+  border-style:dashed;
+  color:var(--ink-faint);
+  text-align:center;
+  padding:.6rem;
+  font-size:.75rem;
+}
+
+/* configurator mockup */
+.mock-config .price-total{
+  display:flex;
+  justify-content:space-between;
+  align-items:baseline;
+  padding-top:1rem;
+  margin-top:.4rem;
+  border-top:2px solid var(--ink);
+}
+.mock-config .price-total .num{
+  font-family:var(--display);
+  font-size:1.6rem;
+  font-weight:600;
+  /* Stated explicitly because .bump below swaps it to the accent when the
+     total changes; this is the resting colour. */
+  color:var(--ink);
+}
+.mock-config .price-total .label{font-size:.75rem;color:var(--ink-faint);}
+.option-group{margin-bottom:1.1rem;}
+.option-group .group-label{
+  font-size:.72rem;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+  color:var(--ink-faint);
+  margin-bottom:.4rem;
+}
+.option-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:.55rem 0;
+  border-bottom:1px solid var(--line);
+  color:var(--ink-soft);
+  transition:color var(--dur-fast) var(--ease-out);
+}
+.option-row .opt-name{display:flex;align-items:center;gap:.55rem;}
+.option-row .radio{
+  width:13px;height:13px;
+  border-radius:50%;
+  border:1.5px solid var(--line);
+  display:inline-block;
+  flex:none;
+  transition:border-color var(--dur-fast) var(--ease-out),
+             background var(--dur-fast) var(--ease-out);
+}
+.option-row.selected{color:var(--ink);}
+.option-row.selected .radio{
+  border-color:var(--accent);
+  background:radial-gradient(circle,var(--accent) 42%,transparent 44%);
+}
+
+/* live, clickable configurator */
+.mock-config[data-interactive] .option-row{
+  cursor:pointer;
+  user-select:none;
+  margin:0 -.5rem;
+  padding-left:.5rem;
+  padding-right:.5rem;
+  border-radius:5px;
+}
+.mock-config[data-interactive] .option-row:hover{
+  color:var(--ink);
+  background:var(--accent-soft);
+}
+.mock-config[data-interactive] .option-row:hover .radio{border-color:var(--accent);}
+.mock-config[data-interactive] .price-total .num{
+  transition:transform var(--dur) var(--ease-spring), color var(--dur) var(--ease-out);
+  display:inline-block;
+}
+.mock-config[data-interactive] .price-total .num.bump{
+  transform:scale(1.07);
+  color:var(--accent);
+}
+.mock-hint{
+  font-family:var(--mono);
+  font-size:.7rem;
+  color:var(--accent);
+  margin-top:.9rem;
+  display:flex;
+  align-items:center;
+  gap:.4rem;
+}
+.mock-hint::before{
+  content:'';
+  width:6px;height:6px;
+  border-radius:50%;
+  background:var(--accent);
+}
+
+/* toggleable optional line item (editor pricing table) */
+tr[data-optional]{cursor:pointer;transition:background var(--dur-fast) var(--ease-out);}
+/* Unselected, an optional line still states its price, greyed so it
+   reads as available rather than included in the subtotal. */
+tr[data-optional]:not(.on) .line-total{color:var(--ink-faint);}
+tr[data-optional]:hover{background:var(--accent-soft);}
+tr[data-optional] .opt-toggle{
+  display:inline-block;
+  width:13px;height:13px;
+  border:1.5px solid var(--line);
+  border-radius:3px;
+  margin-right:.5rem;
+  vertical-align:-2px;
+  transition:border-color var(--dur-fast),background var(--dur-fast);
+  position:relative;
+}
+tr[data-optional].on .opt-toggle{
+  border-color:var(--accent);
+  background:var(--accent);
+}
+tr[data-optional].on .opt-toggle::after{
+  content:'✓';
+  position:absolute;
+  inset:0;
+  color:#fff;
+  font-size:9px;
+  line-height:10px;
+  text-align:center;
+}
+.subtotal-val{
+  transition:transform var(--dur) var(--ease-spring), color var(--dur) var(--ease-out);
+  display:inline-block;
+}
+.subtotal-val.bump{transform:scale(1.07);color:var(--accent);}
+
+/* row menu mockup: the catalog round trip */
+.mock-menu{
+  width:250px;
+  border:1px solid var(--line);
+  border-radius:8px;
+  background:#fff;
+  padding:.35rem;
+  box-shadow:0 12px 28px -12px rgba(17,17,16,.3);
+}
+.mock-menu .mi{
+  display:flex;align-items:center;gap:.55rem;
+  padding:.45rem .55rem;border-radius:5px;
+  color:var(--ink-soft);
+}
+/* the two that matter carry the product accent, the way the real menu
+   highlights them on hover. Everything else is inert chrome. */
+.mock-menu .mi.on{background:var(--accent-soft);color:var(--ink);}
+.mock-menu .mi .ic{color:var(--ink-faint);flex:none;width:1em;text-align:center;}
+.mock-menu .mi.on .ic{color:var(--accent);}
+.mock-menu .sep{height:1px;background:var(--line);margin:.35rem .2rem;}
+
+/* The row menu shown in place: a quote table with one row selected and
+   its menu open over the rows beneath, anchored to that row's handle. */
+.rm-stage{position:relative;padding-bottom:10rem;}
+.rm-table td,.rm-table th{white-space:nowrap;}
+.rm-table .rm-k{width:2rem;text-align:right;position:relative;}
+.rm-table .kb{display:inline-block;width:1.4rem;height:1.4rem;line-height:1.4rem;text-align:center;border-radius:5px;color:var(--ink-faint);}
+.rm-table .kb.on{background:var(--accent);color:#fff;}
+.rm-table tr.sel td{background:var(--accent-soft);}
+.rm-table tr.sel td:first-child{box-shadow:inset 2px 0 0 var(--accent);}
+.rm-table tr.rm-total td{color:var(--ink);font-weight:600;border-bottom:0;}
+.rm-float{position:absolute;right:0;top:calc(100% - .35rem);z-index:2;text-align:left;white-space:nowrap;}
+
+/* detail views carry a back control to the list they were opened from */
+.mock-back{display:flex;align-items:flex-start;gap:.7rem;}
+.mock-back .bk{
+  flex:none;display:inline-flex;align-items:center;justify-content:center;
+  width:1.7rem;height:1.7rem;margin-top:-.1rem;border:1px solid var(--line);border-radius:6px;
+  color:var(--ink-soft);background:#fff;font-size:.85rem;
+}
+
+/* Three-step flow: the same quote shown at each beat, left to right.
+   Each step is its own small light mockup so the sequence reads as
+   three moments in the product rather than one busy screen. */
+.steps3{
+  list-style:none;margin:0;padding:0;
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(.8rem,2vw,1.2rem);
+}
+@media (max-width:900px){.steps3{grid-template-columns:1fr;}}
+.steps3 > li{display:flex;flex-direction:column;min-width:0;}
+.steps3 .st-h{
+  display:flex;gap:.6rem;align-items:baseline;margin-bottom:.7rem;
+  font-family:var(--mono);font-size:.7rem;letter-spacing:.04em;color:var(--fg);
+}
+.steps3 .st-h .ln{color:var(--fg-faint);}
+.steps3 .mock{margin:0;flex:1;}
+.st-body{padding:1rem;font-family:var(--mono);font-size:.72rem;color:var(--ink-soft);}
+.st-title{font-family:var(--display);font-size:.82rem;font-weight:600;color:var(--ink);margin-bottom:.75rem;}
+.st-table{width:100%;border-collapse:collapse;}
+.st-table th{text-align:left;font-weight:500;color:var(--ink-faint);padding:.4rem .35rem;border-bottom:1px solid var(--line);}
+.st-table td{padding:.5rem .35rem;border-bottom:1px solid var(--line);white-space:nowrap;}
+.st-table td:first-child{color:var(--ink);white-space:normal;}
+.st-table .r{text-align:right;}
+.st-table tr.st-on td{background:var(--accent-soft);}
+.st-table tr.st-warn td{background:var(--sys-warning-weak);}
+/* the field being typed in, with a caret, so step one reads as an edit */
+.st-edit{
+  display:inline-flex;align-items:center;gap:1px;
+  border:1.5px solid var(--accent);border-radius:4px;background:#fff;
+  padding:.05rem .3rem;color:var(--ink);
+}
+.st-edit::after{content:'';width:1px;height:.95em;background:var(--ink);animation:stCaret 1s steps(1) infinite;}
+@keyframes stCaret{50%{opacity:0;}}
+@media (prefers-reduced-motion:reduce){.st-edit::after{animation:none;}}
+.st-banner{
+  display:flex;gap:.55rem;align-items:flex-start;margin-bottom:.8rem;
+  padding:.6rem .65rem;border-radius:6px;
+  background:var(--sys-warning-weak);border:1px solid rgba(143,74,11,.22);
+  font-family:var(--ui);font-size:.74rem;line-height:1.4;color:var(--sys-warning);
+}
+.st-banner b{font-weight:600;}
+.st-banner .ic{
+  flex:none;display:inline-flex;align-items:center;justify-content:center;
+  width:1.05rem;height:1.05rem;border-radius:50%;margin-top:.05rem;
+  background:var(--sys-warning);color:#fff;font-size:.66rem;font-weight:700;
+}
+.st-item{
+  display:flex;justify-content:space-between;align-items:center;gap:.6rem;
+  padding:.6rem 0;border-bottom:1px solid var(--line);
+}
+.st-item:first-of-type{border-top:1px solid var(--line);}
+.st-name{display:block;color:var(--ink);}
+.st-sub{display:block;color:var(--ink-faint);font-size:.68rem;margin-top:.15rem;}
+
+/* listing card mockup */
+.listing-card{display:flex;gap:1.1rem;padding:1.2rem 1.4rem;}
+.listing-card .thumb{
+  width:120px;height:90px;
+  flex:none;
+  border-radius:8px;
+  background:linear-gradient(135deg,var(--accent) 0%, #8fb3ee 100%);
+}
+.listing-card .details{flex:1;}
+.listing-card .details .name{font-family:var(--display);font-weight:600;font-size:.95rem;margin-bottom:.2rem;}
+.listing-card .details .loc{color:var(--ink-faint);font-size:.78rem;margin-bottom:.6rem;}
+.listing-card .details .price-row{display:flex;justify-content:space-between;align-items:center;}
+.listing-card .details .price{font-family:var(--display);font-weight:600;}
+.listing-card .badge{
+  display:inline-block;
+  padding:.15rem .5rem;
+  border-radius:999px;
+  background:var(--sys-positive-weak);
+  color:var(--sys-positive);
+  font-size:.68rem;
+  margin-bottom:.5rem;
+}
+.listing-card .badge::before{
+  content:'';
+  display:inline-block;
+  width:5px;height:5px;
+  border-radius:50%;
+  margin-right:.35rem;
+  vertical-align:1px;
+  background:currentColor;
+}
+
+/* =========================================================
+   NEXT / FOOTER / CONTACT
+   ========================================================= */
+.next{padding:clamp(2rem,6vw,3.5rem) 0;border-top:1px solid var(--edge);}
+.next a{text-decoration:none;display:flex;justify-content:space-between;align-items:baseline;gap:1rem;}
+.next .eyebrow{margin-bottom:.5rem;}
+.next h3{font-size:clamp(1.2rem,2.8vw,1.8rem);letter-spacing:-0.04em;margin:0;transition:color .25s ease;}
+.next a:hover h3{color:var(--ac);}
+.next .arrow{font-family:var(--display);color:var(--ac);font-size:1.4rem;flex:none;}
+
+.site-footer{border-top:1px solid var(--edge);padding:2.5rem 0 3rem;}
+.site-footer .wrap{
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;
+  font-family:var(--mono);font-size:.7rem;letter-spacing:.04em;color:var(--fg-faint);
+}
+.site-footer a{text-decoration:none;color:var(--fg-soft);}
+.site-footer a:hover{color:var(--ac);}
+.site-footer .links{display:flex;flex-wrap:wrap;gap:1.2rem;}
+
+.contact-links{margin-top:2rem;}
+.contact-links a{
+  display:flex;justify-content:space-between;align-items:baseline;gap:1rem;
+  text-decoration:none;padding:1.35rem 0;border-top:1px solid var(--edge);
+  font-family:var(--display);font-size:clamp(1.25rem,3.2vw,1.9rem);letter-spacing:-0.04em;
+  transition:padding-left .28s var(--ease-out),color .25s ease;
+}
+.contact-links a:hover{padding-left:.7rem;color:var(--ac);}
+.contact-links li:last-child a{border-bottom:1px solid var(--edge);}
+.contact-links .arrow{color:var(--ac);font-size:1.3rem;flex:none;}
+.contact-links .sub{
+  display:block;font-family:var(--mono);font-size:.68rem;letter-spacing:.04em;
+  color:var(--fg-faint);margin-top:.35rem;
+}
+
+/* =========================================================
+   REVEAL - hidden state gated behind html.js so the site can
+   never render blank if scripting fails or is blocked.
+   ========================================================= */
+html.js .reveal{
+  opacity:0;transform:translateY(24px);
+  transition:opacity var(--dur-slow) var(--ease-out) var(--d,0s),
+             transform var(--dur-slow) var(--ease-out) var(--d,0s);
+}
+html.js .reveal.in{opacity:1;transform:none;}
+html.js .reveal .mock{
+  opacity:0;transform:translateY(26px) scale(.985);
+  transition:opacity var(--dur-slow) var(--ease-out) .12s,
+             transform var(--dur-slow) var(--ease-out) .12s;
+}
+html.js .reveal.in .mock{opacity:1;transform:none;}
+
+@keyframes riseIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:none;}}
+.hero .cta-row{animation:riseIn .85s var(--ease-out) both .34s;}
+.study-hero .eyebrow{animation:riseIn .7s var(--ease-out) both .05s;}
+.study-hero .lede{animation:riseIn .8s var(--ease-out) both .38s;}
+
+/* Reading progress on the long case studies, driven by the native
+   scroll timeline. No scroll listener, no per-frame JS. Where
+   animation-timeline is unsupported the bar simply stays at zero
+   width, which is a missing enhancement rather than a broken one. */
+.progress{
+  position:fixed;top:0;left:0;height:2px;width:100%;
+  transform:scaleX(0);transform-origin:0 50%;
+  background:var(--ac);z-index:70;
+}
+@supports (animation-timeline:scroll()){
+  @media (prefers-reduced-motion:no-preference){
+    .progress{
+      animation:progressGrow linear both;
+      animation-timeline:scroll(root block);
+    }
+  }
+}
+@keyframes progressGrow{from{transform:scaleX(0);}to{transform:scaleX(1);}}
+
+/* =========================================================
+   ONE INTERACTIVE ACCENT
+   The accent means exactly one thing: you can act on this. Links,
+   call-to-action labels and arrow affordances share it.
+
+   Display numbers deliberately do NOT use it. A metric is not a link,
+   and colouring both the same way was what made "highlighted" read as
+   two different promises. Metrics carry weight and size instead.
+
+   Diagram states (.dp, .journey, .jstep, .act-n) also stay off it,
+   except where they mean shipped / after / live. Anything abandoned
+   uses --dead and a dashed edge, so it reads as inert rather than as
+   a second brand colour.
+   ========================================================= */
+.see-more,
+ul.bullets a,
+.spec .row .v a,
+.obsession .item .t a,
+.next .arrow,
+.contact-links .arrow{color:var(--ac);}
+
+.next a:hover h3,
+.contact-links a:hover,
+.site-footer a:hover{color:var(--ac);}
+
+ul.bullets a,
+.spec .row .v a,
+.obsession .item .t a{
+  text-decoration:none;
+  border-bottom:1px solid var(--ac-line);
+}
+ul.bullets a:hover,
+.spec .row .v a:hover,
+.obsession .item .t a:hover{border-bottom-color:var(--ac-line-2);}
+
+/* .see-more is already a labelled call to action, and an underline
+   would fight the arrow */
+.see-more{text-decoration:none;}
+
+/* =========================================================
+   HOVER: CONTRAST FOLLOWS THE POINTER
+
+   One idea at two scales, so every hoverable thing on the site is
+   answering the same question.
+
+   On a card, the pointer is a light source: the radial wash and the
+   top hairline both originate at the cursor's x position.
+
+   On a row, hovering picks that row out of its group. The hairline it
+   already sits on brightens and its text comes to full contrast. The
+   site is built out of hairlines, so the hairlines are what respond.
+
+   Nothing lifts, scales, glows or shadows. The pointer changes what is
+   legible, not where things are - which is also why none of this reads
+   as a click affordance on rows that do not link anywhere. Colour keeps
+   that distinction: a neutral response means "you are reading this", an
+   accent response means "you can open this".
+
+   All of it is gated behind a real hover-capable pointer so no state
+   sticks after a tap on a touchscreen.
+   ========================================================= */
+@media (hover:hover) and (pointer:fine){
+
+  /* key/value rows: index, about, contact, freelance, sound */
+  .spec .row{transition:border-color .3s var(--ease-out);}
+  .spec .row:hover{border-bottom-color:var(--edge-2);}
+  .spec .row .k,
+  .spec .row .v{transition:color .25s var(--ease-out);}
+  .spec .row:hover .k{color:var(--fg-soft);}
+  .spec .row:hover .v{color:var(--fg);}
+
+  /* the four services, on the homepage and on freelance */
+  .services .svc{transition:border-color .3s var(--ease-out);}
+  .services .svc:hover{border-bottom-color:var(--edge-2);}
+  .services .svc h3,
+  .services .svc p{transition:color .25s var(--ease-out);}
+  .services .svc:hover p{color:var(--fg);}
+
+  /* throughline items have no hairline of their own, so contrast
+     alone carries it */
+  .obsession .item .t,
+  .obsession .item .d{transition:color .25s var(--ease-out);}
+  .obsession .item:hover .d{color:var(--fg);}
+
+  /* The capability columns are the one place the focus idea runs at
+     full strength: hovering the list recedes the whole column a step
+     so the item under the cursor is the only one at full weight. Kept
+     to one column at a time, and every state stays readable (66% at
+     rest, 44% receded, 100% picked out). */
+  .skills .grp li{transition:color .22s var(--ease-out);}
+  .skills .grp ul:hover li{color:var(--fg-faint);}
+  .skills .grp ul li:hover{color:var(--fg);}
+
+  /* links already carry the accent, so they get the hairline response
+     on top of it rather than instead of it */
+  .contact-links a{transition:padding-left .28s var(--ease-out),color .25s ease,border-color .3s var(--ease-out);}
+  .contact-links a:hover{border-top-color:var(--edge-2);}
+  /* the last item carries a closing rule too, so light both of its edges */
+  .contact-links li:last-child a{transition:padding-left .28s var(--ease-out),color .25s ease,border-color .3s var(--ease-out);}
+  .contact-links li:last-child a:hover{border-bottom-color:var(--edge-2);}
+  .next .arrow{transition:transform .22s var(--ease-out);}
+  .next a:hover .arrow{transform:translateX(4px);}
+  .contact-links .arrow{transition:transform .22s var(--ease-out);}
+  .contact-links a:hover .arrow{transform:translateX(4px);}
+}
+
+/* =========================================================
+   WORK INDEX - one uniform case-study block
+   All three case studies use the identical component at the
+   identical size. Nothing on the index should imply one project
+   matters more than another; the reader decides that.
+   ========================================================= */
+/* Proximity is the grouping signal, so the space between two cards has
+   to beat the space inside one. The old gap topped out at 1.2rem while
+   .case-card .pad ran to 2.1rem, which meant a card's own contents sat
+   further from its edge than the next card did - three separate case
+   studies reading as one stacked block. The gap now clears the padding
+   at every breakpoint. */
+.work-grid{display:grid;gap:clamp(1.8rem,3.6vw,2.8rem);}
+
+.case-card{
+  display:grid;
+  grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);
+  align-items:stretch;
+  text-decoration:none;
+  color:inherit;
+  overflow:hidden;
+}
+.case-card .pad{
+  padding:clamp(1.4rem,2.8vw,2.1rem);
+  display:flex;
+  flex-direction:column;
+  min-width:0;
+}
+.case-card h3{
+  font-size:clamp(1.3rem,2.3vw,1.75rem);
+  line-height:1.14;
+  letter-spacing:-0.038em;
+  margin-bottom:.75rem;
+  text-wrap:balance;
+}
+.case-card .sub{
+  font-size:1rem;
+  line-height:1.55;
+  color:var(--fg-soft);
+  margin-bottom:1.2rem;
+}
+.case-card .metrics{margin-top:auto;margin-bottom:1.2rem;}
+.case-card .shot{
+  position:relative;
+  min-width:0;
+  display:flex;
+  align-items:center;
+  padding:clamp(1.2rem,2.4vw,1.8rem) 0 clamp(1.2rem,2.4vw,1.8rem) 0;
+  overflow:hidden;
+}
+.case-card .shot .mock{
+  margin:0;
+  width:100%;
+  border-top-right-radius:0;
+  border-bottom-right-radius:0;
+  transform:translateX(6px);
+  transition:transform .5s var(--ease-out);
+}
+.case-card:hover .shot .mock{transform:translateX(0);}
+@media (max-width:860px){
+  .case-card{grid-template-columns:1fr;}
+  .case-card .shot{padding:0 0 0 clamp(1.2rem,4vw,1.6rem);}
+  .case-card .shot .mock{border-bottom-left-radius:0;transform:none;}
+}
+
+
+/* About's narrative fills the section width so its right edge lines up
+   with the spec rows beneath it, per direction. This deliberately runs
+   the measure past the 65ch the rest of the site's prose keeps, so it
+   is scoped to the one block that asked for it rather than to .prose. */
+/* Prose that is not in a reading column fills its section instead. The
+   :not() chain is not decoration - it has to match the base .prose rule
+   above exactly, or that rule outspecifies this one and the width
+   silently reverts. .statement is excluded on both sides because it is
+   display type that is meant to stay short. */
+.wrap.prose:not(.col) > p:not(.eyebrow):not(.lede):not(.statement):not(.mock-caption):not(.mock-hint){
+  max-width:none;
+}
+
+
+/* Confirms an email address was copied. Mail links still open the mail
+   app wherever the page is allowed to; this covers the places it is not. */
+.toast{
+  position:fixed;left:50%;bottom:1.5rem;z-index:80;
+  transform:translate(-50%,12px);opacity:0;pointer-events:none;
+  font-family:var(--mono);font-size:.74rem;letter-spacing:.02em;
+  color:var(--fg);background:var(--bg-2);border:1px solid var(--edge-2);
+  border-radius:var(--r-pill);padding:.65rem 1.1rem;max-width:calc(100vw - 32px);width:max-content;text-align:center;
+  box-shadow:0 18px 40px -16px rgba(0,0,0,.8);
+  transition:opacity .2s var(--ease-out),transform .2s var(--ease-out);
+}
+.toast.show{opacity:1;transform:translate(-50%,0);}
+.toast b{color:var(--ac);font-weight:500;}
+
+/* The page colour also sits on <html>, so overscroll areas stay dark. */
+html,body{background:var(--bg);color:var(--fg);}

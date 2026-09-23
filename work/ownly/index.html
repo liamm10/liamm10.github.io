@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ownly case study · Liam Mackenzie</title>
+<meta name="description" content="Two years building something nobody had a pattern for: reserving a home online. A product design case study by Liam Mackenzie.">
+<meta name="author" content="Liam Mackenzie">
+<meta name="theme-color" content="#0b0b0d">
+<link rel="canonical" href="https://liammackenzie.net/work/ownly/">
+
+<link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/assets/icons/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Liam Mackenzie">
+<meta property="og:title" content="Ownly case study">
+<meta property="og:description" content="Two years building something nobody had a pattern for: reserving a home online. A product design case study by Liam Mackenzie.">
+<meta property="og:url" content="https://liammackenzie.net/work/ownly/">
+<meta property="og:image" content="https://liammackenzie.net/assets/images/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The homepage of Liam Mackenzie's portfolio: I make complicated software feel obvious to the people using it.">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="/css/styles.css">
+<script>document.documentElement.classList.add('js');</script>
+<script src="/js/main.js" defer></script>
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="wrap">
+    <a class="brand" href="/">Liam Mackenzie</a>
+    <div class="links">
+      <a href="/">Homepage</a>
+      <div class="dd">
+        <button class="dd-btn" type="button" aria-expanded="false" aria-haspopup="true">About <span class="chev" aria-hidden="true">&#9662;</span></button>
+        <div class="dd-menu">
+          <a href="/about/">Who</a>
+          <a href="/freelance/">Freelancing</a>
+          <a href="/sound/">My Sound</a>
+        </div>
+      </div>
+      <a href="/contact/">Contact</a>
+    </div>
+  </div>
+</nav>
+
+
+<header class="study-hero">
+  <div class="wrap col read-wide">
+    <p class="eyebrow">Ownly, Sole Product Designer.</p>
+    <h1 class="rw" data-rw-now>Two years building something nobody had a pattern for: reserving a home online.</h1>
+    <p class="lede">Two years designing the self-serve path to buying a new home: discovering, configuring, verifying, and reserving without a sales centre. The most useful thing I learned came from getting one decision badly wrong.</p>
+
+    <div class="metrics" style="margin-top:2.1rem;margin-bottom:0;">
+      <div class="metric"><span class="n">3</span><span class="l">Products shipped</span></div>
+      <div class="metric"><span class="n">75→45%</span><span class="l">Verification drop-off, reservation starters</span></div>
+      <div class="metric"><span class="n">24/7</span><span class="l">Reservations, outside sales hours</span></div>
+    </div>
+  </div>
+</header>
+
+<section class="meta-block reveal">
+  <div class="wrap">
+    <div>
+      <h2 class="mb-h">What I owned</h2>
+      <ul class="bullets">
+        <li>Research and UX strategy across three products</li>
+        <li>Buyer-facing and builder-facing workflows</li>
+        <li>Flows, prototypes, usability testing, implementation support</li>
+        <li>Partnered with product, engineering, compliance, and builders</li>
+      </ul>
+    </div>
+    <div>
+      <h2 class="mb-h">Constraints</h2>
+      <ul class="bullets">
+        <li>The largest purchase most buyers will ever make</li>
+        <li>No salesperson present to absorb doubt</li>
+        <li>Identity and financial checks, with compliance attached</li>
+        <li>Builders with genuinely different sales processes</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ACT 1: THE CONSTRAINT ============ -->
+<section class="act constraint">
+  <div class="wrap col read-wide">
+    <h2 class="act-thesis">Sales centres close at six. People shopping for a house don't.</h2>
+
+    <p>The legacy path to buying a new home is manual, time-bound and opaque. Buyers work through a sales centre, wait on pricing that arrives days later, and repeat the same conversation with three different people. Builders never hear from anyone who showed up after the doors closed, and have no idea how many there were.</p>
+
+    <p>The opening was a self-serve journey that worked at any hour. The difficulty is that removing the salesperson also removes the person who handles doubt. Every reassurance a rep would have given in the room had to be designed into the interface instead, across three products: <strong>ReserveNow</strong> (hold a home online), <strong>Verified</strong> (prove you can actually buy it), and <strong>Build &amp; Price</strong> (configure it and see the number move).</p>
+  </div>
+
+  <div class="wrap">
+    <figure class="fig reveal">
+      <div class="fig-body">
+        <div class="mock">
+          <div class="listing-card">
+            <div class="thumb"></div>
+            <div class="details">
+              <span class="badge">Available now</span>
+              <div class="name">The Birchwood, Lot 14</div>
+              <div class="loc">Sage Meadows, Calgary · 2,140 sqft</div>
+              <div class="price-row">
+                <span class="price">$612,900</span>
+                <span class="mock-btn primary">Reserve for $500</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <figcaption><span>The biggest purchase of someone's life, committed to with one button, and nobody in the room to reassure them.</span></figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ ACT 2: THE PIVOT ============ -->
+<section class="act pivot">
+  <div class="wrap col read-wide">
+    <h2 class="act-thesis">I'd spent weeks polishing the steps. Almost nobody was reaching them.</h2>
+
+    <p>Verified asks buyers for identity and financial information, so I assumed the friction lived in those steps, and that's where nearly all my early effort went. Making each step feel low-stakes. Explaining why every field was needed. Cutting the number of screens.</p>
+
+    <p>What I hadn't questioned was <em>when</em> a buyer was meant to do it. Verification stood on its own, as something a buyer had to decide to go and start, on the reasoning that anyone serious would seek it out when they were ready.</p>
+
+    <p class="statement">Of the buyers who started a reservation, 75% never found it. Not abandoned partway. Never found.</p>
+
+    <p>That figure measures discoverability, not drop-off. The people it counts didn't reach the steps and give up on them; they never learned the steps were there. Most found out verification existed only when a builder raised it directly, by which point it read as an obstacle someone had sprung on them rather than a step they'd chosen. The screens I'd spent weeks polishing were never the problem. Almost nobody saw them.</p>
+
+    <p>So I stopped treating verification as something to be found and made it the thing that follows reserving. A buyer picks a home, reserves it, and verification arrives as the step that completes the commitment they have just made. Same steps, same fields, asked at the one moment the buyer has already decided.</p>
+  </div>
+
+  <div class="wrap">
+    <figure class="fig reveal">
+      <div class="fig-body">
+        <div class="journey before">
+          <div class="jlabel">✕ Before: verification came first, and most buyers never found it</div>
+          <div class="jsteps">
+            <div class="jstep"><span class="sn">01</span>Browse homes</div>
+            <div class="jstep"><span class="sn">02</span>Shortlist</div>
+            <div class="jstep"><span class="sn">03</span>Configure</div>
+            <div class="jstep buried drop" data-drop="75% never found or completed"><span class="sn">04</span>Verify identity</div>
+            <div class="jstep buried"><span class="sn">05</span>Reserve the home</div>
+          </div>
+        </div>
+        <div class="journey after">
+          <div class="jlabel">✓ After: verification follows the reservation</div>
+          <div class="jsteps">
+            <div class="jstep"><span class="sn">01</span>Browse homes</div>
+            <div class="jstep"><span class="sn">02</span>Shortlist</div>
+            <div class="jstep"><span class="sn">03</span>Configure</div>
+            <div class="jstep"><span class="sn">04</span>Reserve the home</div>
+            <div class="jstep entry"><span class="sn">05</span>Verify identity</div>
+          </div>
+        </div>
+      </div>
+      <figcaption><span>The entire fix. No step changed and nothing was added. Verification stopped being something to find and became what happens next.</span></figcaption>
+    </figure>
+  </div>
+
+  <div class="wrap col read-wide">
+    <p>Once buyers reached it, Verified did what it was built for and shifted the first builder conversation from qualification to confirmation. Builders stopped spending early calls working out whether someone could actually buy, and buyers arrived knowing they could.</p>
+  </div>
+</section>
+
+<!-- ============ ACT 3: THE IMPACT ============ -->
+<section class="act impact">
+  <div class="wrap col read-wide">
+    <h2 class="act-thesis">Ownly went from somewhere people browsed to somewhere they could actually buy.</h2>
+  </div>
+
+  <div class="wrap">
+    <div class="impact-grid reveal">
+      <div class="cell"><span class="n">3</span><span class="l">Products shipped end to end</span></div>
+      <div class="cell"><span class="n">24/7</span><span class="l">Reservations, outside sales-centre hours</span></div>
+      <div class="cell"><span class="n">75→45%</span><span class="l">Verification drop-off among buyers who started a reservation</span></div>
+    </div>
+  </div>
+
+  <div class="wrap col read-wide">
+    <p>The three products shipped with builders including Shane Homes, Calbridge Homes, Logel Homes and Westcreek, each running a different sales process on the same platform. That variation was the real design constraint: a flow rigid enough to be trustworthy on the largest purchase of someone's life, and loose enough that four sales teams could recognise their own process inside it.</p>
+
+    <p>Measured across buyers who started a reservation, verification drop-off fell from 75% to 45%. It didn't go to zero, and the 45% that remains is a different problem from the one I fixed: those buyers find verification and choose not to finish it, which is a question about what the process asks for rather than whether anyone knows it exists.</p>
+
+    <p>Build &amp; Price was the piece that changed buyer behaviour most visibly. Configuring a home used to mean a spreadsheet quote that came back days later; now the number moves as you choose. It reduced quoting delay to nothing, and buyers who configured a home converted at a noticeably higher rate than those who didn't.</p>
+  </div>
+
+  <div class="wrap">
+    <figure class="fig reveal">
+      <div class="fig-body">
+        <div class="mock">
+          <div class="mock-config" data-interactive data-base="613100" style="padding:1.4rem 1.5rem;">
+            <div class="mock-title" style="margin-bottom:1rem;">Build &amp; Price: The Birchwood</div>
+            <div class="option-group">
+              <div class="group-label">Elevation</div>
+              <div class="option-row selected" data-price="0"><span class="opt-name"><span class="radio"></span>Craftsman</span><span>+$0</span></div>
+              <div class="option-row" data-price="4200"><span class="opt-name"><span class="radio"></span>Modern Farmhouse</span><span>+$4,200</span></div>
+            </div>
+            <div class="option-group">
+              <div class="group-label">Flooring</div>
+              <div class="option-row selected" data-price="6800"><span class="opt-name"><span class="radio"></span>Engineered Oak</span><span>+$6,800</span></div>
+              <div class="option-row" data-price="1900"><span class="opt-name"><span class="radio"></span>Luxury Vinyl</span><span>+$1,900</span></div>
+            </div>
+            <div class="option-group">
+              <div class="group-label">Package</div>
+              <div class="option-row selected" data-price="9500"><span class="opt-name"><span class="radio"></span>Premium Appliance Package</span><span>+$9,500</span></div>
+              <div class="option-row" data-price="3400"><span class="opt-name"><span class="radio"></span>Standard Appliance Package</span><span>+$3,400</span></div>
+            </div>
+            <div class="price-total"><span class="label">Estimated total</span><span class="num">$629,400</span></div>
+            <p class="mock-hint">Try it: change an option and the price updates live</p>
+          </div>
+        </div>
+      </div>
+      <figcaption><span class="fig-live">Interactive</span><span>The real interaction, rebuilt in code. Click an option and the total recalculates.</span></figcaption>
+    </figure>
+  </div>
+
+  <div class="wrap col read-wide">
+    <h3>Discoverability is not usability</h3>
+    <div class="callout">
+      <p>Discoverability failures look exactly like usability failures in a dashboard, and they are not the same problem. If I'd only read the completion rate for Verified, I'd have kept optimising steps nobody was reaching. The lesson wasn't "test earlier"; I did test. It was to check whether people can find the thing before spending three weeks making the thing pleasant.</p>
+    </div>
+  </div>
+</section>
+
+<section class="next">
+  <div class="wrap">
+    <a href="/work/proposify-cpq/">
+      <div>
+        <p class="eyebrow">Next case study</p>
+        <h3>A pricing tool reps would trust more than a spreadsheet</h3>
+      </div>
+      <span class="arrow">→</span>
+    </a>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>Calgary, Alberta, Canada</span>
+    <div class="links">
+      <a href="/">Homepage</a>
+      <a href="/freelance/">Freelance</a>
+      <a href="/sound/">Sound</a>
+      <a href="/about/">About</a>
+      <a href="/contact/">Contact</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
