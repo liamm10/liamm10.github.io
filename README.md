@@ -15,6 +15,8 @@ browser gets.
   music project, Metro Syndicate.
 - One stylesheet (`css/styles.css`) and one script (`js/main.js`) that every
   page shares, with images and icons in `assets/`.
+- A `sitemap.xml` and `robots.txt` for search engines. If you add a page,
+  add it to the sitemap too.
 
 Most of the product screens in the case studies aren't screenshots. They're
 built in HTML and CSS, and a couple are interactive: try the Build & Price
