@@ -708,7 +708,7 @@ a.sc::after{
 .dp.killed .tag{color:var(--dead);}
 .dp.shipped{border-color:var(--ac-line);}
 .dp.shipped .tag{color:var(--ac);}
-.dp h4{font-size:1.05rem;letter-spacing:-0.025em;margin-bottom:.6rem;}
+.dp h3,.act .dp h3{font-family:var(--display);font-size:1.05rem;letter-spacing:-0.025em;margin:0 0 .6rem;}
 .dp p{font-size:.98rem;line-height:1.5;color:var(--fg-soft);}
 
 /* the little flow diagram inside a decision panel */
@@ -1043,7 +1043,7 @@ ol.loop li.again .ln,ol.loop li.again .lt{color:var(--ac);}
   padding:.2rem .35rem;color:#fff;font-size:.6rem;margin-bottom:.3rem;
 }
 .mock-editor .ed-panel{background:#fff;border-left:1px solid var(--ed-line);padding:.85rem .8rem;}
-.mock-editor .ed-panel h5{margin:0 0 .75rem;font-size:.76rem;font-weight:600;}
+.mock-editor .ed-panel .ed-panel-title{margin:0 0 .75rem;font-size:.76rem;font-weight:600;}
 .mock-editor .ed-panel .grp{color:var(--ed-muted);border-bottom:1px solid var(--ed-line);padding-bottom:.45rem;margin-bottom:.75rem;}
 .mock-editor .ed-panel label{display:block;margin-bottom:.28rem;color:var(--ed-ink);}
 .mock-editor .ed-panel .field{border:1px solid var(--ed-line);border-radius:5px;padding:.32rem .45rem;display:flex;justify-content:space-between;margin-bottom:.85rem;}
@@ -1527,8 +1527,8 @@ tr[data-optional].on .opt-toggle::after{
 .next{padding:clamp(2rem,6vw,3.5rem) 0;border-top:1px solid var(--edge);}
 .next a{text-decoration:none;display:flex;justify-content:space-between;align-items:baseline;gap:1rem;}
 .next .eyebrow{margin-bottom:.5rem;}
-.next h3{font-size:clamp(1.2rem,2.8vw,1.8rem);letter-spacing:-0.04em;margin:0;transition:color .25s ease;}
-.next a:hover h3{color:var(--ac);}
+.next h2,.next h3{font-size:clamp(1.2rem,2.8vw,1.8rem);letter-spacing:-0.04em;margin:0;transition:color .25s ease;}
+.next a:hover h2,.next a:hover h3{color:var(--ac);}
 .next .arrow{font-family:var(--display);color:var(--ac);font-size:1.4rem;flex:none;}
 
 .site-footer{border-top:1px solid var(--edge);padding:2.5rem 0 3rem;}
@@ -1617,6 +1617,7 @@ ul.bullets a,
 .next .arrow,
 .contact-links .arrow{color:var(--ac);}
 
+.next a:hover h2,
 .next a:hover h3,
 .contact-links a:hover,
 .site-footer a:hover{color:var(--ac);}
