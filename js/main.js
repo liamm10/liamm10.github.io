@@ -223,10 +223,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  /* ---------- reading progress on case studies ----------
+  /* ---------- reading progress ----------
      The bar is animated by a CSS scroll timeline, so this only has to
      put the element on the page. No scroll listener, no per-frame work. */
-  if (document.querySelector('.study-hero')) {
+  if (document.querySelector('.study-hero, .hero')) {
     const bar = document.createElement('div');
     bar.className = 'progress';
     bar.setAttribute('aria-hidden', 'true');
