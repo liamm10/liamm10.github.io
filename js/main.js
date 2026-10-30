@@ -387,3 +387,26 @@ document.addEventListener('DOMContentLoaded', () => {
     show(addr, framed);
   });
 })();
+
+/* Enquiry form. The site is static, so there is nowhere to post to.
+   Without scripting the form's own mailto: action still opens a mail
+   app. With it, the fields are laid out as a readable email first, then
+   handed to the mail-link handler above as a real link click, so the
+   form gets the same copy-and-toast behaviour as every other mail link. */
+(function () {
+  document.querySelectorAll('form[data-mailto]').forEach(function (form) {
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var field = function (n) { return form.elements.namedItem(n).value.trim(); };
+      var body = field('message') + '\n\n' + field('name') + '\n' + field('email');
+      var a = document.createElement('a');
+      a.href = 'mailto:' + form.dataset.mailto +
+        '?subject=' + encodeURIComponent(form.dataset.subject) +
+        '&body=' + encodeURIComponent(body);
+      a.hidden = true;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    });
+  });
+})();
