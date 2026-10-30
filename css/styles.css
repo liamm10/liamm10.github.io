@@ -544,9 +544,12 @@ html.js .rw.in .w{opacity:1;transform:none;}
 /* The platforms, as a row of builder badges under the buttons. Each logo
    is the platform's own lockup in a single colour, the way a "built with"
    badge is drawn: brand palettes would be four new accents, and the
-   accent here only ever means "you can act on this". Heights are set per
-   logo (--h) so the four sit at the same optical size, since a wide
-   wordmark at the same pixel height reads larger than a stacked one. */
+   accent here only ever means "you can act on this". Each logo carries
+   its own width, height and fill as attributes rather than rules here:
+   heights differ per logo so the four sit at the same optical size, and
+   in the markup they hold even when a cached stylesheet from before the
+   page existed loads instead of this one - without them the SVGs grow
+   to the full column width in solid black. */
 .hero-badges{
   display:flex;flex-wrap:wrap;justify-content:center;align-items:center;
   gap:1.1rem clamp(1.4rem,3.6vw,2.3rem);
@@ -555,7 +558,7 @@ html.js .rw.in .w{opacity:1;transform:none;}
   animation:riseIn .85s var(--ease-out) both .5s;
 }
 .hero-badges li{display:flex;}
-.hero-badges svg{display:block;height:var(--h,22px);width:auto;fill:currentColor;}
+.hero-badges svg{display:block;flex:none;}
 
 /* ---------- buttons ---------- */
 .cta-row{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:2.1rem;}
