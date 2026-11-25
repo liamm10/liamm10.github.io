@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Proposify CPQ case study · Liam Mackenzie</title>
-<meta name="description" content="A pricing tool reps would trust more than their own spreadsheet. A product design case study by Liam Mackenzie.">
+<meta name="description" content="One price list, every proposal: cutting a CPQ down to what reps would actually use. A product design case study by Liam Mackenzie.">
 <meta name="author" content="Liam Mackenzie">
 <meta name="theme-color" content="#0b0b0d">
 <link rel="canonical" href="https://liammackenzie.net/work/proposify-cpq/">
@@ -16,7 +16,7 @@
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Liam Mackenzie">
 <meta property="og:title" content="Proposify CPQ case study">
-<meta property="og:description" content="A pricing tool reps would trust more than their own spreadsheet. A product design case study by Liam Mackenzie.">
+<meta property="og:description" content="One price list, every proposal: cutting a CPQ down to what reps would actually use. A product design case study by Liam Mackenzie.">
 <meta property="og:url" content="https://liammackenzie.net/work/proposify-cpq/">
 <meta property="og:image" content="https://liammackenzie.net/assets/images/og-image.jpg">
 <meta property="og:image:width" content="1200">
@@ -27,9 +27,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="/css/styles.css">
+<link rel="stylesheet" href="/css/styles.css?v=20261125">
 <script>document.documentElement.classList.add('js');</script>
-<script src="/js/main.js" defer></script>
+<script src="/js/main.js?v=20261125" defer></script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -60,8 +60,8 @@
     },
     {
       "@type": "Article",
-      "headline": "A pricing tool reps would trust more than their own spreadsheet.",
-      "description": "A pricing tool reps would trust more than their own spreadsheet. A product design case study by Liam Mackenzie.",
+      "headline": "One price list, every proposal: cutting a CPQ down to what reps would actually use.",
+      "description": "One price list, every proposal: cutting a CPQ down to what reps would actually use. A product design case study by Liam Mackenzie.",
       "url": "https://liammackenzie.net/work/proposify-cpq/",
       "mainEntityOfPage": "https://liammackenzie.net/work/proposify-cpq/",
       "image": "https://liammackenzie.net/assets/images/og-image.jpg",
@@ -73,7 +73,7 @@
         "@id": "https://liammackenzie.net/#person"
       },
       "datePublished": "2026-09-23",
-      "dateModified": "2026-10-01",
+      "dateModified": "2026-11-25",
       "about": {
         "@type": "Organization",
         "name": "Proposify"
@@ -133,10 +133,11 @@
 
 <header class="study-hero">
   <div class="wrap col read-wide">
-    <p class="eyebrow">Proposify Pricing Library, Lead Product Designer.</p>
-    <h1 class="rw" data-rw-now>A pricing tool reps would trust more than their own spreadsheet.</h1>
+    <p class="eyebrow">Proposify Pricing Catalog, Lead Product Designer.</p>
+    <h1 class="rw" data-rw-now>One price list, every proposal: cutting a CPQ down to what reps would actually use.</h1>
+    <p class="lede" style="margin-top:1.4rem;">Proposify's pricing library made reps retype prices they already kept in spreadsheets. Reps worked around it by pasting screenshots of their price book into proposals or linking out to a Google Sheet. No one could tell which price was current, and the same product went out at different prices across a single sales team. The brief was a full CPQ. Fifteen customer interviews showed that most customers were agencies needing one reliable price list. Only a minority, large franchises, needed industry-specific configuration logic. The PM and I cut Phase 1 down to a pricing catalog that every proposal would pull its prices from, and lined the rest of CPQ up behind it.</p>
     <div class="metrics" style="margin-top:2.1rem;margin-bottom:0;">
-      <div class="metric"><span class="n">~25%</span><span class="l">Faster assembly</span></div>
+      <div class="metric"><span class="n">~25%</span><span class="l">Less time from template to sent</span></div>
       <div class="metric"><span class="n">50→87.5%</span><span class="l">Task completion</span></div>
     </div>
   </div>
@@ -147,19 +148,20 @@
     <div>
       <h2 class="mb-h">What I owned</h2>
       <ul class="bullets">
-        <li>Customer research: interviews across four mid-market accounts, plus support tickets</li>
-        <li>Feasibility on external pricing integrations, with engineering</li>
-        <li>Catalog architecture and pricing UX, from flows to high-fidelity prototypes</li>
+        <li>Customer research: 15 interviews, four with super users at mid-market agencies, plus support tickets</li>
+        <li>The CPQ roadmap, co-led with the PM</li>
+        <li>Feasibility of external pricing integrations, worked out with engineering</li>
+        <li>Catalog architecture and pricing UX, from flows through high-fidelity prototypes</li>
         <li>Rollout, beta, and post-launch evaluation</li>
       </ul>
     </div>
     <div>
       <h2 class="mb-h">Constraints</h2>
       <ul class="bullets">
-        <li>3 months to Phase 1</li>
-        <li>One PM, four engineers, and myself as the product design lead</li>
-        <li>Customers' real prices lived in systems we didn't own</li>
-        <li>A wrong number becomes a signed contract</li>
+        <li>Three months to Phase 1</li>
+        <li>Team: one PM, four engineers, and me as product design lead</li>
+        <li>Customers' real prices lived in spreadsheets Proposify didn't control</li>
+        <li>A wrong number ends up in a signed contract</li>
       </ul>
     </div>
   </div>
@@ -168,9 +170,11 @@
 <!-- ============ PROBLEM ============ -->
 <section class="act problem">
   <div class="wrap col read-wide">
-    <h2 class="act-thesis">Our real competitor was Excel, and Excel was winning.</h2>
+    <h2 class="act-thesis">Our real competitor was the spreadsheet, and the spreadsheet was winning.</h2>
 
-    <p>Mid-market reps didn't trust Proposify with their prices. The v2 Pricing Library couldn't bundle, tier, apply conditional discounts, route approvals or sync with an outside price source, so reps built every quote in a spreadsheet and pasted the result in. Nobody downstream could see what had happened to the number.</p>
+    <p>The v2 pricing library made reps enter every price by hand, even though their price book already lived in a spreadsheet. So they worked around it. Some pasted screenshots of the price book into proposals. Others linked out to a Google Sheet.</p>
+
+    <p>Nobody downstream could tell which price was current. The same product went out at different prices across one sales team, with nothing in Proposify to keep them in line.</p>
 
     <blockquote>"I discovered two reps were quoting different prices for the same product. There was no way to enforce consistency."<cite>VP Sales, B2B services provider</cite></blockquote>
   </div>
@@ -180,6 +184,8 @@
       <div class="fig-body">
         <div class="mock">
           <div class="mock-main" style="padding:1.2rem 1.3rem;">
+            <div class="mock-title" style="margin-bottom:.2rem;">Price book.xlsx</div>
+            <div class="mock-desc" style="margin-bottom:1rem;">Pasted into a proposal as a screenshot</div>
             <table class="mock-table">
               <tr><th>Item</th><th>List</th><th>Rep discount</th><th>Quoted</th></tr>
               <tr><td><span class="cell-main">Enterprise License</span></td><td>$24,999</td><td>15%</td><td>$21,249</td></tr>
@@ -195,30 +201,52 @@
   </div>
 </section>
 
-<!-- ============ WHAT WE LEARNED ============ -->
-<section class="act learned">
+<!-- ============ SCOPE ============ -->
+<section class="act scope">
   <div class="wrap col read-wide">
-    <h2 class="act-thesis">Customers wanted automation, but never at the cost of seeing what changed.</h2>
+    <h2 class="act-thesis">Most customers didn't need CPQ. They needed one price list.</h2>
 
-    <blockquote>"We want the system to update prices, but only if we know when it happens. Surprises would erode our clients' trust."<cite>Account Director, marketing agency</cite></blockquote>
+    <p>The original brief was a full CPQ: configuration, pricing, quoting, approvals and guided selling. Fifteen customer interviews, including four with super users at mid-market agencies, showed two different groups behind that brief.</p>
 
-    <p>I turned that into four principles the team used for every trade-off:</p>
+    <p>A minority were large franchises that needed pricing logic set up for their industry. Most were agencies that needed one reliable catalog to quote from. Building franchise logic first would have made most customers wait for features they didn't need.</p>
 
-    <ul class="bullets">
-      <li><strong>Simplicity over complexity.</strong> Build on the quoting habits people already had.</li>
-      <li><strong>External source of truth.</strong> Treat the customer's own pricing system as authoritative, not something to replace.</li>
-      <li><strong>Clarity and autonomy.</strong> No silent automation, ever.</li>
-      <li><strong>Trust through fail-safes.</strong> Locking, alerts, and predictable behaviour when things go wrong.</li>
-    </ul>
+    <p>The PM and I co-led the CPQ roadmap. I brought the research case for narrowing Phase 1 to a pricing catalog, with the rest of CPQ lined up behind it as development resources came free.</p>
+  </div>
+
+  <div class="wrap">
+    <figure class="fig reveal">
+      <div class="fig-body">
+        <div class="decision">
+          <div class="dp segment">
+            <span class="tag">A minority of customers</span>
+            <h3>Large franchises</h3>
+            <p>Needed industry-specific pricing logic: configuration rules set up for how their industry sells.</p>
+          </div>
+          <div class="dp shipped">
+            <span class="tag">✓ Most customers · Phase 1 focus</span>
+            <h3>Agencies</h3>
+            <p>Needed one reliable price list that every proposal quotes from.</p>
+          </div>
+        </div>
+      </div>
+      <figcaption><span>Two groups behind one brief. Phase 1 built for the larger one.</span></figcaption>
+    </figure>
   </div>
 </section>
 
-<!-- ============ KEY PRODUCT DECISION ============ -->
-<section class="act decision-act">
+<!-- ============ PRINCIPLES ============ -->
+<section class="act learned">
   <div class="wrap col read-wide">
-    <h2 class="act-thesis">We cut a full CPQ brief down to the part nobody trusted: the price.</h2>
+    <h2 class="act-thesis">Four principles the cut committed us to.</h2>
 
-    <p>The brief was a full CPQ product: configuration, pricing, quoting, approvals and guided selling. Four sprints of interviews argued against building it that way. Reps weren't losing time to configuration logic; they were losing it to not trusting the price they started from. So Phase 1 narrowed to the Pricing Catalog, with the rest of CPQ to follow on top of it.</p>
+    <p>Narrowing to a catalog meant every later trade-off had to protect that one price list.</p>
+
+    <ol class="bullets">
+      <li><strong>Start from what they already have.</strong> Reps' prices already lived in spreadsheets, so the catalog needed a way to bring them in. <em>(Delivered in Phase 2 with CSV import.)</em></li>
+      <li><strong>One price list, every proposal.</strong> The catalog is the source, and every pricing table pulls from it.</li>
+      <li><strong>No silent automation.</strong> A person makes every change to a price, and the change is visible.</li>
+      <li><strong>Fail safely.</strong> Protect the number without blocking the rep from sending.</li>
+    </ol>
   </div>
 </section>
 
@@ -227,40 +255,10 @@
   <div class="wrap col read-wide">
     <h2 class="act-thesis">A catalog worth quoting from, wired into every pricing table.</h2>
 
-    <p>The catalog replaced the flat fee list with folders, search and inline editing, and billing frequency travels with each item instead of being retyped into every quote.</p>
-  </div>
+    <h3>Catalog and table templates · Phase 1</h3>
+    <p>The catalog replaced v2's flat fee list. Billing frequency travels with each item, and the pricing table's row menu adds Insert from Catalog and Save to Catalog.</p>
 
-  <div class="wrap">
-    <figure class="fig reveal">
-      <div class="fig-body">
-        <div class="mock">
-          <div class="mock-app">
-            <div class="mock-side">
-              <div class="mock-brand">Pricing Library</div>
-              <div class="mock-nav-item on">Products</div>
-              <div class="mock-nav-item">Bundles</div>
-              <div class="mock-nav-item">Approvals</div>
-              <div class="mock-nav-item">Analytics</div>
-            </div>
-            <div class="mock-main">
-              <div class="mock-back"><span class="bk" aria-hidden="true">&#8592;</span><div><div class="mock-title">Enterprise Platform License</div>
-              <div class="mock-desc">SKU: EPL-001</div></div></div>
-              <div class="mock-tabs">
-                <span class="on">Details</span><span>Add-ons</span><span>Dependencies</span><span>Volume Pricing</span><span>Bundles</span><span>Permissions</span>
-              </div>
-              <table class="mock-table">
-                <tr><th>Field</th><th>Value</th></tr>
-                <tr><td>Cost</td><td>$8,000</td></tr>
-                <tr><td>List Price</td><td>$24,999 <span class="mock-pill">Suggested: $11,200 avg.</span></td></tr>
-                <tr><td>Default Quantity</td><td>1</td></tr>
-                <tr><td>Lock Price</td><td>Enabled</td></tr>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
-      <figcaption><span>Product detail: one screen for most people, six tabs for the admin who needs them.</span></figcaption>
-    </figure>
+    <p>Reps can also save a whole pricing table as a template, separate from any page or document, and reuse it across clients. They stopped rebuilding the same table for every proposal, which is one of the main reasons the time from template to sent dropped.</p>
   </div>
 
   <div class="wrap">
@@ -301,14 +299,58 @@
       <figcaption><span>The pricing table&rsquo;s row menu. Insert from Catalog pulls a priced item in; Save to Catalog sends a custom line back.</span></figcaption>
     </figure>
   </div>
+
+  <div class="wrap col read-wide">
+    <h3>Folders and line-item management · Phase 2</h3>
+    <p>Folders, search and inline editing made a growing list of items manageable for a whole team.</p>
+  </div>
+
+  <div class="wrap">
+    <figure class="fig reveal">
+      <div class="fig-body">
+        <div class="mock">
+          <div class="mock-app">
+            <div class="mock-side">
+              <div class="mock-brand">Pricing Library</div>
+              <div class="mock-nav-item on">Products</div>
+              <div class="mock-nav-item">Bundles</div>
+              <div class="mock-nav-item">Approvals</div>
+              <div class="mock-nav-item">Analytics</div>
+            </div>
+            <div class="mock-main">
+              <div class="mock-back"><span class="bk" aria-hidden="true">&#8592;</span><div><div class="mock-title">Enterprise Platform License</div>
+              <div class="mock-desc">SKU: EPL-001</div></div></div>
+              <div class="mock-tabs">
+                <span class="on">Details</span><span>Add-ons</span><span>Dependencies</span><span>Volume Pricing</span><span>Bundles</span><span>Permissions</span>
+              </div>
+              <table class="mock-table">
+                <tr><th>Field</th><th>Value</th></tr>
+                <tr><td>Cost</td><td>$8,000</td></tr>
+                <tr><td>List Price</td><td>$24,999 <span class="mock-pill">Suggested: $11,200 avg.</span></td></tr>
+                <tr><td>Default Quantity</td><td>1</td></tr>
+                <tr><td>Lock Price</td><td>Enabled</td></tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <figcaption><span>Product detail: one simple view for most people, six tabs for the admin who needs them.</span></figcaption>
+    </figure>
+  </div>
 </section>
 
 <!-- ============ KEY TRADE-OFF ============ -->
 <section class="act tradeoff">
   <div class="wrap col read-wide">
-    <h2 class="act-thesis">I spent two weeks pushing for two-way pricing sync. Then we killed it.</h2>
+    <h2 class="act-thesis">I spent two weeks pushing for two-way sync. Then I recommended we kill it.</h2>
 
-    <p>Customers were asking for live sync between Proposify and their own sheets, and I argued for it. A feasibility spike with engineering found what I'd missed: if both sides changed the same price between syncs, every way of resolving it silently overwrote one of them. That broke the no-silent-automation principle, and a pricing tool that changes numbers without telling you is worse than none, because people stop checking.</p>
+    <p>I started out arguing for live, two-way sync between the catalog and customers' spreadsheets. It looked like the shortest path to one price list.</p>
+
+    <p>A feasibility spike with engineering showed the flaw. When both sides changed the same price, any resolution would silently overwrite one of them. That broke our own no-silent-automation principle, in a product where a wrong number ends up in a signed contract.</p>
+
+    <blockquote>"We want the system to update prices, but only if we know when it happens. Surprises would erode our clients' trust."<cite>Account Director, marketing agency</cite></blockquote>
+
+    <p>So I recommended cutting it. Phase 1 shipped a catalog that people maintain themselves, where every change is a deliberate move and conflicts can't happen. Phase 2 added CSV import, so reps could start from the spreadsheet they already had instead of retyping it.</p>
   </div>
 
   <div class="wrap">
@@ -328,43 +370,119 @@
           </div>
           <div class="dp shipped">
             <span class="tag">✓ Shipped</span>
-            <h3>A catalog, and nothing moves by itself</h3>
+            <h3>Catalog (Phase 1) + CSV import (Phase 2)</h3>
             <div class="flow">
-              <span class="node sys">Pricing Catalog</span>
+              <span class="node">Spreadsheet</span>
               <span class="ar">→</span>
-              <span class="node">Proposal</span>
+              <span class="node" style="border-style:dashed;">CSV import</span>
+              <span class="ar">→</span>
+              <span class="node sys">Pricing Catalog</span>
             </div>
             <div class="flow" style="margin-top:.2rem;">
-              <span class="node">Proposal</span>
-              <span class="ar">→</span>
               <span class="node sys">Pricing Catalog</span>
+              <span class="ar">⇄</span>
+              <span class="node">Proposal</span>
             </div>
             <div class="flow" style="margin-top:.2rem;">
               <span class="node" style="border-style:dashed;">Insert from Catalog · Save to Catalog</span>
             </div>
-            <p style="margin-top:1rem;">Still two-way, but a person makes every move, one row at a time, so there is never a conflict to resolve.</p>
+            <p style="margin-top:1rem;">A person makes every move, one import or one row at a time, so there is never a conflict to resolve.</p>
           </div>
         </div>
       </div>
-      <figcaption><span>The decision that defined the project. Losing the feature was the point, not the cost.</span></figcaption>
+      <figcaption><span>The decision that defined the project.</span></figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ SAFEGUARDS ============ -->
+<section class="act trust">
+  <div class="wrap col read-wide">
+    <h2 class="act-thesis">Three safeguards kept pricing consistent across every proposal.</h2>
+
+    <ul class="bullets">
+      <li><strong>Locked on send · Phase 1.</strong> Once a proposal is sent, its prices are fixed. The version a client signs is the version they received.</li>
+      <li><strong>Shared pricing tables · Phase 2.</strong> Teams save a pricing table once and reuse it across proposals. Only its owner, typically the sales manager, can edit it, so every proposal built from it carries the same prices.</li>
+      <li><strong>Price provenance · Phase 2, with the notifications team.</strong> Each line shows where its price came from and flags any override, so a reviewer can see when a proposal departs from the catalog.</li>
+    </ul>
+
+    <p>Each time the system showed more, whether a log, an icon or an extra confirmation, reps trusted it more.</p>
+  </div>
+</section>
+
+<!-- ============ OUTCOME ============ -->
+<section class="act impact">
+  <div class="wrap col read-wide">
+    <h2 class="act-thesis">Building a priced proposal got faster and far more reliable.</h2>
+  </div>
+
+  <div class="wrap">
+    <div class="impact-grid reveal">
+      <div class="cell"><span class="n">~25%</span><span class="l">Less time from template to sent</span></div>
+      <div class="cell"><span class="n">50→87.5%</span><span class="l">Task completion, accounts struggling with v3 pricing tables</span></div>
+    </div>
+  </div>
+
+  <div class="wrap col read-wide">
+    <p>Across the rollout cohort, which started with 100 companies, the time from duplicating a template to sending a proposal dropped by about 25%.</p>
+
+    <p>For accounts that had fully moved from v2 to v3 but were struggling with v3's pricing tables, task completion rose from 50% to 87.5%. More of them stayed on v3 instead of reverting to v2.</p>
+
+    <p>Every proposal a team sent now pulled its prices from the same catalog.</p>
+
+    <p class="mock-caption"><em>Both measured in product analytics on the rollout cohort.</em></p>
+  </div>
+</section>
+
+<!-- ============ WHAT IT SET UP ============ -->
+<section class="act foundation">
+  <div class="wrap col read-wide">
+    <h2 class="act-thesis">What the foundation set up.</h2>
+  </div>
+
+  <div class="wrap">
+    <figure class="fig reveal">
+      <div class="fig-body">
+        <div class="decision phases">
+          <div class="dp shipped">
+            <span class="tag">Phase 1</span>
+            <ul class="phase-list">
+              <li>Pricing catalog</li>
+              <li>Table templates</li>
+              <li>Locked on send</li>
+            </ul>
+          </div>
+          <div class="dp">
+            <span class="tag">Phase 2</span>
+            <ul class="phase-list">
+              <li>CSV import</li>
+              <li>Folders, line items</li>
+              <li>Shared pricing tables</li>
+              <li>Price provenance</li>
+            </ul>
+          </div>
+          <div class="dp">
+            <span class="tag">Phase 3</span>
+            <ul class="phase-list">
+              <li>Approval workflow</li>
+              <li>User roles</li>
+            </ul>
+          </div>
+          <div class="dp later">
+            <span class="tag">Later</span>
+            <ul class="phase-list">
+              <li>Rest of CPQ</li>
+              <li class="q">as resources allow</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <figcaption><span>Each phase built on the catalog shipped before it.</span></figcaption>
     </figure>
   </div>
 
   <div class="wrap col read-wide">
-    <p>Killing sync made the catalog the source of truth inside Proposify, and that tested our second principle. <strong>It turned out to be a hypothesis.</strong> We'd assumed customers needed Proposify to defer to a pricing system they already had. In reality, smaller companies were happy to build their catalog from scratch, and others were fine uploading a CSV to start. What most companies actually used to track pricing was an Excel sheet, so the eventual answer was simply letting them link it as the source.</p>
-  </div>
-</section>
-
-<!-- ============ TRUST MECHANISMS ============ -->
-<section class="act trust">
-  <div class="wrap col read-wide">
-    <h2 class="act-thesis">Three fail-safes made the numbers trustworthy.</h2>
-
-    <ul class="bullets">
-      <li><strong>Quote locking.</strong> Freezes every price once a proposal is sent, so a catalog change can't rewrite what a client already saw.</li>
-      <li><strong>Provenance.</strong> Shows where each line's price came from and whether someone overrode it.</li>
-      <li><strong>Approval thresholds.</strong> Catch risky quotes without ever blocking the rep.</li>
-    </ul>
+    <p>Phase 1 shipped the catalog most customers needed. Phase 2 let teams bring in their spreadsheets and control who could edit a price. Interviews kept surfacing inconsistent proposals, so Phase 3 added a basic approval workflow and user roles on top of the catalog.</p>
   </div>
 
   <div class="wrap">
@@ -415,26 +533,13 @@
           </li>
         </ol>
       </div>
-      <figcaption><span>Admins set the rule, such as a discount over 20% or a total over $50,000.</span></figcaption>
+      <figcaption><span>Phase 3 approvals. Admins set the rules, such as a discount limit or a total cap.</span></figcaption>
     </figure>
   </div>
-</section>
-
-<!-- ============ OUTCOME ============ -->
-<section class="act impact">
-  <div class="wrap col read-wide">
-    <h2 class="act-thesis">Building a priced proposal became faster and significantly more reliable.</h2>
-  </div>
-
-  <div class="wrap">
-    <div class="impact-grid reveal">
-      <div class="cell"><span class="n">~25%</span><span class="l">Faster assembly</span></div>
-      <div class="cell"><span class="n">50→87.5%</span><span class="l">Task completion</span></div>
-    </div>
-  </div>
 
   <div class="wrap col read-wide">
-    <p class="statement">Every time we chose to show more, whether a log, an icon or one more confirmation, people trusted the system more.</p>
+    <p class="statement">The hardest call on this project was cutting a feature I'd argued for.</p>
+    <p>Shipping less gave reps one price list they actually used, and what they asked for next, approvals and roles, showed us where CPQ needed to go.</p>
   </div>
 </section>
 

@@ -793,6 +793,17 @@ a.sc::after{
   padding:.4rem .6rem;margin-top:.6rem;display:inline-block;
 }
 
+/* Phase strip: the decision panel stretched to four columns. Phase 1
+   carries the accent; "Later" is dashed because it has not shipped. */
+.decision.phases{grid-template-columns:repeat(4,1fr);}
+@media (max-width:900px){.decision.phases{grid-template-columns:1fr 1fr;}}
+@media (max-width:520px){.decision.phases{grid-template-columns:1fr;}}
+.dp .tag{color:var(--fg-faint);}
+.dp.later{border-style:dashed;border-color:var(--edge-2);}
+.phase-list{list-style:none;margin:0;padding:0;font-size:.92rem;line-height:1.45;color:var(--fg-soft);}
+.phase-list li + li{margin-top:.45rem;}
+.phase-list li.q{color:var(--fg-faint);font-size:.82rem;}
+
 /* =========================================================
    ARTIFACT: journey strip (entry-point relocation)
    ========================================================= */
