@@ -207,13 +207,6 @@ p:last-child{margin-bottom:0;}
   text-wrap:balance;
 }
 .statement.short{max-width:19ch;}
-/* Closing statement of a case study: set in capitals, a step larger,
-   so the page ends on one strong line. */
-.statement.finale{
-  text-transform:uppercase;font-weight:600;
-  font-size:clamp(1.6rem,3.8vw,2.6rem);line-height:1.12;letter-spacing:-0.02em;
-  margin-top:clamp(1rem,3vw,2rem);
-}
 /* Inside a case study, statements and act theses run the same width as the
    body copy around them, so every text block in the column shares one left
    and right edge. The narrower measures above still apply on Freelance and
