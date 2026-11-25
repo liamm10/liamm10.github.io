@@ -1023,6 +1023,27 @@ blockquote cite{
 .skills .grp li{font-size:1rem;line-height:1.4;color:var(--fg-soft);}
 @media (max-width:760px){.skills{grid-template-columns:1fr;gap:2rem;}}
 
+/* Principles as big, strong statements: each name set in display type at
+   statement size, with its explanation underneath in body copy. Same
+   hairline rows and mono numbers as ol.loop so the two lists read as kin. */
+ol.principles{list-style:none;margin:.4rem 0 1rem;padding:0;border-top:1px solid var(--edge);}
+ol.principles li{
+  display:grid;grid-template-columns:2.6rem minmax(0,1fr);
+  gap:clamp(.6rem,2vw,1.4rem);align-items:baseline;
+  padding:clamp(1.2rem,3vw,1.8rem) 0;border-bottom:1px solid var(--edge);
+}
+ol.principles .pn{font-family:var(--mono);font-size:.75rem;letter-spacing:.08em;color:var(--ac);}
+ol.principles .pt{
+  display:block;font-family:var(--display);font-weight:600;
+  font-size:clamp(1.5rem,3.4vw,2.2rem);line-height:1.18;letter-spacing:-0.035em;
+  color:var(--fg);text-wrap:pretty;
+}
+ol.principles .pd{display:block;margin-top:.55rem;font-size:1.05rem;line-height:1.5;color:var(--fg-soft);}
+ol.principles .pd em{color:var(--fg-faint);}
+@media (max-width:560px){
+  ol.principles li{grid-template-columns:1fr;gap:.4rem;}
+}
+
 /* The weekly research loop as a scannable sequence. Same hairline rows
    as the spec lists; the last step carries the accent because it is the
    one that sends the loop back to the start. */
