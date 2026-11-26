@@ -2,41 +2,44 @@
    Liam Mackenzie - portfolio
    Hand-written CSS. No framework, no build step.
 
-   ONE ACCENT, TWO SURFACES.
-   - Chrome (--bg/--fg/--edge/--ac) is a neutral off-black with a
-     single warm accent. The accent means "actionable" and nothing
-     else: links, CTAs, the shipped/after side of a comparison.
-   - Mockups keep the light tokens (--paper/--ink/--sys-*) because a
-     product screen should look like a product screen. Light app UI on
-     off-black is the whole visual idea, and the cool product blue
-     reads as a different system from the warm site chrome on purpose.
+   PAPER AND INK, ONE ACCENT.
+   - Chrome (--bg/--fg/--edge/--ac) is warm off-white paper with
+     near-black ink. Hierarchy comes from size, weight and hairlines,
+     not from colour or glow.
+   - The single accent is a deep ink blue. It means "actionable" and
+     nothing else: links, CTAs, the shipped/after side of a comparison.
+   - Mockups keep their own light product tokens (--paper/--ink/--sys-*)
+     and sit on the page with a hairline rim and a soft, ink-tinted
+     shadow so a white screen still reads as an object on paper.
 
-   RADIUS SYSTEM (one documented rule, applied everywhere):
-     --r-card 14px   panels, cards, mockups, grouped blocks
-     --r-sm    8px   inputs, chips, small nodes
-     --r-pill 999px  anything pill-shaped or interactive-round
+   TYPE: IBM Plex Sans for everything people read; IBM Plex Mono only
+   for small data - labels, captions, numbers. Sentence case throughout.
+
+   RADIUS SYSTEM (kept deliberately tight):
+     --r-card 4px   panels, cards, mockups, grouped blocks
+     --r-sm   2px   inputs, chips, buttons, small nodes
+     --r-pill 2px   formerly pill-shaped elements, now squared off
    ========================================================= */
 :root{
-  color-scheme:dark;
-  /* ---- chrome: dark, neutral, off-black ---- */
-  --bg:#0b0b0d;
-  --bg-2:#131317;
-  --surface:rgba(255,255,255,.03);
-  --surface-2:rgba(255,255,255,.06);
-  --edge:rgba(255,255,255,.09);
-  --edge-2:rgba(255,255,255,.17);
-  --fg:#ececed;
-  --fg-soft:rgba(236,236,237,.66);
-  --fg-faint:rgba(236,236,237,.44);
-  --fg-ghost:rgba(236,236,237,.15);
+  color-scheme:light;
+  /* ---- chrome: warm paper, near-black ink ---- */
+  --bg:#f5f4f0;
+  --bg-2:#ecebe6;
+  --surface:rgba(22,22,20,.022);
+  --surface-2:rgba(22,22,20,.05);
+  --edge:rgba(22,22,20,.11);
+  --edge-2:rgba(22,22,20,.22);
+  --fg:#161614;
+  --fg-soft:rgba(22,22,20,.74);
+  --fg-faint:rgba(22,22,20,.58);
+  --fg-ghost:rgba(22,22,20,.2);
 
-  /* The one chrome accent. hsl(24 73% 56%), 6.5:1 against --bg. */
-  --ac:#e07a3f;
-  --ac-line:rgba(224,122,63,.38);
-  --ac-line-2:rgba(224,122,63,.85);
-  --ac-soft:rgba(224,122,63,.10);
-  /* Accent needs dark text on top of it, never white: 6.5:1 vs 3.0:1. */
-  --on-ac:#0b0b0d;
+  /* The one chrome accent: ink blue, ~10:1 against --bg. */
+  --ac:#1f3a5f;
+  --ac-line:rgba(31,58,95,.32);
+  --ac-line-2:rgba(31,58,95,.8);
+  --ac-soft:rgba(31,58,95,.07);
+  --on-ac:#f5f4f0;
 
   /* Legacy aliases. Every old reference resolves to the one accent or
      to --dead. Killed / before / buried states use --dead, so an
@@ -45,7 +48,7 @@
   --b:var(--ac);
   --c:var(--ac);
   --lime:var(--ac);
-  --dead:rgba(236,236,237,.50);
+  --dead:rgba(22,22,20,.5);
   --pink:var(--dead);
   --grad:var(--ac);
 
@@ -79,14 +82,14 @@
   --good:var(--green-500);
   --warn:var(--amber-500);
 
-  --display:'Geist','Inter Tight',system-ui,-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;
+  --display:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;
   --ui:var(--display);
   --mono:'IBM Plex Mono','SF Mono',Consolas,monospace;
   --body:var(--display);
 
-  --r-card:14px;
-  --r-sm:8px;
-  --r-pill:999px;
+  --r-card:4px;
+  --r-sm:2px;
+  --r-pill:2px;
 
   --max:1180px;
   --wide:1400px;
@@ -143,12 +146,11 @@ ul{margin:0;padding:0;list-style:none;}
 /* =========================================================
    TYPE
    ========================================================= */
-h1,h2,h3,h4{font-family:var(--display);font-weight:500;letter-spacing:-0.03em;margin:0;}
+h1,h2,h3,h4{font-family:var(--display);font-weight:500;letter-spacing:-0.015em;margin:0;}
 .eyebrow{
   font-family:var(--mono);
-  font-size:.7rem;
-  letter-spacing:.14em;
-  text-transform:uppercase;
+  font-size:.76rem;
+  letter-spacing:0;
   color:var(--fg-faint);
 }
 .lede{font-size:1.16rem;line-height:1.5;color:var(--fg-soft);}
@@ -200,7 +202,7 @@ p:last-child{margin-bottom:0;}
   font-weight:500;
   font-size:clamp(1.5rem,3.4vw,2.2rem);
   line-height:1.22;
-  letter-spacing:-0.035em;
+  letter-spacing:-0.018em;
   color:var(--fg);
   max-width:24ch;
   margin:clamp(2rem,5vw,3rem) 0;
@@ -237,18 +239,18 @@ html.js .rw.in .w{opacity:1;transform:none;}
    ========================================================= */
 .site-nav{
   position:sticky;top:0;z-index:60;
-  background:rgba(5,6,10,.72);
+  background:rgba(245,244,240,.82);
   backdrop-filter:blur(14px) saturate(150%);
   border-bottom:1px solid var(--edge);
 }
 .site-nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:1rem;height:62px;}
 .site-nav .brand{
   font-family:var(--display);font-weight:600;font-size:.98rem;
-  letter-spacing:-0.025em;text-decoration:none;white-space:nowrap;
+  letter-spacing:-0.013em;text-decoration:none;white-space:nowrap;
 }
 .site-nav .links{
   display:flex;gap:clamp(.85rem,2.4vw,1.8rem);
-  font-family:var(--mono);font-size:.75rem;letter-spacing:.02em;
+  font-family:var(--ui);font-size:.9rem;letter-spacing:0;
 }
 .site-nav .links a{
   position:relative;text-decoration:none;color:var(--fg-faint);
@@ -289,7 +291,7 @@ html.js .rw.in .w{opacity:1;transform:none;}
   position:absolute;top:calc(100% + .7rem);left:-.8rem;z-index:61;
   display:grid;min-width:176px;padding:.35rem;
   background:var(--bg-2);border:1px solid var(--edge-2);border-radius:var(--r-sm);
-  box-shadow:0 18px 40px -16px rgba(0,0,0,.8);
+  box-shadow:0 12px 32px -14px rgba(22,22,20,.22);
   opacity:0;visibility:hidden;transform:translateY(-4px);
   transition:opacity .18s var(--ease-out),transform .18s var(--ease-out),visibility 0s linear .18s;
 }
@@ -309,7 +311,7 @@ html.js .rw.in .w{opacity:1;transform:none;}
 }
 .site-nav .dd-menu a{
   display:flex;align-items:center;justify-content:space-between;gap:1rem;
-  padding:.55rem .7rem;border-radius:6px;color:var(--fg-soft);
+  padding:.55rem .7rem;border-radius:var(--r-sm);color:var(--fg-soft);
 }
 .site-nav .dd-menu a::after{display:none;}
 .site-nav .dd-menu a:hover{background:var(--surface-2);color:var(--fg);}
@@ -323,7 +325,7 @@ html.js .rw.in .w{opacity:1;transform:none;}
   width:6px;height:6px;border-radius:50%;background:var(--ac);transform:none;
 }@media (max-width:560px){.site-nav .dd-menu{left:50%;transform:translate(-50%,-4px);}
   .site-nav .dd.open .dd-menu,.site-nav .dd:focus-within .dd-menu{transform:translateX(-50%);}}
-@media (max-width:620px){.site-nav .links{font-size:.7rem;}}
+@media (max-width:620px){.site-nav .links{font-size:.84rem;}}
 @media (max-width:560px){
   .site-nav .wrap{flex-wrap:wrap;height:auto;padding-top:.7rem;padding-bottom:.55rem;gap:.45rem;}
   .site-nav .links{width:100%;justify-content:space-between;gap:.4rem;}
@@ -358,18 +360,18 @@ html.js .rw.in .w{opacity:1;transform:none;}
    honest metaphor here rather than a decorative one. This takes one
    layer of it, the rails, and leaves the cells and records behind,
    because it has to sit under a headline rather than be the headline.
-   Inverted for the dark ground: the carcass becomes a light hairline,
-   which is what the rest of this site is built out of anyway. Masked
+   On paper the carcass is a faint ink hairline, which is what the
+   rest of this site is built out of anyway. Masked
    so it stays off the left where the type sits and reads strongest
    through the warm part of the field. */
 .hero-crate{
   --cell:128px;
-  --rail:rgba(236,236,237,.08);
+  --rail:rgba(22,22,20,.07);
   /* Lighting strength lives in variables because it is ground-relative:
      the same white glow reads far weaker over the Freelance hero's
      lifted base than over the homepage's near-black. */
-  --lit:.30;
-  --lit-edge:.24;
+  --lit:.045;
+  --lit-edge:.28;
   position:absolute;inset:0;z-index:1;pointer-events:none;
   overflow:hidden;
   -webkit-mask-image:linear-gradient(100deg,transparent 0%,rgba(0,0,0,.28) 32%,#000 68%,rgba(0,0,0,.55) 100%);
@@ -413,112 +415,49 @@ html.js .rw.in .w{opacity:1;transform:none;}
   --p:0;
   position:absolute;
   width:var(--cell);height:var(--cell);
-  background:radial-gradient(circle at 50% 45%, rgba(236,236,237,var(--lit)), rgba(236,236,237,0) 72%);
+  background:rgba(22,22,20,var(--lit));
   /* The edge is what makes it read as a cube opening rather than a
      smudge following the cursor. This site is built out of hairlines,
      so the hairline is the thing that should respond. */
-  box-shadow:inset 0 0 0 1px rgba(236,236,237,var(--lit-edge));
+  box-shadow:inset 0 0 0 1px rgba(31,58,95,var(--lit-edge));
   opacity:var(--p);
   transition:opacity .4s var(--ease-out);
 }
 
-/* THE EMBER FIELD.
-   One hue family rather than a second brand colour: the sweep runs
-   from the site accent (24deg) through crimson to a violet tail, so it
-   reads as the accent's own shadow. The mass sits right of centre,
-   which leaves the headline and the buttons on a dark field - the
-   primary CTA is solid accent and needs that separation to stay
-   legible as the one actionable thing. */
-.hero::before{
-  content:'';
-  position:absolute;inset:-15%;z-index:0;
-  background:
-    radial-gradient(56% 72% at 76% 30%, rgba(224,122,63,.44) 0%, rgba(224,122,63,0) 68%),
-    radial-gradient(50% 60% at 97% 72%, rgba(198,58,72,.36) 0%, rgba(198,58,72,0) 66%),
-    radial-gradient(62% 66% at 46% 104%, rgba(84,52,127,.38) 0%, rgba(84,52,127,0) 70%),
-    linear-gradient(104deg,#0b0b0d 0%,#14100f 36%,#1d1210 62%,#130f18 100%);
-  animation:emberDrift 34s var(--ease-out) infinite alternate;
-}
+/* The ground is flat paper. The coloured field that used to sit here
+   was removed in the paper redesign: the lattice and the pointer-lit
+   cubes carry the hero on their own. The Freelance opener shares the
+   homepage composition exactly. */
+.study-hero.opener .hero-crate{--rail:rgba(22,22,20,.07);}
 
-/* The same field in a lighter key, for the Freelance opener. Same
-   composition and the same hue family, so the two pages read as one
-   system; the base is lifted off black and the pools are softer and
-   goldier, which is the difference you can see when you land on it
-   from the homepage. Scoped to .opener rather than .study-hero,
-   because the case studies need compact headers - each one carries an
-   eyebrow and a reading-mode toggle, and the article itself should
-   start near the top of the viewport. */
-.study-hero.opener::before{
-  content:'';
-  position:absolute;inset:-15%;z-index:0;
-  background:
-    radial-gradient(56% 72% at 74% 28%, rgba(232,150,90,.40) 0%, rgba(232,150,90,0) 68%),
-    radial-gradient(52% 62% at 96% 70%, rgba(206,96,104,.28) 0%, rgba(206,96,104,0) 66%),
-    radial-gradient(62% 66% at 44% 104%, rgba(112,84,158,.30) 0%, rgba(112,84,158,0) 70%),
-    linear-gradient(104deg,#121216 0%,#1b1614 36%,#251815 62%,#191322 100%);
-  animation:emberDrift 34s var(--ease-out) infinite alternate;
-}
-/* The lattice has a lighter ground to sit on here, so it needs a
-   little more to stay visible at all - but only a little. The glow is
-   white at --lit over the ground, so what you see is lit x (255 - ground):
-   .30 over the homepage's near-black is ~73, and matching that over this
-   page's lifted base (~28) takes about .32, not the half-again that was
-   here before. Ground-relative is the right instinct; the correction is
-   just much smaller than it looks, because both grounds are dark. */
-.study-hero.opener .hero-crate{--rail:rgba(236,236,237,.09);--lit:.34;--lit-edge:.26;}
-
-@media (prefers-reduced-motion:reduce){
-  .hero::before,
-  .study-hero.opener::before{animation:none;}
-}
-@keyframes emberDrift{
-  from{transform:translate3d(0,0,0) scale(1);}
-  to{transform:translate3d(-2.2%,-1.6%,0) scale(1.06);}
-}
-
-/* Grain and scrim, static above the drifting field. The scrim
-   guarantees headline contrast on the left; the grain is what stops a
-   large CSS gradient banding on a dark ground. */
+/* Scrim: keeps the lattice off the left so the headline sits on
+   clean paper. */
 .hero::after,
 .study-hero.opener::after{
-  --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.15'/%3E%3C/svg%3E");
   content:'';
   position:absolute;inset:0;z-index:2;pointer-events:none;
-  background:
-    var(--grain),
-    linear-gradient(96deg,rgba(11,11,13,.92) 0%,rgba(11,11,13,.66) 34%,rgba(11,11,13,.14) 70%,rgba(11,11,13,0) 100%);
-  background-size:180px 180px, auto;
+  background:linear-gradient(96deg,rgba(245,244,240,.96) 0%,rgba(245,244,240,.7) 34%,rgba(245,244,240,.1) 70%,rgba(245,244,240,0) 100%);
 }
 .hero h1{
   font-size:clamp(2.05rem,6vw,4.4rem);
-  line-height:1.03;
-  letter-spacing:-0.048em;
+  font-weight:500;
+  line-height:1.06;
+  letter-spacing:-0.024em;
   max-width:24ch;
   text-wrap:balance;
 }
 
 /* THE FRAMED OPENER, for Websites.
-   The same field, crate and grain as the homepage, recomposed around a
+   The same crate as the homepage, recomposed around a
    centred frame instead of a left-hand headline: a landing page reads
    as one offer, so everything stacks on the middle axis. The frame is
-   the nav's own material (off-black glass and an --edge-2 hairline at
+   the nav's own material (paper glass and an --edge-2 hairline at
    card radius), so it belongs to the chrome rather than floating over
-   it. With the type centred, the warm pools move out to both edges and
-   the scrim becomes a soft pool behind the frame, since there is no
-   longer a left side that needs protecting. */
+   it. With the type centred, the scrim becomes a soft pool behind the
+   frame, since there is no longer a left side that needs protecting. */
 .hero.center > .wrap{display:flex;justify-content:center;}
-.hero.center::before{
-  background:
-    radial-gradient(44% 62% at 14% 24%, rgba(224,122,63,.34) 0%, rgba(224,122,63,0) 68%),
-    radial-gradient(48% 64% at 86% 30%, rgba(224,122,63,.38) 0%, rgba(224,122,63,0) 68%),
-    radial-gradient(50% 60% at 94% 86%, rgba(198,58,72,.30) 0%, rgba(198,58,72,0) 66%),
-    radial-gradient(58% 64% at 10% 98%, rgba(84,52,127,.34) 0%, rgba(84,52,127,0) 70%),
-    linear-gradient(180deg,#0b0b0d 0%,#16110f 52%,#120f17 100%);
-}
 .hero.center::after{
-  background:
-    var(--grain),
-    radial-gradient(46% 58% at 50% 50%,rgba(11,11,13,.62) 0%,rgba(11,11,13,.3) 60%,rgba(11,11,13,0) 100%);
+  background:radial-gradient(46% 58% at 50% 50%,rgba(245,244,240,.9) 0%,rgba(245,244,240,.5) 60%,rgba(245,244,240,0) 100%);
 }
 /* The lattice fades out behind the frame and holds at the edges, which
    is the centred version of the homepage's left-to-right mask. */
@@ -529,7 +468,7 @@ html.js .rw.in .w{opacity:1;transform:none;}
 .hero-box{
   width:100%;max-width:700px;text-align:center;
   padding:clamp(2rem,5vw,3.2rem) clamp(1.3rem,4vw,3rem);
-  background:rgba(11,11,13,.55);
+  background:rgba(245,244,240,.72);
   -webkit-backdrop-filter:blur(12px) saturate(140%);
   backdrop-filter:blur(12px) saturate(140%);
   border:1px solid var(--edge-2);border-radius:var(--r-card);
@@ -537,7 +476,7 @@ html.js .rw.in .w{opacity:1;transform:none;}
 .hero-box .eyebrow{margin:0 0 1.1rem;color:var(--fg-soft);}
 .hero.center h1{
   font-size:clamp(1.9rem,4.8vw,3.4rem);line-height:1.06;
-  letter-spacing:-0.045em;max-width:18ch;margin:0 auto;
+  letter-spacing:-0.022em;max-width:18ch;margin:0 auto;
 }
 .hero-box .lede{max-width:44ch;margin:1.2rem auto 0;}
 .hero-box .cta-row{justify-content:center;margin-top:1.9rem;}
@@ -564,15 +503,15 @@ html.js .rw.in .w{opacity:1;transform:none;}
 .cta-row{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:2.1rem;}
 .btn{
   display:inline-flex;align-items:center;gap:.5rem;
-  font-family:var(--mono);font-size:.76rem;letter-spacing:.06em;text-transform:uppercase;
+  font-family:var(--ui);font-size:.92rem;font-weight:500;letter-spacing:0;
   text-decoration:none;white-space:nowrap;
-  padding:.8rem 1.35rem;border-radius:var(--r-pill);
+  padding:.78rem 1.25rem;border-radius:var(--r-sm);
   border:1px solid transparent;
   transition:background .2s ease,border-color .2s ease,color .2s ease,transform .12s var(--ease-out);
 }
 /* Dark text on the accent scores 6.5:1. White on the accent is 3.0:1. */
 .btn.primary{background:var(--ac);color:var(--on-ac);font-weight:500;}
-.btn.primary:hover{background:#ef8c53;}
+.btn.primary:hover{background:#142a47;}
 .btn.ghost{border-color:var(--edge-2);color:var(--fg-soft);}
 .btn.ghost:hover{border-color:var(--fg-soft);color:var(--fg);}
 .btn:active{transform:translateY(1px);}
@@ -599,7 +538,7 @@ button.btn{line-height:inherit;cursor:pointer;}
 .sc::before{
   content:'';position:absolute;inset:0;z-index:0;pointer-events:none;
   background:radial-gradient(380px circle at var(--mx,50%) var(--my,0%),
-    rgba(255,255,255,.055),transparent 62%);
+    rgba(22,22,20,.035),transparent 62%);
   opacity:0;transition:opacity .35s ease;
 }
 .sc:hover::before{opacity:1;}
@@ -618,12 +557,12 @@ button.btn{line-height:inherit;cursor:pointer;}
   opacity:0;transition:opacity .4s var(--ease-out);
   background:
     radial-gradient(260px 1px at var(--mx,50%) 50%,var(--fg-soft),transparent),
-    linear-gradient(90deg,transparent,rgba(255,255,255,.09),transparent);
+    linear-gradient(90deg,transparent,rgba(22,22,20,.1),transparent);
 }
 a.sc::after{
   background:
     radial-gradient(260px 1px at var(--mx,50%) 50%,var(--ac),transparent),
-    linear-gradient(90deg,transparent,rgba(255,255,255,.09),transparent);
+    linear-gradient(90deg,transparent,rgba(22,22,20,.1),transparent);
 }
 .sc:hover::after{opacity:1;}
 
@@ -637,7 +576,7 @@ a.sc::after{
 .chapter-head{margin-bottom:clamp(2rem,5vw,3rem);}
 .chapter-title h2{
   font-size:clamp(1.6rem,3.6vw,2.5rem);line-height:1.1;
-  letter-spacing:-0.042em;max-width:20ch;text-wrap:balance;
+  letter-spacing:-0.021em;max-width:20ch;text-wrap:balance;
 }
 .chapter-title .chapter-lede{
   font-size:1.07rem;line-height:1.6;
@@ -661,12 +600,12 @@ a.sc::after{
 }
 .bento .pad{padding:clamp(1.2rem,2.4vw,1.7rem);}
 .bento .kicker{
-  font-family:var(--mono);font-size:.66rem;letter-spacing:.12em;
-  text-transform:uppercase;color:var(--fg-faint);display:block;margin-bottom:.85rem;
+  font-family:var(--mono);font-size:.74rem;letter-spacing:0;
+  color:var(--fg-faint);display:block;margin-bottom:.85rem;
 }
 .bento h3{
   font-size:clamp(1.15rem,2.2vw,1.6rem);line-height:1.14;
-  letter-spacing:-0.035em;margin-bottom:.7rem;text-wrap:balance;
+  letter-spacing:-0.018em;margin-bottom:.7rem;text-wrap:balance;
 }
 .bento .sub{
   font-size:1rem;line-height:1.55;
@@ -674,11 +613,11 @@ a.sc::after{
 }
 .bento .shot{
   margin-top:auto;padding:0 0 0 clamp(1.2rem,2.4vw,1.7rem);
-  overflow:hidden;border-top-left-radius:10px;
+  overflow:hidden;border-top-left-radius:var(--r-card);
 }
 .bento .shot .mock{
   margin:0;border-bottom:0;border-right:0;
-  border-top-left-radius:10px;border-bottom-left-radius:0;border-bottom-right-radius:0;
+  border-top-left-radius:var(--r-card);border-bottom-left-radius:0;border-bottom-right-radius:0;
   transform:translateY(6px);
   transition:transform .5s var(--ease-out);
 }
@@ -687,15 +626,15 @@ a.sc::after{
 .metrics{display:flex;flex-wrap:wrap;gap:1.2rem 1.8rem;margin-bottom:1.2rem;}
 .metric .n{
   display:block;font-family:var(--display);font-weight:600;
-  font-size:clamp(1.4rem,2.6vw,1.9rem);letter-spacing:-0.045em;line-height:1;
+  font-size:clamp(1.4rem,2.6vw,1.9rem);letter-spacing:-0.022em;line-height:1;
   color:var(--fg);
 }
 .metric .l{
-  font-family:var(--mono);font-size:.64rem;text-transform:uppercase;
-  letter-spacing:.1em;color:var(--fg-faint);margin-top:.4rem;display:block;
+  font-family:var(--mono);font-size:.72rem;
+  letter-spacing:0;color:var(--fg-faint);margin-top:.4rem;display:block;
 }
 .see-more{
-  font-family:var(--mono);font-size:.74rem;letter-spacing:.04em;
+  font-family:var(--ui);font-size:.95rem;font-weight:500;letter-spacing:0;
   color:var(--ac);text-decoration:none;display:inline-flex;gap:.4rem;align-items:center;
 }
 .see-more .arrow{display:inline-block;transition:transform .22s var(--ease-out);}
@@ -716,11 +655,11 @@ a.sc::after{
 .section > .wrap + .wrap{margin-top:1.8rem;}
 .act-head{display:flex;align-items:baseline;gap:1rem;margin-bottom:2.2rem;flex-wrap:wrap;}
 .act-n{
-  font-family:var(--mono);font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;
+  font-family:var(--mono);font-size:.74rem;letter-spacing:0;
   color:var(--fg-faint);border:1px solid var(--edge-2);border-radius:var(--r-pill);padding:.28rem .75rem;
 }
 .act-head h2{
-  font-size:clamp(1.5rem,3.2vw,2.1rem);letter-spacing:-0.04em;line-height:1.1;
+  font-size:clamp(1.5rem,3.2vw,2.1rem);letter-spacing:-0.020em;line-height:1.1;
 }
 /* Every act label carries the accent, so the three beats read as one
    system across all three case studies rather than changing colour
@@ -730,7 +669,7 @@ a.sc::after{
 /* the one-line thesis under each act heading */
 .act-thesis{
   font-family:var(--display);font-weight:500;
-  font-size:clamp(1.15rem,2.3vw,1.5rem);line-height:1.28;letter-spacing:-0.03em;
+  font-size:clamp(1.15rem,2.3vw,1.5rem);line-height:1.28;letter-spacing:-0.015em;
   color:var(--fg);max-width:none;margin:0 0 2rem;
 }
 
@@ -743,12 +682,12 @@ a.sc::after{
 .impact-grid .cell{background:var(--bg-2);padding:clamp(1.1rem,2.4vw,1.5rem);}
 .impact-grid .cell .n{
   display:block;font-family:var(--display);font-weight:600;
-  font-size:clamp(1.6rem,3.4vw,2.3rem);letter-spacing:-0.05em;line-height:1;
+  font-size:clamp(1.6rem,3.4vw,2.3rem);letter-spacing:-0.025em;line-height:1;
   color:var(--fg);
 }
 .impact-grid .cell .l{
-  display:block;font-family:var(--mono);font-size:.64rem;text-transform:uppercase;
-  letter-spacing:.1em;color:var(--fg-faint);margin-top:.55rem;line-height:1.4;
+  display:block;font-family:var(--mono);font-size:.72rem;
+  letter-spacing:0;color:var(--fg-faint);margin-top:.55rem;line-height:1.4;
 }
 
 /* =========================================================
@@ -765,7 +704,7 @@ a.sc::after{
   position:relative;overflow:hidden;
 }
 .dp .tag{
-  font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;
+  font-family:var(--mono);font-size:.72rem;letter-spacing:0;
   display:inline-flex;align-items:center;gap:.45rem;margin-bottom:1rem;
 }
 /* A killed idea reads as inert: dashed edge, muted label. The shipped
@@ -774,7 +713,7 @@ a.sc::after{
 .dp.killed .tag{color:var(--dead);}
 .dp.shipped{border-color:var(--ac-line);}
 .dp.shipped .tag{color:var(--ac);}
-.dp h3,.act .dp h3{font-family:var(--display);font-size:1.05rem;letter-spacing:-0.025em;margin:0 0 .6rem;}
+.dp h3,.act .dp h3{font-family:var(--display);font-size:1.05rem;letter-spacing:-0.013em;margin:0 0 .6rem;}
 .dp p{font-size:.98rem;line-height:1.5;color:var(--fg-soft);}
 
 /* the little flow diagram inside a decision panel */
@@ -813,7 +752,7 @@ a.sc::after{
 }
 .journey + .journey{margin-top:.8rem;}
 .journey .jlabel{
-  font-family:var(--mono);font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;
+  font-family:var(--mono);font-size:.72rem;letter-spacing:0;
   color:var(--fg-faint);margin-bottom:1rem;display:flex;gap:.6rem;align-items:center;flex-wrap:wrap;
 }
 .journey.before .jlabel{color:var(--dead);}
@@ -852,21 +791,21 @@ figure.fig figcaption{
 figure.fig figcaption .fig-n{flex:none;color:var(--fg);font-weight:500;}
 figure.fig figcaption .fig-live{
   flex:none;color:var(--ac);border:1px solid var(--ac-line);border-radius:var(--r-pill);
-  padding:.05rem .5rem;font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;
+  padding:.05rem .45rem;font-size:.66rem;letter-spacing:0;
 }
 
-/* light mockups need a rim + shadow to sit on near-black, and their own
+/* white mockups need a rim + soft ink shadow to sit on paper, and their own
    light colour scheme so a scrollbar inside one isn't drawn dark */
 .mock{
   color-scheme:light;
-  box-shadow:0 30px 70px -28px rgba(0,0,0,.85),0 0 0 1px rgba(255,255,255,.07);
+  box-shadow:0 1px 2px rgba(22,22,20,.05),0 18px 40px -22px rgba(22,22,20,.28),0 0 0 1px rgba(22,22,20,.07);
 }
 
 /* A real product screenshot, framed like the coded mockups so it sits on
-   the dark ground the same way: card radius, hairline rim, deep shadow. */
+   the paper the same way: card radius, hairline rim, deep shadow. */
 .shot-img{
   border-radius:var(--r-card);overflow:hidden;background:#fff;
-  box-shadow:0 30px 70px -28px rgba(0,0,0,.85),0 0 0 1px rgba(255,255,255,.07);
+  box-shadow:0 1px 2px rgba(22,22,20,.05),0 18px 40px -22px rgba(22,22,20,.28),0 0 0 1px rgba(22,22,20,.07);
 }
 .shot-img img{width:100%;height:auto;}
 
@@ -891,7 +830,7 @@ figure.fig figcaption .fig-live{
 .study-hero .eyebrow{margin-bottom:1rem;}
 .study-hero h1{
   font-size:clamp(1.9rem,4.6vw,3.3rem);line-height:1.06;
-  letter-spacing:-0.045em;max-width:20ch;text-wrap:balance;
+  letter-spacing:-0.022em;max-width:20ch;text-wrap:balance;
 }
 .study-hero .lede{margin-top:1.2rem;max-width:58ch;}
 
@@ -929,7 +868,7 @@ figure.fig figcaption .fig-live{
 .meta-block .wrap{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,5vw,4rem);}
 .meta-block .eyebrow{margin-bottom:1rem;}
 .meta-block .mb-h{
-  font-size:1.05rem;font-weight:500;letter-spacing:-0.02em;
+  font-size:1.05rem;font-weight:500;letter-spacing:-0.010em;
   color:var(--fg);margin:0 0 .95rem;
 }
 .meta-block ul.bullets li{font-size:.98rem;}
@@ -942,8 +881,8 @@ figure.fig figcaption .fig-live{
 .section:last-of-type{border-bottom:none;}
 .section.finale{padding-bottom:clamp(3.5rem,9vw,6rem);}
 .section .col > .eyebrow{margin-bottom:1.2rem;}
-.section h2{font-size:clamp(1.4rem,2.8vw,1.9rem);letter-spacing:-0.035em;margin-bottom:1.2rem;}
-.section h3,.act h3{font-size:1.08rem;font-family:var(--display);letter-spacing:-0.025em;margin:2.8rem 0 1rem;}
+.section h2{font-size:clamp(1.4rem,2.8vw,1.9rem);letter-spacing:-0.018em;margin-bottom:1.2rem;}
+.section h3,.act h3{font-size:1.08rem;font-family:var(--display);letter-spacing:-0.013em;margin:2.8rem 0 1rem;}
 ul.bullets{margin:1.4rem 0 2rem;}
 ul.bullets li{position:relative;padding-left:1.4rem;margin-bottom:.8rem;color:var(--fg-soft);}
 ul.bullets li::before{
@@ -975,8 +914,8 @@ blockquote cite{
   gap:clamp(1rem,3vw,2rem);padding:1rem 0;border-bottom:1px solid var(--edge);
 }
 .spec .row .k{
-  font-family:var(--mono);font-size:.68rem;text-transform:uppercase;
-  letter-spacing:.1em;color:var(--fg-faint);padding-top:.2rem;
+  font-family:var(--mono);font-size:.74rem;
+  letter-spacing:0;color:var(--fg-faint);padding-top:.2rem;
 }
 .spec .row .v{font-size:1rem;line-height:1.5;color:var(--fg-soft);}
 .spec .row .v a{color:var(--ac);text-decoration:none;border-bottom:1px solid var(--ac-line);}
@@ -992,7 +931,7 @@ blockquote cite{
   border-top:1px solid var(--edge);
 }
 .services .svc{padding:clamp(1.4rem,3vw,1.9rem) 0;border-bottom:1px solid var(--edge);}
-.services .svc h3{font-size:1.12rem;letter-spacing:-0.025em;margin:0 0 .55rem;}
+.services .svc h3{font-size:1.12rem;letter-spacing:-0.013em;margin:0 0 .55rem;}
 .services .svc p{font-size:1rem;line-height:1.55;color:var(--fg-soft);max-width:46ch;}
 /* The last row of the 2-col grid keeps its rule so the block closes cleanly. */
 .services .svc:nth-last-child(-n+2){border-bottom:1px solid var(--edge);}
@@ -1003,10 +942,10 @@ blockquote cite{
   display:grid;grid-template-columns:minmax(0,260px) minmax(0,1fr);
   gap:clamp(1.2rem,4vw,3rem);align-items:start;
 }
-.obsession h3{font-size:clamp(1.1rem,2.4vw,1.45rem);line-height:1.18;letter-spacing:-0.03em;margin:0;}
+.obsession h3{font-size:clamp(1.1rem,2.4vw,1.45rem);line-height:1.18;letter-spacing:-0.015em;margin:0;}
 .obsession h3 .dim{display:block;color:var(--fg-faint);font-weight:400;font-size:.82em;}
 .obsession .items{display:grid;gap:1.1rem;}
-.obsession .item .t{font-family:var(--display);font-weight:500;font-size:1rem;letter-spacing:-0.02em;margin-bottom:.2rem;}
+.obsession .item .t{font-family:var(--display);font-weight:500;font-size:1rem;letter-spacing:-0.010em;margin-bottom:.2rem;}
 .obsession .item .t a{color:var(--ac);text-decoration:none;border-bottom:1px solid var(--ac-line);}
 .obsession .item .t a:hover{border-color:var(--ac-line-2);}
 .obsession .item .d{font-size:1rem;line-height:1.5;color:var(--fg-soft);max-width:58ch;}
@@ -1016,7 +955,7 @@ blockquote cite{
    group into the three phases they actually belong to instead. */
 .skills{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(1.6rem,4vw,3rem);}
 .skills .grp h3{
-  font-size:.98rem;font-weight:500;color:var(--fg);letter-spacing:-0.02em;
+  font-size:.98rem;font-weight:500;color:var(--fg);letter-spacing:-0.010em;
   padding-bottom:.75rem;margin:0 0 .95rem;border-bottom:1px solid var(--edge);
 }
 .skills .grp ul{display:grid;gap:.5rem;}
@@ -1035,7 +974,7 @@ ol.principles li{
 ol.principles .pn{font-family:var(--mono);font-size:.75rem;letter-spacing:.08em;color:var(--ac);}
 ol.principles .pt{
   display:block;font-family:var(--display);font-weight:600;
-  font-size:clamp(1.5rem,3.4vw,2.2rem);line-height:1.18;letter-spacing:-0.035em;
+  font-size:clamp(1.5rem,3.4vw,2.2rem);line-height:1.18;letter-spacing:-0.018em;
   color:var(--fg);text-wrap:pretty;
 }
 ol.principles .pd{display:block;margin-top:.55rem;font-size:1.05rem;line-height:1.5;color:var(--fg-soft);}
@@ -1054,7 +993,7 @@ ol.loop li{
   padding:.85rem 0;border-bottom:1px solid var(--edge);
 }
 ol.loop .ln{font-family:var(--mono);font-size:.68rem;letter-spacing:.08em;color:var(--fg-faint);}
-ol.loop .lt{font-weight:500;letter-spacing:-0.02em;color:var(--fg);}
+ol.loop .lt{font-weight:500;letter-spacing:-0.010em;color:var(--fg);}
 ol.loop .ld{font-size:1rem;line-height:1.5;color:var(--fg-soft);}
 ol.loop li.again .ln,ol.loop li.again .lt{color:var(--ac);}
 @media (max-width:560px){
@@ -1103,7 +1042,7 @@ ol.loop li.again .ln,ol.loop li.again .lt{color:var(--ac);}
   grid-column:2 / -1;background:#fff;border-bottom:1px solid var(--ed-line);
   padding:.65rem .95rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;
 }
-.mock-editor .ed-title{font-size:.88rem;font-weight:600;letter-spacing:-0.012em;}
+.mock-editor .ed-title{font-size:.88rem;font-weight:600;letter-spacing:-0.006em;}
 .mock-editor .ed-meta{display:flex;gap:.55rem;margin-top:.2rem;color:var(--ed-muted);font-size:.6rem;letter-spacing:.07em;text-transform:uppercase;}
 .mock-editor .ed-actions{display:flex;align-items:center;gap:.65rem;color:var(--ed-muted);flex:none;}
 .mock-editor .ed-share{background:#1f4353;color:#fff;border-radius:999px;padding:.28rem .68rem;font-weight:500;}
@@ -1163,16 +1102,15 @@ ol.loop li.again .ln,ol.loop li.again .lt{color:var(--ac);}
 /* ---------- coded UI mockups ---------- */
 .mock{
   border:1px solid var(--line);
-  border-radius:10px;
+  border-radius:var(--r-card);
   overflow-x:auto;
   overflow-y:hidden;
   -webkit-overflow-scrolling:touch;
   background:#fff;
-  /* A light surface inside a dark-theme document, so it has to state its
-     own text colour. Without this, anything in a mockup that doesn't set
-     a colour inherits --fg and renders near-white on white. */
+  /* A product surface inside the site chrome, so it states its own text
+     colour rather than inheriting --fg. */
   color:var(--ink);
-  box-shadow:0 30px 60px -30px rgba(17,17,16,.25);
+  box-shadow:0 1px 2px rgba(22,22,20,.05),0 18px 40px -22px rgba(22,22,20,.28);
   margin:1rem 0 .6rem;
 }
 /* window chrome - makes a coded mockup read as a real product screen */
@@ -1625,7 +1563,7 @@ tr[data-optional].on .opt-toggle::after{
 .next{padding:clamp(2rem,6vw,3.5rem) 0;border-top:1px solid var(--edge);}
 .next a{text-decoration:none;display:flex;justify-content:space-between;align-items:baseline;gap:1rem;}
 .next .eyebrow{margin-bottom:.5rem;}
-.next h2,.next h3{font-size:clamp(1.2rem,2.8vw,1.8rem);letter-spacing:-0.04em;margin:0;transition:color .25s ease;}
+.next h2,.next h3{font-size:clamp(1.2rem,2.8vw,1.8rem);letter-spacing:-0.020em;margin:0;transition:color .25s ease;}
 .next a:hover h2,.next a:hover h3{color:var(--ac);}
 .next .arrow{font-family:var(--display);color:var(--ac);font-size:1.4rem;flex:none;}
 
@@ -1642,7 +1580,7 @@ tr[data-optional].on .opt-toggle::after{
 .contact-links a{
   display:flex;justify-content:space-between;align-items:baseline;gap:1rem;
   text-decoration:none;padding:1.35rem 0;border-top:1px solid var(--edge);
-  font-family:var(--display);font-size:clamp(1.25rem,3.2vw,1.9rem);letter-spacing:-0.04em;
+  font-family:var(--display);font-size:clamp(1.25rem,3.2vw,1.9rem);letter-spacing:-0.020em;
   transition:padding-left .28s var(--ease-out),color .25s ease;
 }
 .contact-links a:hover{padding-left:.7rem;color:var(--ac);}
@@ -1668,7 +1606,7 @@ tr[data-optional].on .opt-toggle::after{
 .enquiry .wide{grid-column:1 / -1;}
 .enquiry label{
   display:block;margin-bottom:.55rem;
-  font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;
+  font-family:var(--mono);font-size:.74rem;letter-spacing:0;
   color:var(--fg-faint);
 }
 .enquiry input,
@@ -1686,7 +1624,7 @@ tr[data-optional].on .opt-toggle::after{
    field's own edge, which keeps the 8px radius instead of the ring's 3. */
 .enquiry input:focus-visible,
 .enquiry textarea:focus-visible{outline:none;border-color:var(--ac-line-2);background:var(--surface-2);}
-/* Autofill paints its own pale fill; keep it on the dark ground. */
+/* Autofill paints its own fill; keep it on the page's own tone. */
 .enquiry input:-webkit-autofill{
   -webkit-text-fill-color:var(--fg);
   -webkit-box-shadow:0 0 0 100px var(--bg-2) inset;
@@ -1883,7 +1821,7 @@ ul.bullets a:hover,
 .case-card h3{
   font-size:clamp(1.3rem,2.3vw,1.75rem);
   line-height:1.14;
-  letter-spacing:-0.038em;
+  letter-spacing:-0.019em;
   margin-bottom:.75rem;
   text-wrap:balance;
 }
@@ -1940,11 +1878,11 @@ ul.bullets a:hover,
   font-family:var(--mono);font-size:.74rem;letter-spacing:.02em;
   color:var(--fg);background:var(--bg-2);border:1px solid var(--edge-2);
   border-radius:var(--r-pill);padding:.65rem 1.1rem;max-width:calc(100vw - 32px);width:max-content;text-align:center;
-  box-shadow:0 18px 40px -16px rgba(0,0,0,.8);
+  box-shadow:0 12px 32px -14px rgba(22,22,20,.22);
   transition:opacity .2s var(--ease-out),transform .2s var(--ease-out);
 }
 .toast.show{opacity:1;transform:translate(-50%,0);}
 .toast b{color:var(--ac);font-weight:500;}
 
-/* The page colour also sits on <html>, so overscroll areas stay dark. */
+/* The page colour also sits on <html>, so overscroll areas match. */
 html,body{background:var(--bg);color:var(--fg);}
