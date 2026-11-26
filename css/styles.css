@@ -838,7 +838,8 @@ figure.fig figcaption .fig-live{
 }
 /* The Freelance opener's headline is short enough to sit on one line,
    so it drops the case-study title measure. */
-.study-hero.opener h1{max-width:none;}
+.study-hero.opener h1,
+.study-hero h1.full{max-width:none;}
 .study-hero .lede{margin-top:1.2rem;max-width:58ch;}
 
 /* About: a portrait above the tagline, in the same card radius as the
