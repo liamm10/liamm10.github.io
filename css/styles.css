@@ -582,6 +582,10 @@ a.sc::after{
   font-size:1.07rem;line-height:1.6;
   color:var(--fg-soft);max-width:62ch;margin-top:1.1rem;
 }
+/* The work index heading runs the full container width, so the title
+   and its lede share the same right edge as the case cards below. */
+.chapter-title.full h2,
+.chapter-title.full .chapter-lede{max-width:none;}
 
 /* =========================================================
    BENTO GRID - the work index
